@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
+import React  from 'react'
 import './App.css';
+import {useSelector, useDispatch} from 'react-redux';
+import Signup from './Components/Signup'
+import Signin from './Components/Signin'
+import TenantDashbaord from './Components/TenantDashboard'
 
-function App() {
+
+
+
+export default function App() {
+
+  const isLogged = useSelector(state => state.isLogged)
+
+ 
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    
+       <div className="App">
+            
+  { isLogged ? <> <TenantDashbaord/> </> : <><Signin/> <Signup/></> }
+     </div>
+   
+  )
 }
 
-export default App;
+
