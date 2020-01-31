@@ -12,7 +12,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import {useSelector, useDispatch} from 'react-redux';
-import {assign_user_values, sign_in} from '../actions';
+import {userSigninFetch, sign_in} from '../actions';
 
 
 
@@ -58,7 +58,7 @@ export default function SignIn(props) {
   const dispatch = useDispatch() 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const API = "http://localhost:3000/login";
+  // const API = "http://localhost:3000/login";
 
   let handleEmailChange = event => {
     setEmail(event.target.value);
@@ -70,28 +70,19 @@ export default function SignIn(props) {
 
   let handleSubmit = event => {
     event.preventDefault();
-    console.log(`${email}, ${password}`);
 
     let user = {
       email: email,
       password: password
     };
+    console.log(`${email}, ${password}`);
+    set_user(user)
 
-    fetch(API, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
-      body: JSON.stringify({ user })
-    })
-      .then(res => res.json())
-      .then(data => set_user(data));
   };
 
-  const set_user = (data) => {
+  const set_user = (user) => {
       dispatch(sign_in())
-    dispatch(assign_user_values(data.user.name, data.user.id))
+    dispatch(userSigninFetch(user))
   }
 
   return (

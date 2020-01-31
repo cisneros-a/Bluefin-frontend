@@ -33,9 +33,12 @@ export default function TenantDashboard() {
 
     return (
         <div>
-          {showMap()}
-            
+          {/* {showMap()} */}
             </div>
     )
 }
 
+
+
+
+  

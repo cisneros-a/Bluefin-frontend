@@ -11,6 +11,9 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import {userSignupFetch, sign_in} from '../actions';
+import {useSelector, useDispatch} from 'react-redux';
+
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -33,29 +36,25 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Signup(props) {
+  const dispatch = useDispatch() 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const classes = useStyles();
 
-  const API = "http://localhost:3000/users";
 
   let handleSubmit = event => {
     event.preventDefault();
     console.log(`${name}, ${email}, ${password}`);
     let user = { name: name, email: email, password: password, avatar: 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Guy_Fieri_at_Guantanamo_2.jpg' };
 
-    fetch(API, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
-      body: JSON.stringify({ user })
-    })
-      .then(res => res.json())
-      .then(data => props.handleLogin(data));
+   set_user(user)
   };
+
+  const set_user = (user) => {
+    dispatch(sign_in())
+  dispatch(userSignupFetch(user))
+}
 
   let handleNameChange = event => {
     setName(event.target.value);

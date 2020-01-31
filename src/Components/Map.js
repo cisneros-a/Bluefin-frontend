@@ -5,7 +5,6 @@ import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import MapFlag from './MapFlag'
 
 export default function Map() {
-    
     const [viewport, setViewport] = useState({
         latitude: 30.2672,
         longitude: -97.7431,
