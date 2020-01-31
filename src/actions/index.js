@@ -11,3 +11,10 @@ export const sign_in = () => {
         type: 'SIGN_IN'
     }
 }
+
+export const populate_homes = (payload) => {
+    return {
+        type: 'POPULATE_HOMES',
+        payload: payload,
+    }
+}

@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react'
-
+import {useSelector, } from 'react-redux';
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
-import * as parkData from "../data/skateboard-parks.json";
+
+import MapFlag from './MapFlag'
 
 export default function Map() {
-    const REACT_APP_MAPBOX_TOKEN = "pk.eyJ1IjoiY2lzbmVyb3MtYSIsImEiOiJjazV5OWhjbG4yZWdmM2VuMWw4N3A1bjV2In0.Qr08RacxUb-4_etwtaK1Sg"
+    
     const [viewport, setViewport] = useState({
         latitude: 30.2672,
         longitude: -97.7431,
@@ -13,18 +14,21 @@ export default function Map() {
         zoom: 12
       });
 
-    const [selectedPark, setSelectedPark] = useState(null)
+    const homes = useSelector((state) => state.homes)
 
-    const handleClick = (e, park) => {
+
+    const [selectedHome, setSelectedHome] = useState(null)
+
+    const handleClick = (e, home) => {
         e.preventDefault()
-        setSelectedPark(park)
+        setSelectedHome(home)
 
     }
 
     useEffect(()=> {
         const listener = e =>{
             if (e.key === "Escape"){
-                setSelectedPark(null);
+                setSelectedHome(null);
             }
         };
         window.addEventListener("keydown", listener)
@@ -46,30 +50,31 @@ export default function Map() {
             }}
             >
                 
-                {parkData.features.map((park) => (
+                {homes.state.map((home) => (
                 <Marker
-                 key={park.properties.PARK_ID}
-                 latitude={park.geometry.coordinates[1]}
-                 longitude={park.geometry.coordinates[0]}
+                 key={home.id}
+                 latitude={home.latitude}
+                 longitude={home.longitude}
                  >
                    <button
-                    onClick={event => handleClick(event, park)}
+                    onClick={event => handleClick(event, home)}
                     className="marker-btn">
-                       <img src='./skateboarding.svg' alt="Skate Icon"/>
+                       <MapFlag/>
                    </button>
                 </Marker>
 
                 ))}
 
-                {selectedPark ? (
+                {selectedHome ? (
                     <Popup
-                    onClose={() => setSelectedPark(null)}
-                    latitude={selectedPark.geometry.coordinates[1]}
-                    longitude={selectedPark.geometry.coordinates[0]}
+                    onClose={() => setSelectedHome(null)}
+                    latitude={selectedHome.latitude}
+                    longitude={selectedHome.longitude}
                     >
                         <div>
-                            <h2>{selectedPark.properties.NAME}</h2>
-                            <p>{selectedPark.properties.DESCRIPTIO}</p>
+                            <h2>{selectedHome.address}</h2>
+                            <p>Bedrooms: {selectedHome.bedrooms}</p>
+                            <p>Bathrooms: {selectedHome.bathrooms}</p>
                         </div>
                     </Popup>
                 ) : null}
