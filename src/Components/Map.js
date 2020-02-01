@@ -15,7 +15,7 @@ export default function Map() {
 
     const homes = useSelector((state) => state.homes)
 
-
+    const REACT_APP_MAPBOX_TOKEN = "pk.eyJ1IjoiY2lzbmVyb3MtYSIsImEiOiJjazV5OWhjbG4yZWdmM2VuMWw4N3A1bjV2In0.Qr08RacxUb-4_etwtaK1Sg"
     const [selectedHome, setSelectedHome] = useState(null)
 
     const handleClick = (e, home) => {
@@ -43,7 +43,7 @@ export default function Map() {
             <ReactMapGL
             {...viewport}
             mapboxApiAccessToken={REACT_APP_MAPBOX_TOKEN}
-            mapStyle='mapbox://styles/cisneros-a/ck5yaamb9a6qq1ijye427p2l3'
+            mapStyle='mapbox://styles/cisneros-a/ck62slkcs02ij1imqgdp6j6il'
             onViewportChange={viewport => {
                 setViewport(viewport);
             }}

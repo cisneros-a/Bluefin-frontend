@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import { ThemeProvider } from '@chakra-ui/core'
 
 import allReducers from './reducers';
 // webPack will automatically look for the index.js file in
@@ -30,9 +31,11 @@ const store = createStore(allReducers, enhancer);
 
 
 ReactDOM.render(
+  <ThemeProvider>
     <Provider store={store}>
         <App />
-    </Provider>,
+    </Provider>
+    </ThemeProvider>,
      document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

@@ -12,7 +12,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import {userSignupFetch, sign_in} from '../actions';
-import {useSelector, useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 
 const useStyles = makeStyles(theme => ({

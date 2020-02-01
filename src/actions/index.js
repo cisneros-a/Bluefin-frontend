@@ -1,28 +1,3 @@
-// export const assign_user_values = (username, user_id) => {
-//     return {
-//         type: 'ASSIGN_USER_VALUES',
-//         username: username,
-//         user_id: user_id,
-//     }
-// }
-export const sign_in = () => {
-    return {
-        type: 'SIGN_IN'
-    }
-}
-
-
-const loginUser = userObj => ({
-    type: 'LOGIN_USER',
-    payload: userObj
-})
-
-export const populate_homes = (payload) => {
-    return {
-        type: 'POPULATE_HOMES',
-        payload: payload,
-    }
-}
 
 export const userSigninFetch = user => {
     return async dispatch => {
@@ -93,6 +68,40 @@ export const userSigninFetch = user => {
               dispatch(sign_in())
           }
       }
+    }
+  }
+  
+  const loginUser = userObj => ({
+      type: 'LOGIN_USER',
+      payload: userObj
+  })
+
+
+
+
+
+
+
+export const sign_in = () => {
+    return {
+        type: 'SIGN_IN'
+    }
+}
+
+
+export const populate_homes = (payload) => {
+    return {
+        type: 'POPULATE_HOMES',
+        payload: payload,
+    }
+}
+
+
+
+  export const selectHome = (payload) => {
+    return {
+        type: 'SELECT_HOME',
+        payload: payload,
     }
   }
   
