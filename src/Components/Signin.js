@@ -12,7 +12,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useDispatch} from 'react-redux';
-import {userSigninFetch, sign_in} from '../actions';
+import {userSigninFetch} from '../actions';
 
 
 
@@ -81,7 +81,6 @@ export default function SignIn(props) {
   };
 
   const set_user = (user) => {
-      dispatch(sign_in())
     dispatch(userSigninFetch(user))
   }
 

@@ -11,7 +11,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import {userSignupFetch, sign_in} from '../actions';
+import {userSignupFetch} from '../actions';
 import { useDispatch } from 'react-redux';
 
 
@@ -52,7 +52,6 @@ export default function Signup(props) {
   };
 
   const set_user = (user) => {
-    dispatch(sign_in())
   dispatch(userSignupFetch(user))
 }
 

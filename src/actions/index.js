@@ -18,6 +18,7 @@ export const userSigninFetch = user => {
         else {
             localStorage.setItem("token", data.jwt)
             dispatch(loginUser(data.user))
+            dispatch(signIn())
         }
     }
   }
@@ -41,6 +42,7 @@ export const userSigninFetch = user => {
         else {
             localStorage.setItem("token", data.jwt)
             dispatch(loginUser(data.user))
+            dispatch(signIn())
         }
     }
   }
@@ -65,7 +67,7 @@ export const userSigninFetch = user => {
           }
           else {
               dispatch(loginUser(data.user))
-              dispatch(sign_in())
+              dispatch(signIn())
           }
       }
     }
@@ -77,12 +79,16 @@ export const userSigninFetch = user => {
   })
 
 
+export const toggleView = () => {
+    return {
+        type: "TOGGLE"
+    }
+}
 
 
 
 
-
-export const sign_in = () => {
+export const signIn = () => {
     return {
         type: 'SIGN_IN'
     }
@@ -96,13 +102,12 @@ export const populate_homes = (payload) => {
     }
 }
 
-
-
   export const selectHome = (payload) => {
     return {
         type: 'SELECT_HOME',
         payload: payload,
     }
   }
+
   
   

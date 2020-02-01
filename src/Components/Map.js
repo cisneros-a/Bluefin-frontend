@@ -1,10 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import {useSelector, } from 'react-redux';
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
-
 import MapFlag from './MapFlag'
+import MapPopup from './MapPopup'
+import { useDispatch} from 'react-redux';
+import { selectHome } from '../actions';
 
 export default function Map() {
+    const dispatch = useDispatch()
     const [viewport, setViewport] = useState({
         latitude: 30.2672,
         longitude: -97.7431,
@@ -21,6 +24,7 @@ export default function Map() {
     const handleClick = (e, home) => {
         e.preventDefault()
         setSelectedHome(home)
+        dispatch(selectHome(home))
 
     }
 
@@ -58,24 +62,22 @@ export default function Map() {
                    <button
                     onClick={event => handleClick(event, home)}
                     className="marker-btn">
-                       <MapFlag/>
+                       <MapFlag rent={home.rent}/>
                    </button>
                 </Marker>
 
                 ))}
 
                 {selectedHome ? (
+                    <div className="Popup">
                     <Popup
                     onClose={() => setSelectedHome(null)}
                     latitude={selectedHome.latitude}
                     longitude={selectedHome.longitude}
                     >
-                        <div>
-                            <h2>{selectedHome.address}</h2>
-                            <p>Bedrooms: {selectedHome.bedrooms}</p>
-                            <p>Bathrooms: {selectedHome.bathrooms}</p>
-                        </div>
+                         <MapPopup selectedHome={selectedHome}/> 
                     </Popup>
+                        </div>
                 ) : null}
             </ReactMapGL>
         </div>
