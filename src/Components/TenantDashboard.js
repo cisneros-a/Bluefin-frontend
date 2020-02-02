@@ -18,7 +18,7 @@ export default function TenantDashboard() {
     // const toggle = useSelector(state => state.toggle)
     const dispatch = useDispatch() 
 
-    const [toggle, setToggle] = useState(false)
+    const [toggle, setToggle] = useState(true)
 
 
     useEffect(() => {
@@ -61,6 +61,7 @@ export default function TenantDashboard() {
         <div>
             <TenantNavbar/>
             <Fragment>
+                <ToggleSwitch/>
                             {/* <h3>Map</h3><Switch onClick={()=> setToggle(!toggle)} color="teal" size="lg"/><h3>Cards</h3> */}
                         </Fragment>
                 <div >

@@ -85,6 +85,10 @@ export const toggleView = () => {
     }
 }
 
+export const logoutUser = () => ({
+    type: 'LOGOUT_USER'
+  })
+
 
 
 

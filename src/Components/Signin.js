@@ -13,6 +13,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useDispatch} from 'react-redux';
 import {userSigninFetch} from '../actions';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 
 
@@ -58,6 +61,7 @@ export default function SignIn(props) {
   const dispatch = useDispatch() 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [type, setType] = useState("")
   // const API = "http://localhost:3000/login";
 
   let handleEmailChange = event => {
@@ -65,6 +69,9 @@ export default function SignIn(props) {
   };
   let handlePasswordChange = event => {
     setPassword(event.target.value);
+  };
+  let handleTypeChange = event => {
+    setType(event.target.value);
   };
 
 
@@ -75,8 +82,8 @@ export default function SignIn(props) {
       email: email,
       password: password
     };
-    console.log(`${email}, ${password}`);
-    set_user(user)
+    console.log(`${email}, ${password}, ${type}`);
+    // set_user(user)
 
   };
 
@@ -127,6 +134,11 @@ export default function SignIn(props) {
             id="password"
             autoComplete="current-password"
           />
+          <RadioGroup aria-label="gender" name="gender1" value={type} onChange={handleTypeChange}>
+          <FormControlLabel value="landlord" control={<Radio />} label="Landlord" />
+          <FormControlLabel value="tenant" control={<Radio />} label="Tenant" />
+         
+        </RadioGroup>
           <Button
             type="submit"
             fullWidth

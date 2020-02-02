@@ -7,7 +7,6 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-
 import { withStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
@@ -17,6 +16,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import SettingsIcon from '@material-ui/icons/Settings';
 import SendIcon from '@material-ui/icons/Send';
+import { logoutUser } from '../actions';
+import { useDispatch } from 'react-redux';
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -62,6 +64,7 @@ const StyledMenu = withStyles({
   }))(MenuItem);
 
 export default function MenuAppBar() {
+  const dispatch = useDispatch()
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -82,6 +85,15 @@ export default function MenuAppBar() {
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
   };
+
+  const handleLogoutClick = (event) => {
+      event.preventDefault()
+      localStorage.removeItem("token")
+      dispatch(logoutUser())
+
+  }
+
+  
 
   return (
     <div className={classes.root}>
@@ -125,7 +137,9 @@ export default function MenuAppBar() {
           </ListItemIcon>
           <ListItemText primary="Settings" />
         </StyledMenuItem>
-        <StyledMenuItem>
+        <StyledMenuItem
+        onClick={(event) => handleLogoutClick(event)}
+        >
           <ListItemIcon>
             <ExitToAppIcon fontSize="small" />
           </ListItemIcon>

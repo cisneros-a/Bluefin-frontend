@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import {useSelector, useDispatch} from 'react-redux';
 import Signup from './Components/Signup'
 import Signin from './Components/Signin'
+// import TestSignUp from './Components/TestSignUp'
 import {getProfileFetch} from './actions';
 
 
