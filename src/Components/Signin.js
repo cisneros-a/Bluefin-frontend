@@ -16,6 +16,8 @@ import {userSigninFetch} from '../actions';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
+
 
 
 
@@ -52,7 +54,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SignIn(props) {
+export default function SignIn() {
 
   // const user_info = useSelector(state => state.user)
 //   const dispatch = useDispatch() 
@@ -61,7 +63,7 @@ export default function SignIn(props) {
   const dispatch = useDispatch() 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [type, setType] = useState("")
+  const [userType, setUserType] = useState("")
   // const API = "http://localhost:3000/login";
 
   let handleEmailChange = event => {
@@ -71,7 +73,7 @@ export default function SignIn(props) {
     setPassword(event.target.value);
   };
   let handleTypeChange = event => {
-    setType(event.target.value);
+    setUserType(event.target.value);
   };
 
 
@@ -80,15 +82,15 @@ export default function SignIn(props) {
 
     let user = {
       email: email,
-      password: password
+      password: password,
     };
-    console.log(`${email}, ${password}, ${type}`);
-    // set_user(user)
+    // console.log(user)
+    set_user(user)
 
   };
 
   const set_user = (user) => {
-    dispatch(userSigninFetch(user))
+    dispatch(userSigninFetch(user, userType))
   }
 
   return (
@@ -134,9 +136,10 @@ export default function SignIn(props) {
             id="password"
             autoComplete="current-password"
           />
-          <RadioGroup aria-label="gender" name="gender1" value={type} onChange={handleTypeChange}>
-          <FormControlLabel value="landlord" control={<Radio />} label="Landlord" />
-          <FormControlLabel value="tenant" control={<Radio />} label="Tenant" />
+          <FormLabel component="legend">User Type:</FormLabel>
+          <RadioGroup aria-label="userType" name="userType" value={userType} onChange={(event) => handleTypeChange(event)} row>
+          <FormControlLabel  value="landlord" control={<Radio />} label="Landlord" />
+          <FormControlLabel  value="tenant" control={<Radio />} label="Tenant" />
          
         </RadioGroup>
           <Button

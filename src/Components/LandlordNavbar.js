@@ -68,15 +68,15 @@ export default function MenuAppBar() {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
-  // const open = Boolean(anchorEl);
+//   const open = Boolean(anchorEl);
 
-  // const handleChange = event => {
-  //   setAuth(event.target.checked);
-  // };
+//   const handleChange = event => {
+//     setAuth(event.target.checked);
+//   };
 
-  // const handleMenu = event => {
-  //   setAnchorEl(event.currentTarget);
-  // };
+//   const handleMenu = event => {
+//     setAnchorEl(event.currentTarget);
+//   };
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -102,11 +102,18 @@ export default function MenuAppBar() {
      
       <AppBar position="static">
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+        <Typography variant="h6" className={classes.title}>
+            {/* Bluefin - Landlord */}
+          </Typography>
+          <Button color="inherit">Lease applications</Button>
+          {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           <Typography variant="h6" className={classes.title}>
-            Bluefin - Tenant
+            Bluefin - Landlord
+          </Typography>
+          <Typography variant="h6" className={classes.title}>
+            {/* Bluefin - Landlord */}
           </Typography>
           <AccountCircle />
           {auth && (

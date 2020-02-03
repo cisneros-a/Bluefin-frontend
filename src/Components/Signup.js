@@ -129,7 +129,6 @@ export default function Signup(props) {
 
   let handleSubmit = event => {
     event.preventDefault();
-    console.log(`${name}, ${email}, ${password}`);
     let user = { name: name, email: email, password: password, avatar: 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Guy_Fieri_at_Guantanamo_2.jpg' };
 
    set_user(user)
