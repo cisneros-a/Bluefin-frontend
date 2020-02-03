@@ -1,23 +1,25 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import {useSelector, useDispatch} from 'react-redux';
-import {populate_homes} from '../actions';
+import {populate_homes, toggleView} from '../actions';
 import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
-import ToggleSwitch from './ToggleSwitch'
 import Map from './Map'
-import TestCard from './TestCard'
 import HomeSpec from './HomeSpecs'
-import { Modal, ModalBody, ModalContent } from "@chakra-ui/core";
+import TenantNavbar from './TenantNavbar'
+// import ToggleSwitch from './ToggleSwitch'
+// import { Switch } from "@chakra-ui/core";
+import CardHolder from './CardHolder';
 
 
 
 export default function TenantDashboard() {
-    const homes = useSelector((state) => state.homes)
+    const allHomes = useSelector((state) => state.homes)
     const selectedHome = useSelector(state => state.selectedHome)
-
     const dispatch = useDispatch() 
     const [toggle, setToggle] = useState(true)
+
+    // const toggle = useSelector(state => state.toggle)
+
 
 
     useEffect(() => {
@@ -30,13 +32,12 @@ export default function TenantDashboard() {
         dispatch(populate_homes(data))
     }
 
-    const showMapOrCards = () => {
-        console.log(selectedHome)
+    const showMap = (homes) => {
         if (homes.state.length > 0) {
             if (toggle){
-                return homes.state.map(home=>  <TestCard key={home.id} home={home}/> )
+              return   <CardHolder homes={homes} />
             } 
-                return <Map/>
+              return <Map/>
         }
     }
 
@@ -46,41 +47,28 @@ export default function TenantDashboard() {
         }
     }
 
-    const handleToggle = (button) => {
-        console.log(button)
-        if (button === "Card"){
-            // setToggle(true)
-            console.log("card")
-        } else if (button === "Map"){
-            // setToggle(false)
-            console.log("map");
-            
-        }
+    const handleToggle = () => {
+        dispatch(toggleView())
     }
 
-    // let showAddress = () => {
-    //     return  homes.state.map(home => <Card address={home.address}/>)
-    // }
+  
 
     return (
-        
         <div>
-            {/* <ToggleSwitch  handleToggle={() => handleToggle()}>Toggle!!</ToggleSwitch> */}
+            <TenantNavbar/>
+                        {/* <h3>Map</h3><Switch onClick={()=> setToggle(!toggle)} color="teal" size="lg"/><h3>Cards</h3> */}
                 <div >
                     <Grid  container spacing={2} >
-                        <Grid className="scroll" item xs={6}>       
-                            {showMapOrCards()}      
+                        <Grid  item xs={7}>    
+                            {showMap(allHomes)}      
                         </Grid>
-                        <Grid item xs={6}>
+
+                        <Grid item xs={5}>
                             {showHomeSpecs()}
                         </Grid>  
-                    </Grid>
-                        
+                    </Grid>  
                 </div>
-       
-
-          
-            </div>
+        </div>
           
             
     )

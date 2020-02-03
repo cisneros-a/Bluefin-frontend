@@ -1,3 +1,87 @@
+// import { useForm } from "react-hook-form";
+// import React, { useState } from "react";
+// import {
+//   FormErrorMessage,
+//   FormLabel,
+//   FormControl,
+//   Input,
+//   Button,
+// } from "@chakra-ui/core";
+
+// export default function HookForm() {
+//   const { handleSubmit, errors, register } = useForm();
+//   const [isSubmitting, setIsSubmitting] = useState(false);
+
+//   function validateFirstName(value) {
+//     let error;
+//     if (!value) {
+//       error = "Name is required";
+//     }
+//     return error || true;
+//   }
+
+//   function validateLastName(value) {
+//     let error;
+//     if (!value) {
+//       error = "Name is required";
+//     }
+//     return error || true;
+//   }
+
+//   function onSubmit(values) {
+//     console.log(values)
+//     setIsSubmitting(true);
+
+//     setTimeout(() => {
+//       alert(JSON.stringify(values, null, 2));
+//       setIsSubmitting(false);
+//     }, 1000);
+//   }
+
+//   return (
+//     <form onSubmit={handleSubmit(onSubmit)}>
+//       <FormControl isInvalid={errors.name}>
+//         <FormLabel htmlFor="name">First name</FormLabel>
+//         <Input
+//           name="firstname"
+//           placeholder=" First name"
+//           ref={register({ validate: validateFirstName })}/>
+//         <FormErrorMessage>
+//           {errors.name && errors.name.message}
+//         </FormErrorMessage>
+
+
+
+//         <FormLabel htmlFor="Last name">Last name</FormLabel>
+//         <Input
+//           name="lastname"
+//           placeholder="Last name"
+//           ref={register({ validate: validateLastName })}
+//         />
+//         <FormErrorMessage>
+//           {errors.name && errors.name.message}
+//         </FormErrorMessage>
+
+
+//       </FormControl>
+//       <Button mt={4} variantColor="teal" isLoading={isSubmitting} type="submit">
+//         Submit
+//       </Button>
+//     </form>
+//   );
+// }
+
+
+
+
+
+
+
+
+
+
+
+
 import React from "react";
 import { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
@@ -11,7 +95,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import {userSignupFetch, sign_in} from '../actions';
+import {userSignupFetch} from '../actions';
 import { useDispatch } from 'react-redux';
 
 
@@ -45,14 +129,12 @@ export default function Signup(props) {
 
   let handleSubmit = event => {
     event.preventDefault();
-    console.log(`${name}, ${email}, ${password}`);
     let user = { name: name, email: email, password: password, avatar: 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Guy_Fieri_at_Guantanamo_2.jpg' };
 
    set_user(user)
   };
 
   const set_user = (user) => {
-    dispatch(sign_in())
   dispatch(userSignupFetch(user))
 }
 

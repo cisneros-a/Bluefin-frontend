@@ -7,7 +7,7 @@ import { selectHome } from '../actions';
 
 
 
-export default function TestCard(props) {
+export default function HomeCard(props) {
 
   const dispatch = useDispatch()
 
@@ -20,9 +20,11 @@ export default function TestCard(props) {
     formattedPrice: props.home.rent
   };
 
+
   let setSelectedHome= home => {
     dispatch(selectHome(home))
   }
+ 
 
   return (
     <Box

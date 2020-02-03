@@ -1,4 +1,5 @@
 .App {
+	background-color: opaque;
 	text-align: center;
 }
 
@@ -13,26 +14,44 @@
 	cursor: pointer;
 }
 
-.scroll { 
-	margin:4px, 4px; 
-	padding:4px; 
-	width: 40vh; 
-	height: 100vh; 
-	overflow-x: hidden; 
-	overflow-x: auto; 
-	text-align:justify; 
-} 
+.modal {
+	width: 400px;
+	height: 100px;
+}
 
-.homeSpec {
+.toggle {
+	height: 50px;
+}
+
+.CardHolderName {
+	text-align: left;
+}
+
+.scroll {
+	margin: 4px, 4px;
+	padding: 4px;
+	width: 55vw;
+	height: 100vh;
+	overflow-x: hidden;
+	overflow-x: auto;
+	text-align: justify;
+}
+
+.MapFlag {
+	background-color: tomato;
+}
+
+.HomeSpec {
+	text-align: center;
 	/* Add shadows to create the "card" effect */
-	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 	transition: 0.3s;
-  }
-  
-  /* On mouse-over, add a deeper shadow */
-  .homeSpec:hover {
+}
+
+/* On mouse-over, add a deeper shadow */
+.HomeSpec:hover {
 	box-shadow: 0 8px 16px 0 rgba(58, 130, 179, 0.2);
-  }
+}
 
 @media (prefers-reduced-motion: no-preference) {
 	.App-logo {
@@ -48,17 +67,9 @@
 	
   } */
 
-  
-
-  .flex {
-	  flex-wrap: wrap;
-  }
-
- 
-
-  
-  
-  
+.flex {
+	flex-wrap: wrap;
+}
 
 .App-header {
 	background-color: #282c34;

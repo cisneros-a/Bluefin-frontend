@@ -1,5 +1,5 @@
 
-export const userSigninFetch = user => {
+export const userSigninFetch = (user, userType) => {
     return async dispatch => {
       const resp = await fetch("http://localhost:3000/login", {
             method: "POST",
@@ -17,7 +17,9 @@ export const userSigninFetch = user => {
         }
         else {
             localStorage.setItem("token", data.jwt)
-            dispatch(loginUser(data.user))
+            localStorage.setItem("userType", userType)
+            dispatch(loginUser(data.user, userType))
+            dispatch(signIn())
         }
     }
   }
@@ -41,6 +43,7 @@ export const userSigninFetch = user => {
         else {
             localStorage.setItem("token", data.jwt)
             dispatch(loginUser(data.user))
+            dispatch(signIn())
         }
     }
   }
@@ -48,6 +51,7 @@ export const userSigninFetch = user => {
   export const getProfileFetch = () => {
     return async dispatch => {
       const token = localStorage.token;
+      const userType = localStorage.userType
       if (token) {
         const resp = await fetch("http://localhost:3000/profile", {
               method: "GET",
@@ -62,27 +66,39 @@ export const userSigninFetch = user => {
               // An error will occur if the token is invalid.
               // If this happens, you may want to remove the invalid token.
               localStorage.removeItem("token")
+              
           }
           else {
-              dispatch(loginUser(data.user))
-              dispatch(sign_in())
+              dispatch(loginUser(data.user, userType))
+              dispatch(signIn())
           }
       }
     }
   }
   
-  const loginUser = userObj => ({
+  const loginUser = (userObj, userType) => {
+    return {
       type: 'LOGIN_USER',
-      payload: userObj
+      payload: userObj,
+      userType: userType
+    }
+  }
+
+
+export const toggleView = () => {
+    return {
+        type: "TOGGLE"
+    }
+}
+
+export const logoutUser = () => ({
+    type: 'LOGOUT_USER'
   })
 
 
 
 
-
-
-
-export const sign_in = () => {
+export const signIn = () => {
     return {
         type: 'SIGN_IN'
     }
@@ -96,13 +112,12 @@ export const populate_homes = (payload) => {
     }
 }
 
-
-
   export const selectHome = (payload) => {
     return {
         type: 'SELECT_HOME',
         payload: payload,
     }
   }
+
   
   
