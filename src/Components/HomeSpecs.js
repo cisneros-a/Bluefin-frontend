@@ -60,6 +60,8 @@ export default function HomeSpecs() {
             <h1>{home.address}</h1>
             <h2>Rent: ${home.rent} </h2>
     <h2>Bedrooms: {home.bedrooms} Bathrooms: {home.bathrooms}</h2>
+    <h2>Sqft: {home.sqft} </h2>
+
     <h2>Description: {home.description}</h2>
     <h3>Being leased by: {home.user.name}</h3>
 

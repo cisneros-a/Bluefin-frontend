@@ -7,7 +7,9 @@ import Signin from './Components/Signin'
 // import TestSignUp from './Components/TestSignUp'
 import {getProfileFetch} from './actions';
 import LandlordDashboard from './Components/LandlordDashboard'
-import TenantDashbaord from './Components/TenantDashboard'
+import TenantDashboard from './Components/TenantDashboard'
+import LandlordNavbar from './Components/LandlordNavbar'
+import TenantNavbar from './Components/TenantNavbar'
 
 
 
@@ -25,10 +27,15 @@ export default function App() {
 
   const decideUserPath = () => {
     if (isLogged){
+      console.log('Checking type')
       if (userType === 'tenant'){
-        return <TenantDashbaord/>
+        return <div><TenantNavbar/>
+        <TenantDashboard/>
+        </div>
       } else {
-        return <LandlordDashboard/>
+        return <div><LandlordNavbar/>
+        <LandlordDashboard/>
+        </div>
       }
     } return <> <Signin/> <Signup/> </>
   } 

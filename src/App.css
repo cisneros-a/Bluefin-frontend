@@ -27,8 +27,13 @@
 	text-align: left;
 }
 
+.CardGrid {
+	justify-content: center;
+}
+
 .scroll {
-	margin: 4px, 4px;
+	margin: auto;
+	display: block;
 	padding: 4px;
 	width: 55vw;
 	height: 100vh;
@@ -42,6 +47,7 @@
 }
 
 .HomeSpec {
+	margin: auto;
 	text-align: center;
 	/* Add shadows to create the "card" effect */
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);

@@ -24,12 +24,14 @@ export default function LandlordDashboard() {
 
 
     useEffect(() => {
+      console.log('landlord dashboard re-render')
         fetch('http://localhost:3000/properties')
         .then( res => res.json())
         .then(data => sortHomes(data))
     }, [])
 
     const sortHomes = data => {
+      console.log("sorting homes", data)
         let landlordHomes = data.filter(home => home.user_id === userId)
         let availableHomes = landlordHomes.filter(home => home.availability)
         let unavailableHomes = landlordHomes.filter(home => home.availability === false)
@@ -42,14 +44,13 @@ export default function LandlordDashboard() {
     // }
 
     const showCards = homes => {
-        
-              return  <CardHolder homes={homes} />     
+      console.log('Showing cards')
+      return  <CardHolder homes={homes} />     
         
     }
 
     return (
         <div>
-            <LandlordNavbar/>
             <div >
             <Grid container spacing={2}>
           <Grid item xs={6}>

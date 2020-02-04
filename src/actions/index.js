@@ -76,7 +76,7 @@ export const userSigninFetch = (user, userType) => {
     }
   }
   
-  const loginUser = (userObj, userType) => {
+  export const loginUser = (userObj, userType) => {
     return {
       type: 'LOGIN_USER',
       payload: userObj,
@@ -86,6 +86,7 @@ export const userSigninFetch = (user, userType) => {
 
 
 export const toggleView = () => {
+  console.log('Toggle is dispatched')
     return {
         type: "TOGGLE"
     }
