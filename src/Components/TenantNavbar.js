@@ -16,8 +16,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import SettingsIcon from '@material-ui/icons/Settings';
 import SendIcon from '@material-ui/icons/Send';
-import { logoutUser } from '../actions';
-import { useDispatch } from 'react-redux';
+import { logoutUser, loginUser } from '../actions';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const useStyles = makeStyles(theme => ({
@@ -65,9 +65,13 @@ const StyledMenu = withStyles({
 
 export default function MenuAppBar() {
   const dispatch = useDispatch()
+  const name = useSelector(state => state.user.name)
+  const id = useSelector(state => state.user.user_id)
+
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  
   // const open = Boolean(anchorEl);
 
   // const handleChange = event => {
@@ -94,6 +98,18 @@ export default function MenuAppBar() {
       dispatch(logoutUser())
 
   }
+
+
+  const handleSwitchClick = (event) => {
+    let user = {
+      name: name,
+      id: id,
+    };
+    console.log({user})
+    localStorage.setItem("userType", "landlord")
+    dispatch(loginUser(user , "landlord"))
+
+}
 
   
 
@@ -127,25 +143,28 @@ export default function MenuAppBar() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <StyledMenuItem>
-          <ListItemIcon>
-            <SendIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Sent mail" />
+        <StyledMenuItem
+        onClick={(event) => handleSwitchClick(event)}>
+            <ListItemIcon>
+              <SendIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary="Switch" />
         </StyledMenuItem>
+
         <StyledMenuItem>
-          <ListItemIcon>
-            <SettingsIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Settings" />
+           <ListItemIcon>
+             <SettingsIcon fontSize="small" />
+           </ListItemIcon>
+           <ListItemText primary="Settings" />
         </StyledMenuItem>
+
         <StyledMenuItem
         onClick={(event) => handleLogoutClick(event)}
         >
-          <ListItemIcon>
-            <ExitToAppIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Logout" />
+            <ListItemIcon>
+              <ExitToAppIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary="Logout" />
         </StyledMenuItem>
       </StyledMenu>
             </div>

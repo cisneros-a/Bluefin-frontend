@@ -7,7 +7,7 @@ import Map from './Map'
 import HomeSpec from './HomeSpecs'
 import TenantNavbar from './TenantNavbar'
 // import ToggleSwitch from './ToggleSwitch'
-// import { Switch } from "@chakra-ui/core";
+import { Switch, Button } from "@chakra-ui/core";
 import CardHolder from './CardHolder';
 
 
@@ -15,17 +15,26 @@ import CardHolder from './CardHolder';
 export default function TenantDashboard() {
     const allHomes = useSelector((state) => state.homes)
     const selectedHome = useSelector(state => state.selectedHome)
-    const dispatch = useDispatch() 
-    const [toggle, setToggle] = useState(true)
+    console.log('re-rendering')
 
-    // const toggle = useSelector(state => state.toggle)
+    const dispatch = useDispatch() 
+    const [toggle, setToggle] = useState("card")
+
+    const toggleState = useSelector(state => state.toggle.state)
 
 
 
     useEffect(() => {
+        // console.log("This is hitting useEffet")
+        // setToggle(toggleState)
         fetch('http://localhost:3000/properties')
         .then( res => res.json())
         .then(data => set_homes(data))
+        .then(setToggle(toggleState))
+        
+    //     .then(idk => {if (updated){
+    // }
+    //     console.log(toggle)})
     }, [])
 
     const set_homes = (data) => {
@@ -33,8 +42,9 @@ export default function TenantDashboard() {
     }
 
     const showMap = (homes) => {
+        console.log(toggleState)
         if (homes.state.length > 0) {
-            if (toggle){
+            if (toggleState === 'card'){
               return   <CardHolder homes={homes} />
             } 
               return <Map/>
@@ -43,28 +53,30 @@ export default function TenantDashboard() {
 
     const showHomeSpecs = () => {
         if (selectedHome) {
-            return <HomeSpec/>
+            return <Grid item s={12}><HomeSpec/></Grid>
         }
     }
 
     const handleToggle = () => {
+        console.log('handleToggle')
         dispatch(toggleView())
     }
 
   
 
     return (
-        <div>
-            <TenantNavbar/>
-                        {/* <h3>Map</h3><Switch onClick={()=> setToggle(!toggle)} color="teal" size="lg"/><h3>Cards</h3> */}
+                <div>
+                    <h3>Map</h3><Switch onChange={()=> handleToggle()} color="teal" size="lg"/><h3>Cards</h3>
                 <div >
                     <Grid  container spacing={2} >
-                        <Grid  item xs={7}>    
+                        <Grid  item s={6}>    
                             {showMap(allHomes)}      
                         </Grid>
 
-                        <Grid item xs={5}>
+                        <Grid item s={6}>
+                            <Grid container>
                             {showHomeSpecs()}
+                            </Grid>
                         </Grid>  
                     </Grid>  
                 </div>

@@ -16,8 +16,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import SettingsIcon from '@material-ui/icons/Settings';
 import SendIcon from '@material-ui/icons/Send';
-import { logoutUser } from '../actions';
-import { useDispatch } from 'react-redux';
+import { logoutUser, loginUser } from '../actions';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const useStyles = makeStyles(theme => ({
@@ -65,6 +65,8 @@ const StyledMenu = withStyles({
 
 export default function MenuAppBar() {
   const dispatch = useDispatch()
+  const name = useSelector(state => state.user.name)
+  const id = useSelector(state => state.user.user_id)
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -94,6 +96,17 @@ export default function MenuAppBar() {
       dispatch(logoutUser())
 
   }
+
+  const handleSwitchClick = (event) => {
+    let user = {
+      name: name,
+      id: id,
+    };
+    console.log({user})
+    localStorage.setItem("userType", "tenant")
+    dispatch(loginUser(user , "tenant"))
+
+}
 
   
 
@@ -134,18 +147,21 @@ export default function MenuAppBar() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <StyledMenuItem>
+        <StyledMenuItem
+        onClick={(event) => handleSwitchClick(event)}>
           <ListItemIcon>
             <SendIcon fontSize="small" />
           </ListItemIcon>
-          <ListItemText primary="Sent mail" />
+          <ListItemText primary="Switch Dashboard" />
         </StyledMenuItem>
+
         <StyledMenuItem>
           <ListItemIcon>
             <SettingsIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText primary="Settings" />
         </StyledMenuItem>
+
         <StyledMenuItem
         onClick={(event) => handleLogoutClick(event)}
         >
