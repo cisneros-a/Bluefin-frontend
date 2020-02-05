@@ -3,7 +3,8 @@ import LandlordNavbar from './LandlordNavbar'
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
-import {populate_homes} from '../actions';
+// import {populate_homes} from '../actions';
+import LandlordAppTable from './LandlordAppTable'
 import CardHolder from './CardHolder';
 import { useEffect, useState } from 'react'
 import {useSelector, useDispatch} from 'react-redux';
@@ -24,14 +25,12 @@ export default function LandlordDashboard() {
 
 
     useEffect(() => {
-      console.log('landlord dashboard re-render')
         fetch('http://localhost:3000/properties')
         .then( res => res.json())
         .then(data => sortHomes(data))
     }, [])
 
     const sortHomes = data => {
-      console.log("sorting homes", data)
         let landlordHomes = data.filter(home => home.user_id === userId)
         let availableHomes = landlordHomes.filter(home => home.availability)
         let unavailableHomes = landlordHomes.filter(home => home.availability === false)
@@ -44,7 +43,6 @@ export default function LandlordDashboard() {
     // }
 
     const showCards = homes => {
-      console.log('Showing cards')
       return  <CardHolder homes={homes} />     
         
     }
@@ -53,7 +51,7 @@ export default function LandlordDashboard() {
         <div>
             <div >
             <Grid container spacing={2}>
-          <Grid item xs={6}>
+          <Grid item xs={5}>
             <Container>
               <Typography variant="h4" component="h3">
                 <div className={'CardHolderName'}>Leased :</div>
@@ -63,7 +61,7 @@ export default function LandlordDashboard() {
             </Container>
           </Grid>
 
-          <Grid item xs={6}>
+          <Grid item xs={5}>
             <Container>
               <Typography variant="h4" component="h3">
                 <div className={'CardHolderName'}> Not Leased :</div>
@@ -75,6 +73,9 @@ export default function LandlordDashboard() {
          
         </Grid>
                 </div>
+                <Grid item xs={8}>
+                <LandlordAppTable/>
+                </Grid>
         </div>
     )
 }

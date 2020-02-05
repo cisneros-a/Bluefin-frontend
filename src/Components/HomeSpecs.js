@@ -27,7 +27,7 @@ export default function HomeSpecs() {
       property_id: home.id
     }
 
-    fetch("http://localhost:3000/applications", {
+    const res = await fetch("http://localhost:3000/applications", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -35,22 +35,19 @@ export default function HomeSpecs() {
       },
       body: JSON.stringify({ application })
     })
-      .then(res => res.json())
-      .then(data => console.log(data));
+
+    const data = await res.json()
+    if (data.message) {
+      console.log('Maybe this failed')
+    } else {
+      console.log('Maybe this passed')
+    }
+
+    
+      
   };
 
-  //   const resp = await fetch("http://localhost:3000/applications", {
-  //     method: "POST",
-  //     headers: {
-  //         'Content-Type': 'application/json',
-  //         Accept: 'application/json',
-  //     },
-  //     body: JSON.stringify({ tenant_id: userId,
-  //       landlord_id: home.user.id,
-  //       property_id: home.id })
-  // })
-  // const data = await resp.json()
-  //   console.log(data)
+  
     
  
 

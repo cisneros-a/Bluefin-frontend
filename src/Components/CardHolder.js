@@ -23,14 +23,14 @@ export default function CardHolder(props) {
         if (userType === 'tenant'){
             return props.homes.state.map(home=> <Grid className = "CardGrid"item xs={6}><HomeCard key={home.id} home={home}/> </Grid> )
           } else {
-            return props.homes.map(home=> <Grid className = "CardGrid"><HomeCard key={home.id} home={home}/></Grid> )
+            return props.homes.map(home=> <Grid className = "CardGrid" item xs={4}><HomeCard key={home.id} home={home}/></Grid> )
           }
     }
     
 
     return (
         <div className="scroll">
-          <Grid container spacing={2}>
+          <Grid container spacing={1}>
             {populateCards()}
             </Grid>
         </div>

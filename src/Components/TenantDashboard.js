@@ -5,9 +5,9 @@ import {populate_homes, toggleView} from '../actions';
 import Grid from "@material-ui/core/Grid";
 import Map from './Map'
 import HomeSpec from './HomeSpecs'
-import TenantNavbar from './TenantNavbar'
+import TenantAppTable from './TenantAppTable'
 // import ToggleSwitch from './ToggleSwitch'
-import { Switch, Button } from "@chakra-ui/core";
+import { Switch } from "@chakra-ui/core";
 import CardHolder from './CardHolder';
 
 
@@ -15,7 +15,6 @@ import CardHolder from './CardHolder';
 export default function TenantDashboard() {
     const allHomes = useSelector((state) => state.homes)
     const selectedHome = useSelector(state => state.selectedHome)
-    console.log('re-rendering')
 
     const dispatch = useDispatch() 
     const [toggle, setToggle] = useState("card")
@@ -42,7 +41,6 @@ export default function TenantDashboard() {
     }
 
     const showMap = (homes) => {
-        console.log(toggleState)
         if (homes.state.length > 0) {
             if (toggleState === 'card'){
               return   <CardHolder homes={homes} />
@@ -58,7 +56,6 @@ export default function TenantDashboard() {
     }
 
     const handleToggle = () => {
-        console.log('handleToggle')
         dispatch(toggleView())
     }
 
@@ -78,7 +75,8 @@ export default function TenantDashboard() {
                             {showHomeSpecs()}
                             </Grid>
                         </Grid>  
-                    </Grid>  
+                    </Grid> 
+                    <TenantAppTable/> 
                 </div>
         </div>
           
