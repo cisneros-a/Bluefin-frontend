@@ -8,9 +8,9 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
-import { IconButton } from "@chakra-ui/core";
+import { IconButton, Button, Collapse } from "@chakra-ui/core";
 import TableRow from '@material-ui/core/TableRow';
-import { fetch_applications } from '../actions'
+import { fetch_applications, fetch_homes } from '../actions'
 
 
 
@@ -32,6 +32,10 @@ export default function LandlordAppTable() {
   // const [applications, setApplications] = useState([])
   // const [rows, setRows] = useState([])
   const dispatch = useDispatch()
+  const [show, setShow] = useState(false);
+  const handleToggle = () => setShow(!show);
+
+
   // const apps = useSelector(state => state.applications)
 
   useEffect(() => {
@@ -80,6 +84,12 @@ export default function LandlordAppTable() {
       align: 'right',
       
     },
+    {
+      id: 'more',
+      label: 'See More:',
+      minWidth: 170,
+      align: 'right'
+    }
   ];
 
   
@@ -123,7 +133,8 @@ export default function LandlordAppTable() {
         },
         body: JSON.stringify({ availability: 0 })
       })
-      .then(dispatch(fetch_applications(userId)))
+      .then(dispatch(fetch_applications(userId)), dispatch(fetch_homes()))
+  
 
   }
 
@@ -148,13 +159,16 @@ export default function LandlordAppTable() {
           buttons: <div><IconButton onClick={() => handleAccept(application.id, application.tenant_id, application.property_id)} variantColor="green" aria-label="Call Segun" size="lg" icon="check"/> <IconButton onClick={() => handleDeny(application.id)} variantColor="red" aria-label="Call Segun" size="lg" icon="close"/></div>,
           address: `${application.property.address}`,
           name: `${application.tenant.name}`,
-          date: `${application.property.available_date}` 
+          date: `${application.property.available_date}`,
+          more: <div><Button variantColor="blue" onClick={handleToggle}>Toggle</Button>
+   </div>
       })
       })
     } 
     console.log(rows)
     return (rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => {
       return (
+        <>
         <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
           {columns.map(column => {
             const value = row[column.id];
@@ -165,6 +179,10 @@ export default function LandlordAppTable() {
             );
           })}
         </TableRow>
+        <Collapse mt={4} isOpen={show}>
+        <h1>Hi</h1>
+       </Collapse>
+       </>
       );
     }))
   }
@@ -182,6 +200,7 @@ export default function LandlordAppTable() {
                   style={{ minWidth: column.minWidth }}
                 >
                   {column.label}
+                  
                 </TableCell>
               ))}
             </TableRow>

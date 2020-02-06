@@ -1,11 +1,16 @@
 import React from 'react'
+import { Button } from "@chakra-ui/core";
 
 
 export default function MapFlag(props) {
 
     return (
-        <div className="MapFlag">
-            <h1>${props.rent}</h1>
+        <div>
+            
+
+<Button  leftIcon="info" variantColor="purple" variant="solid">
+${props.rent}
+        </Button>
         </div>
     )
 }

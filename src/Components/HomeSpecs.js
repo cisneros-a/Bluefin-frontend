@@ -1,8 +1,9 @@
 import React from 'react'
+import { useState } from 'react'
 import {useSelector} from 'react-redux'
 import { Button, ButtonGroup } from "@chakra-ui/core";
 import { useDisclosure, Textarea, useToast } from "@chakra-ui/core";
-import { FormControl, FormLabel } from "@chakra-ui/core";
+import { FormControl, FormLabel, Box } from "@chakra-ui/core";
 import {
   Modal,
   ModalOverlay,
@@ -19,8 +20,18 @@ export default function HomeSpecs() {
   const toast = useToast();
   const home = useSelector(state => state.selectedHome.state)
   const userId = useSelector(state => state.user.user_id)
+  const [button, setButton] = useState(true)
 
   const handleClick = async () => {
+
+    toast({
+      title: "Thank you for submitting an application!",
+      description: "You should recieve a response soon!",
+      status: "success",
+      duration: 2500,
+      isClosable: true,
+      position: 'top'
+    })
     const application = {
       tenant_id: userId,
       landlord_id: home.user.id,
@@ -41,14 +52,13 @@ export default function HomeSpecs() {
       console.log('Maybe this failed')
     } else {
       console.log('Maybe this passed')
+      setButton(!button)
+
     }
 
     
       
   };
-
-  
-    
  
 
     return (
@@ -89,10 +99,16 @@ export default function HomeSpecs() {
       </ModalBody>
 
       <ModalFooter>
-        <Button variantColor="teal" mr={3} onClick={() => handleClick()}  >
-          Submit!
+      {button ? (
+        <Button onClick={() => handleClick()} leftIcon="edit" variantColor="teal" variant="solid">
+          Apply now!
         </Button>
-        <Button variant="ghost">Cancel</Button>
+        ) : ( 
+        <Button onClick={onClose} variant="ghost">
+          Cancel
+        </Button>
+           )}
+       
       </ModalFooter>
     </ModalContent>
     </Modal>

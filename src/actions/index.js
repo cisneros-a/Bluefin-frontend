@@ -105,9 +105,19 @@ export const signIn = () => {
     }
 }
 
+export const fetch_homes = () => {
+  return async dispatch => {
+    let  resp = await fetch('http://localhost:3000/properties')
+    const data = await resp.json()
+    let availableHomes = data.filter(home => home.availability)
+    console.log()
+    dispatch(populate_homes(availableHomes))
+
+  }
+}
+
 
 export const populate_homes = (payload) => {
-  console.log('Hit second action')
     return {
         type: 'POPULATE_HOMES',
         payload: payload,
@@ -132,7 +142,6 @@ export const selectHome = (payload) => {
 export const fetch_applications = (userId) => {
  
   return async dispatch => {
-    console.log('hit async')
     const resp = await fetch("http://localhost:3000/applications", {
           method: "GET",
           headers: {
@@ -146,7 +155,6 @@ export const fetch_applications = (userId) => {
       if (localStorage.userType === 'landlord'){
       let landlordApplications = data.filter(application => application.landlord_id === userId)
       let pendingApplications = landlordApplications.filter(application => application.status === 'pending')
-      console.log('Sorting applications :')
           dispatch(populate_applications(pendingApplications))
       } else{
       let tenantApplications = data.filter(application => application.tenant_id === userId)
@@ -159,6 +167,38 @@ export const fetch_applications = (userId) => {
 }
   
   
+
+export const fetchTenantLease = (userId) => {
+  console.log('hit lease fetch')
+  return async dispatch => {
+      const resp = await fetch("http://localhost:3000/leases", {
+        method: "GET",
+        headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                
+            }
+          })
+          const data = await resp.json()
+        if (data.message) {
+          
+        }
+        else {
+          let tenantLease = data.find(lease => lease.tenant_id === userId)
+          console.log(tenantLease)
+          dispatch(populateLease(tenantLease))
+        }
+   }
+  
+}
+
+const populateLease = (payload) => {
+  return {
+    type: 'POPULATE_TENANT_LEASE',
+    payload: payload,
+  }
+}
+
 export const Example = (user, userType) => {
   return async dispatch => {
     const resp = await fetch("http://localhost:3000/login", {

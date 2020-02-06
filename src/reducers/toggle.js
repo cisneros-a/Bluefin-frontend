@@ -1,15 +1,8 @@
-const toggleReducer = (state = 'map', action) => {
+const toggleReducer = (state = false, action) => {
     // eslint-disable-next-line default-case
     switch (action.type) {
         case 'TOGGLE':
-            
-            {if (state.state !== 'map') {
-            console.log('should return map. The current state is', state.state)
-            return {state: 'map'}
-            } else{
-                console.log('should return card', console.log("the current state is", state.state))
-                return {state: 'card'}
-            }}
+            return !state
         default:
            return state;
         

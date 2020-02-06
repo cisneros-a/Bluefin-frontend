@@ -27,6 +27,7 @@ export default function CardHolder(props) {
           }
     }
     
+    console.log('cards in CardHolder is', props.homes)
 
     return (
         <div className="scroll">

@@ -1,212 +1,168 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import styled, { css } from "styled-components";
-
-export const CardWrapper = styled.div`
-  overflow: hidden;
-  padding: 0 0 32px;
-  margin: 48px auto 0;
-  width: 325px;
-  font-family: Quicksand, arial, sans-serif;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05), 0 0px 40px rgba(0, 0, 0, 0.08);
-  border-radius: 5px;
-`;
-
-export const CardHeader = styled.header`
-  padding-top: 32px;
-  padding-bottom: 32px;
-`;
-
-export const CardHeading = styled.h1`
-  font-size: 24px;
-  font-weight: bold;
-  text-align: center;
-`;
-
-export const CardBody = styled.div`
-  padding-right: 32px;
-  padding-left: 32px;
-`;
-
-export const CardFieldset = styled.fieldset`
-  position: relative;
-  padding: 0;
-  margin: 0;
-  border: 0;
-
-  & + & {
-    margin-top: 24px;
-  }
-
-  &:nth-last-of-type(2) {
-    margin-top: 32px;
-  }
-
-  &:last-of-type {
-    text-align: center;
-  }
-`;
-
-export const CardInput = styled.input`
-  padding: 7px 0;
-  width: 100%;
-  font-family: inherit;
-  font-size: 14px;
-  border-top: 0;
-  border-right: 0;
-  border-bottom: 1.35px solid #fff;
-  border-left: 0;
-  transition: border-bottom-color 0.25s ease-in;
-
-  &:focus {
-    border-bottom-color: #4663ac;
-    outline: 0;
-  }
-`;
-
-export const CardIcon = styled.span`
-  color: #666;
-  cursor: pointer;
-  opacity: .25;
-  transition: opacity .25s ease-in;
-
-  &:hover {
-    opacity: .95;
-  }
-
-  ${props =>
-    props.big &&
-    css`
-      font-size: 26px;
-    `}
-
-  ${props =>
-    props.eye &&
-    css`
-      position: absolute;
-      top: 8px;
-      right: 0;
-    `}
-
-  ${props =>
-    props.small &&
-    css`
-      font-size: 14px;
-    `}
-`;
-
-export const CardOptionsNote = styled.small`
-  padding-top: 8px;
-  display: block;
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  text-transform: uppercase;
-`;
-
-export const CardOptions = styled.ul`
-  padding: 0;
-  margin: 16px 0 8px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  list-style-type: none;
-`;
-
-export const CardOptionsItem = styled.li`
-  &:nth-of-type(n + 2) {
-    margin-left: 16px;
-  }
-`;
-
-export const CardButton = styled.button`
-  display: block;
-  width: 100%;
-  padding: 12px 0;
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 700;
-  color: #fff;
-  background-color: #003366;
-  border: 0;
-  border-radius: 35px;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.08);
-  cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
-
-  &:hover {
-    box-shadow: 0 15px 15px rgba(0, 0, 0, 0.16);
-    transform: translate(0, -5px);
-  }
-`;
-
-export const CardLink = styled.a`
-  display: inline-block;
-  font-size: 12px;
-  text-decoration: none;
-  color: #aaa;
-  border-bottom: 1px solid #ddd;
-  cursor: pointer;
-  transition: color 0.25s ease-in;
-
-  &:hover {
-    color: #777;
-  }
-`;
+import { useState } from "react";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import { useDispatch} from 'react-redux';
+import {userSigninFetch} from '../actions';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
 
 
 
-export default function SignupCard() {
+
+function Copyright() {
   return (
-    <div className="App">
-      <CardWrapper>
-        <CardHeader>
-          <CardHeading>Sign up</CardHeading>
-        </CardHeader>
+    <Typography variant="body2" color="textSecondary" align="center">
+      {"Copyright © "}
+      <Link color="inherit" href="https://material-ui.com/">
+        Job Huntr
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
 
-        <CardBody>
-          <CardFieldset>
-            <CardInput placeholder="Username" type="text" required />
-          </CardFieldset>
+const useStyles = makeStyles(theme => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main
+  },
+  form: {
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(1)
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2)
+  }
+}));
 
-          <CardFieldset>
-            <CardInput placeholder="E-mail" type="text" required />
-          </CardFieldset>
+export default function SignIn() {
 
-          <CardFieldset>
-            <CardInput placeholder="Password" type="password" required />
-            <CardIcon className="fa fa-eye" eye small />
-          </CardFieldset>
+  // const user_info = useSelector(state => state.user)
+//   const dispatch = useDispatch() 
 
-          <CardFieldset>
+  const classes = useStyles();
+  const dispatch = useDispatch() 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [userType, setUserType] = useState("")
+  // const API = "http://localhost:3000/login";
 
-            <CardOptions>
-              <CardOptionsItem>
-                <CardIcon className="fab fa-google" big />
-              </CardOptionsItem>
+  let handleEmailChange = event => {
+    setEmail(event.target.value);
+  };
+  let handlePasswordChange = event => {
+    setPassword(event.target.value);
+  };
+  let handleTypeChange = event => {
+    setUserType(event.target.value);
+  };
 
-              <CardOptionsItem>
-                <CardIcon className="fab fa-twitter" big />
-              </CardOptionsItem>
 
-              <CardOptionsItem>
-                <CardIcon className="fab fa-facebook" big />
-              </CardOptionsItem>
-            </CardOptions>
-          </CardFieldset>
+  let handleSubmit = event => {
+    event.preventDefault();
 
-          <CardFieldset>
-            <CardButton type="button">Sign Up</CardButton>
-          </CardFieldset>
+    let user = {
+      email: email,
+      password: password,
+    };
+    // console.log(user)
+    set_user(user)
 
-          <CardFieldset>
-            <CardLink>I already have an account</CardLink>
-          </CardFieldset>
-        </CardBody>
-      </CardWrapper>
-    </div>
+  };
+
+  const set_user = (user) => {
+    dispatch(userSigninFetch(user, userType))
+  }
+
+  return (
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Sign in
+        </Typography>
+        <form
+          onSubmit={event => handleSubmit(event)}
+          className={classes.form}
+          noValidate
+        >
+          <TextField
+            onChange={event => {
+              handleEmailChange(event);
+            }}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+            autoFocus
+          />
+          <TextField
+            onChange={event => {
+              handlePasswordChange(event);
+            }}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+          />
+          <FormLabel component="legend">User Type:</FormLabel>
+          <RadioGroup aria-label="userType" name="userType" value={userType} onChange={(event) => handleTypeChange(event)} row>
+          <FormControlLabel  value="landlord" control={<Radio />} label="Landlord" />
+          <FormControlLabel  value="tenant" control={<Radio />} label="Tenant" />
+         
+        </RadioGroup>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Sign In
+          </Button>
+          <Grid container>
+            <Grid item>
+              <Link href="/" variant="body2">
+                {"Don't have an account? Sign Up"}
+              </Link>
+            </Grid>
+          </Grid>
+        </form>
+      </div>
+      <Box mt={8}>
+        <Copyright />
+      </Box>
+    </Container>
   );
 }
