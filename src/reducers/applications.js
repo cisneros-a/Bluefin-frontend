@@ -1,7 +1,8 @@
-const homeReducer = (state = [], action) => {
+const applicationReducer = (state =  [], action) => {
     // eslint-disable-next-line default-case
     switch (action.type) {
-        case 'POPULATE_HOMES':
+        case 'POPULATE_APPLICATIONS':
+            console.log('Hit reducer')
             return {state: action.payload}
         default:
            return state;
@@ -9,4 +10,4 @@ const homeReducer = (state = [], action) => {
     }
 };
 
-export default homeReducer;
+export default applicationReducer;

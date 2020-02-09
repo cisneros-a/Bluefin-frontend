@@ -41,8 +41,8 @@ export default function HomeCard(props) {
 
       <Box  p="6">
         <Box  d="flex" alignItems="baseline">
-          <Badge rounded="full" px="2" variantColor="teal">
-            New
+          <Badge rounded="full" px="2" variantColor="red">
+            Hot!
           </Badge>
           <Box
             color="gray.500"

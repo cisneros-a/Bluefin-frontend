@@ -1,54 +1,38 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import {useSelector, useDispatch} from 'react-redux';
-import {populate_homes, toggleView} from '../actions';
+import {fetch_homes, toggleView} from '../actions';
 import Grid from "@material-ui/core/Grid";
 import Map from './Map'
 import HomeSpec from './HomeSpecs'
-import TenantNavbar from './TenantNavbar'
-// import ToggleSwitch from './ToggleSwitch'
-import { Switch, Button } from "@chakra-ui/core";
+import TenantAppTable from './TenantAppTable'
+import { Switch } from "@chakra-ui/core";
 import CardHolder from './CardHolder';
+import TenantLease from './TenantLease';
 
 
 
 export default function TenantDashboard() {
     const allHomes = useSelector((state) => state.homes)
     const selectedHome = useSelector(state => state.selectedHome)
-    console.log('re-rendering')
-
     const dispatch = useDispatch() 
-    const [toggle, setToggle] = useState("card")
-
-    const toggleState = useSelector(state => state.toggle.state)
+    const toggleState = useSelector(state => state.toggle)
 
 
 
     useEffect(() => {
-        // console.log("This is hitting useEffet")
-        // setToggle(toggleState)
-        fetch('http://localhost:3000/properties')
-        .then( res => res.json())
-        .then(data => set_homes(data))
-        .then(setToggle(toggleState))
-        
-    //     .then(idk => {if (updated){
-    // }
-    //     console.log(toggle)})
+        dispatch(fetch_homes())
+      
     }, [])
 
-    const set_homes = (data) => {
-        dispatch(populate_homes(data))
-    }
-
     const showMap = (homes) => {
-        console.log(toggleState)
+        if (homes.state) {
         if (homes.state.length > 0) {
-            if (toggleState === 'card'){
+            if ( toggleState ){
               return   <CardHolder homes={homes} />
             } 
               return <Map/>
-        }
+        } }
     }
 
     const showHomeSpecs = () => {
@@ -57,16 +41,11 @@ export default function TenantDashboard() {
         }
     }
 
-    const handleToggle = () => {
-        console.log('handleToggle')
-        dispatch(toggleView())
-    }
-
-  
 
     return (
                 <div>
-                    <h3>Map</h3><Switch onChange={()=> handleToggle()} color="teal" size="lg"/><h3>Cards</h3>
+                    {/* <TenantLease/> */}
+                    <h3>Map</h3><Switch onChange={()=> dispatch(toggleView())} color="teal" size="lg"/><h3>Cards</h3>
                 <div >
                     <Grid  container spacing={2} >
                         <Grid  item s={6}>    
@@ -78,9 +57,10 @@ export default function TenantDashboard() {
                             {showHomeSpecs()}
                             </Grid>
                         </Grid>  
-                    </Grid>  
-                </div>
-        </div>
+                    </Grid> 
+                    {/* <TenantAppTable/>   */}
+                 </div>
+         </div>
           
             
     )

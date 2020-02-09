@@ -27,7 +27,6 @@ export default function App() {
 
   const decideUserPath = () => {
     if (isLogged){
-      console.log('Checking type')
       if (userType === 'tenant'){
         return <div><TenantNavbar/>
         <TenantDashboard/>

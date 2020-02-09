@@ -43,6 +43,7 @@ export default function Map() {
 
 
     return (
+        
         <div>
             <ReactMapGL
             {...viewport}
