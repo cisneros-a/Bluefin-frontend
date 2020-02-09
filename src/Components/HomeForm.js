@@ -59,7 +59,7 @@ export default function Signup(props) {
     //   .then(res=>res.json())
     //   .then(data => console.log(data.Response.View[0].Result[0].Location.DisplayPosition.Latitude, data.Response.View[0].Result[0].Location.DisplayPosition.Longitude ))
     // // console.log(images)
-    let property = {user_id: 2, address: '1744 Dorch Dr, Pflugerville, TX 78660', rent: '170', bedrooms: '4', bathrooms: '3', sqft: '2699', availability: 1, available_date: '01/28/20', description: "Large home that is well kept! A MUST SEE!", latitude: 30.350558, longitude: -97.887929, uploads: images[0]};
+    let property = {user_id: 2, address: '1744 Dorch Dr, Pflugerville, TX 78660', rent: '170', bedrooms: '4', bathrooms: '3', sqft: '2699', availability: 1, available_date: '01/28/20', description: "Large home that is well kept! A MUST SEE!", latitude: 30.301758, longitude:  -97.727459, uploads: images[0]};
     const res = await fetch("http://localhost:3000/properties", {
         method: "POST",
         headers: {

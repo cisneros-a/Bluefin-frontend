@@ -12,10 +12,11 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
+  Image
 } from "@chakra-ui/core";
 
 export default function HomeSpecs() {
-
+  let photo ='/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2…2a493d3e508146c08205b9287e608a5ae797eb5b/IMG3.png'
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   const allHomes = useSelector((state) => state.homes.state)
@@ -58,14 +59,37 @@ export default function HomeSpecs() {
   };
 
   const getPicture = () => {
-    console.log(allHomes.find(singleHome => singleHome.id === home.id ))
+    fetch(`http://localhost:3000/properties/${home.id}`, {
+              method: "GET",
+              headers: {
+                  'Content-Type': 'application/json',
+                  Accept: 'application/json'
+              }
+          })
+          .then(res => res.json())
+          .then(data => {
+            console.log(data.uploads)
+            return <img src='/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2…2a493d3e508146c08205b9287e608a5ae797eb5b/IMG3.png' alt='home'></img>
+          })
 
+    // const res = await fetch(`http://localhost:3000/properties/${home.id}`, {
+    //           method: "GET",
+    //           headers: {
+    //               'Content-Type': 'application/json',
+    //               Accept: 'application/json'
+    //           }
+    //       })
+    // const data = await res.json()
+    // console.log(data.uploads)
+  //  return <img src={data.uploads} alt='home'></img>
   }
- 
 
     return (
         <div className="HomeSpec">
-            {getPicture()}
+   <Box size="sm">
+  <Image size="400px" src="http://localhost:3000/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBZmM9IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--c03ceae6fa4f46ab1cc8eb33b79b52fbeff7e85b/IMG1.png" alt="Home" />
+</Box>
+            
             <h1>{home.address}</h1>
             <h2>Rent: ${home.rent} </h2>
     <h2>Bedrooms: {home.bedrooms} Bathrooms: {home.bathrooms}</h2>
