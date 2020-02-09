@@ -10,7 +10,6 @@ import LandlordDashboard from './Components/LandlordDashboard'
 import TenantDashboard from './Components/TenantDashboard'
 import LandlordNavbar from './Components/LandlordNavbar'
 import TenantNavbar from './Components/TenantNavbar'
-import TestSignUp from './Components/TestSignUp'
 
 
 
@@ -28,7 +27,6 @@ export default function App() {
 
   const decideUserPath = () => {
     if (isLogged){
-      console.log('Checking type')
       if (userType === 'tenant'){
         return <div><TenantNavbar/>
         <TenantDashboard/>

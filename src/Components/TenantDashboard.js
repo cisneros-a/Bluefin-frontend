@@ -28,7 +28,6 @@ export default function TenantDashboard() {
     const showMap = (homes) => {
         if (homes.state) {
         if (homes.state.length > 0) {
-            console.log(toggleState)
             if ( toggleState ){
               return   <CardHolder homes={homes} />
             } 
@@ -59,8 +58,8 @@ export default function TenantDashboard() {
                             </Grid>
                         </Grid>  
                     </Grid> 
-                    <TenantAppTable/> 
-                </div>
+                    {/* <TenantAppTable/>   */}
+                 </div>
          </div>
           
             

@@ -125,7 +125,7 @@ export default function LandlordAppTable() {
   }
 
   let updateProperty = async propertyId => {
-    await fetch(`http://localhost:3000/properties/${propertyId}`, {
+    await fetch(`http://localhost:3000/update_availability/${propertyId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

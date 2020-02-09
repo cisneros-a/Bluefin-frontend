@@ -18,6 +18,7 @@ export default function HomeSpecs() {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
+  const allHomes = useSelector((state) => state.homes.state)
   const home = useSelector(state => state.selectedHome.state)
   const userId = useSelector(state => state.user.user_id)
   const [button, setButton] = useState(true)
@@ -53,17 +54,18 @@ export default function HomeSpecs() {
     } else {
       console.log('Maybe this passed')
       setButton(!button)
-
-    }
-
-    
-      
+    }     
   };
+
+  const getPicture = () => {
+    console.log(allHomes.find(singleHome => singleHome.id === home.id ))
+
+  }
  
 
     return (
         <div className="HomeSpec">
-            
+            {getPicture()}
             <h1>{home.address}</h1>
             <h2>Rent: ${home.rent} </h2>
     <h2>Bedrooms: {home.bedrooms} Bathrooms: {home.bathrooms}</h2>

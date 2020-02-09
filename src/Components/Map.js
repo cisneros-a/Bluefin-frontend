@@ -41,7 +41,6 @@ export default function Map() {
         }
     }, [])
 
-    console.log('Home in map',)
 
     return (
         

@@ -36,32 +36,7 @@ export default function LandlordAppTable() {
     dispatch(fetch_applications(userId))
     }, [])
 
-    // let reloadTable =  () => {
-    //     console.log('reloading table function')
-    //     fetch('http://localhost:3000/applications')
-    //     .then(res => res.json())
-    //     .then(data => {
-    //         let landlordApplications = data.filter(application => application.landlord_id === userId)
-    //         let pendingApplications = landlordApplications.filter(application => application.status === 'pending')
-    //         dispatch(populate_applications(pendingApplications))
-    //     })       
-
-    // }
-
-    // let populate_rows = (data) => {
-    //     dispatch(populate_applications(data))
-    //     setApplications(data)
-    //     console.log('Populating rows')
-    //     data.forEach(application => {
-    //         console.log(applications)
-    //     setRows(prevState => [...prevState, {
-    //         status: `${application.status}`,
-    //         address: `${application.property.address}`,
-    //         name: `${application.landlord.name}`,
-    //         date: <div><IconButton onClick={() => handleDelete(application.id, application.tenant_id, application.property_id)} variantColor="red" aria-label="Call Segun" size="lg" icon="close"/></div>, 
-    //     }])
-    //     })   
-    // }
+ 
     const columns = [
     { id: 'status', label: 'Application Status', maxWidth: 25 },
     
@@ -90,11 +65,7 @@ export default function LandlordAppTable() {
 
 
   
-  
-//   function createData(buttons, address, name, date) {
-//     console.log('Create Data functions')
-//     return { buttons, address, name, date };
-//   }
+ 
   
 
 
@@ -141,13 +112,6 @@ export default function LandlordAppTable() {
       );
     }))
   }
-
-  
-  
-
- 
-
- 
 
   return (
     <Paper className={classes.root}>
