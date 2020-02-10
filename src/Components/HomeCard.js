@@ -12,7 +12,7 @@ export default function HomeCard(props) {
   const dispatch = useDispatch()
 
   const property = {
-    imageUrl: "https://bit.ly/2Z4KKcF",
+    imageUrl: `http://localhost:3000/${props.img}`,
     imageAlt: "Rear view of modern home with pool",
     beds: props.home.bedrooms,
     baths: props.home.bathrooms,

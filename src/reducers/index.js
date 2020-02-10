@@ -1,6 +1,6 @@
 import loggedReducer from './isLogged'
 import {combineReducers} from 'redux'
-import userReducer from './userInfo';
+import userReducer from './userinfo';
 import homeReducer from './homes'
 import toggleRedcuer from './toggle'
 import selectedHomeReducer from './selectedHome'

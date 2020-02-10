@@ -110,13 +110,11 @@ export const fetch_homes = () => {
     let  resp = await fetch('http://localhost:3000/properties')
     const data = await resp.json()
     let availableHomes = data.filter(home => home.property.availability)
-    console.log(availableHomes)
     let onlyHomes = []
     for (let i = 0; i < availableHomes.length; i++) {
       onlyHomes.push(availableHomes[i].property)
     }
-    console.log(onlyHomes)
-    dispatch(populate_homes(onlyHomes))
+    dispatch(populate_homes(data))
 
   }
 }

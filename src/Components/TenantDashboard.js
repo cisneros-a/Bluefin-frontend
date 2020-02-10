@@ -27,12 +27,19 @@ export default function TenantDashboard() {
 
     const showMap = (homes) => {
         if (homes.state) {
-        if (homes.state.length > 0) {
+
+        if (homes.state.length > 0) { 
+            // console.log('homes.state.length is greater than 0')   
+            // console.log(homes.state)       
+            let onlyHomes = []
+            homes.state.forEach(home => onlyHomes.push(home.property))
             if ( toggleState ){
               return   <CardHolder homes={homes} />
             } 
-              return <Map/>
-        } }
+            console.log('dashboard', homes.state)
+              return <Map homes={homes.state}/>
+        }
+     }
     }
 
     const showHomeSpecs = () => {

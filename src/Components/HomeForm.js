@@ -9,7 +9,7 @@ import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import { Input } from '@material-ui/core';
 import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import HomeIcon from '@material-ui/icons/Home';
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
@@ -17,6 +17,14 @@ import {userSignupFetch} from '../actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { DirectUpload } from "activestorage";
 import Dropzone from 'react-dropzone'
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import InputLabel from "@material-ui/core/InputLabel";
+import InputAdornment from '@material-ui/core/InputAdornment';
+
+
+
+
 
 
 
@@ -44,22 +52,42 @@ const useStyles = makeStyles(theme => ({
 export default function Signup(props) {
   const userId = useSelector(state => state.user.user_id)
   const dispatch = useDispatch() 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+ 
   const [files, setFiles] = useState('')
   const classes = useStyles();
   const [images, setImages] = useState('')
+  
+  
+  const [values, setValues] = React.useState({
+    streetaddress: 'N/A',
+    city: 'N/A',
+    state: 'TX',
+    zipcode: 'N/A',
+    rent: 'N/A',
+    bedrooms: 'N/A',
+    bathrooms: 'N/A',
+    sqft: 'N/A',
+    date: 'N/A',
+    description: 'N/A',
+
+  });
+
+  const handleChange = prop => event => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
+
+
 
 
   let handleSubmit = async event => {
-    //   let input = "5920 Zachary Scott St Austin"
+      let input = `${values.streetaddress}, ${values.city}, ${values.state}, ${values.zipcode}`
       event.preventDefault();
-    //   fetch(`https://geocoder.ls.hereapi.com/6.2/geocode.json?apiKey=OHYIZygaUlcGO559jEmBfMg_2UaFX5n3qMoYn7h2TKo&searchtext=${input}`)
-    //   .then(res=>res.json())
-    //   .then(data => console.log(data.Response.View[0].Result[0].Location.DisplayPosition.Latitude, data.Response.View[0].Result[0].Location.DisplayPosition.Longitude ))
-    // // console.log(images)
-    let property = {user_id: 2, address: '1744 Dorch Dr, Pflugerville, TX 78660', rent: '170', bedrooms: '4', bathrooms: '3', sqft: '2699', availability: 1, available_date: '01/28/20', description: "Large home that is well kept! A MUST SEE!", latitude: 30.301758, longitude:  -97.727459, uploads: images[0]};
+      console.log(values, images)
+      let resp = await fetch(`https://geocoder.ls.hereapi.com/6.2/geocode.json?apiKey=OHYIZygaUlcGO559jEmBfMg_2UaFX5n3qMoYn7h2TKo&searchtext=${input}`)
+      const data = await resp.json()
+      console.log(data.Response.View[0].Result[0].Location.DisplayPosition.Latitude, data.Response.View[0].Result[0].Location.DisplayPosition.Longitude )
+    
+      let property = {user_id: userId, address: input, rent: values.rent, bedrooms: values.bedrooms, bathrooms: values.bathrooms, sqft: values.sqft, availability: 1, available_date: values.date, description: values.description, latitude: data.Response.View[0].Result[0].Location.DisplayPosition.Latitude, longitude:  data.Response.View[0].Result[0].Location.DisplayPosition.Longitude, uploads: images[0]};
     const res = await fetch("http://localhost:3000/properties", {
         method: "POST",
         headers: {
@@ -69,11 +97,11 @@ export default function Signup(props) {
         body: JSON.stringify({ property })
       })
   
-      const data = await res.json()
+      const propertiesData = await res.json()
       if (data.message) {
         console.log('Maybe this failed')
       } else {
-        uploadFile(images, data)
+        uploadFile(images, propertiesData)
         // console.log(data)
       }
   };
@@ -125,33 +153,31 @@ export default function Signup(props) {
 //       }).then(postLease(tenantId, propertyId)) 
 //   }
 
- 
 
-  let handleNameChange = event => {
-      console.log(files)
-    setName(event.target.value);
-  };
-  let handleEmailChange = event => {
-    setEmail(event.target.value);
-  };
-  let handlePasswordChange = event => {
-    setPassword(event.target.value);
-  };
 
-  let handleFileChange = (event) => {
-      if (event.target.name === 'imgCollection') {
-        let imgArray = []
-        for (let i = 0; i < event.target.files.length ; i++){
-            imgArray.push(event.target.files[i])
-        }
-    setFiles(imgArray)
-      }
-  }
+
+
+  // let handleFileChange = (event) => {
+  //     if (event.target.name === 'imgCollection') {
+  //       let imgArray = []
+  //       for (let i = 0; i < event.target.files.length ; i++){
+  //           imgArray.push(event.target.files[i])
+  //       }
+  //   setFiles(imgArray)
+  //     }
+  // }
 
   let handleDrop = acceptedFiles => {
       setImages(acceptedFiles)
   }
 
+  const createOptions = () => {
+    // return <MenuItem value={'hello'}>State</MenuItem>
+    let states = [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY' ];
+   return  states.map(state => 
+       <MenuItem value={state}>{state}</MenuItem>
+     )
+  }
 //   const getRequest = () => {
 //     fetch('https://storage.googleapis.com/storage/v1/b/bluefin-app')
 //     .then(res=> res.json())
@@ -165,7 +191,7 @@ export default function Signup(props) {
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
+          <HomeIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
           Upload A Home
@@ -175,55 +201,158 @@ export default function Signup(props) {
           className={classes.form}
           noValidate
         >
-          <Grid container spacing={2}>
+          <Grid container spacing={3}>
             <Grid item xs={12}>
               <TextField
-                onChange={event => {
-                  handleNameChange(event);
-                }}
-                autoComplete="name"
-                name="Name"
-                variant="outlined"
+                onChange= {handleChange('streetaddress')}
+                autoComplete="streetadress"
+                name="street"
                 required
                 fullWidth
-                id="Name"
-                label="Name"
+                id="street"
+                label="Street Address"
                 autoFocus
+                color="secondary"
+
               />
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid item xs={4}>
               <TextField
-                onChange={event => {
-                  handleEmailChange(event);
-                }}
-                variant="outlined"
+                onChange= {handleChange('city')}
+                autoComplete="city"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
+                id="city"
+                label="City"
+                name="city"
+                color="secondary"
+
               />
             </Grid>
-            <Grid item xs={12}>
+
+
+            <Grid item xs={4}>
+            <InputLabel id="demo-simple-select-label">State</InputLabel>
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={values.state}
+        onChange= {handleChange('state')} >
+        {createOptions()}
+      </Select>
+            </Grid>
+
+
+            <Grid item xs={4}>
               <TextField
-                onChange={event => {
-                  handlePasswordChange(event);
-                }}
-                variant="outlined"
+               onChange= {handleChange('zipcode')}
+                
+                autoComplete="zipcode"
                 required
                 fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
+                type="number"
+                id="standard-adornment-amount"
+                label="Zip Code"
+                name="zipcode"
+                color="secondary"
+              />  
+            </Grid> 
+
+            <Grid item xs={4}>
+              <TextField
+               onChange= {handleChange('rent')}
+                
+                autoComplete="rent"
+                required
+                fullWidth
+                type="number"
+                id="standard-adornment-amount"
+                label="Rent Amount"
+                name="rent"
+                color="secondary"
+              />
+              </Grid>
+             
+             
+              <Grid item xs={4}>
+              
+              <TextField
+               onChange= {handleChange('bedrooms')}
+                
+                autoComplete="beedrooms"
+                required
+                fullWidth
+                type="number"
+                id="standard-adornment-amount"
+                label="Bedrooms"
+                name="bedrooms"
+                color="secondary"
+              />
+              </Grid>  
+              
+              <Grid item xs={4}>
+              <TextField
+               onChange= {handleChange('bathrooms')}
+                
+                autoComplete="bathrooms"
+                required
+                fullWidth
+                type="number"
+                id="standard-adornment-amount"
+                label="Bathrooms"
+                name="bathrooms"
+                color="secondary"
+              />
+              </Grid>
+
+
+            <Grid item xs={6}>
+              <TextField
+                onChange= {handleChange('sqft')}
+                color="secondary"
+                required
+                fullWidth
+                name="sqft"
+                label="Sqft"
+                type="number"
+                id="sqft"
+                autoComplete="sqft"
               />
             </Grid>
+
+
+            <Grid item xs={6}>
+            <TextField
+              onChange= {handleChange('date')}
+              id="date"
+              label="Available Starting: "
+              type="date"
+              defaultValue="2020-02-14"
+              className={classes.textField}
+              InputLabelProps={{
+              shrink: true,
+              }}
+              />
+
+              </Grid>
+
+              <Grid item xs={12}>
+              <TextField
+                onChange= {handleChange('description')}
+                color="secondary"
+                required
+                fullWidth
+                name="description"
+                label="Description"
+                id="description"
+                autoComplete="description"
+              />
+            </Grid>
+
             {/* <input type="file" name="imgCollection" onChange={(event) => handleFileChange(event)} multiple /> */}
 
-
+            <Grid item xs={12}>
 <Dropzone onDrop={(acceptedFiles) => handleDrop(acceptedFiles)} accept="image/png, image/gif,image/jpg,image/jpeg">
   {({getRootProps, getInputProps}) => (
     <section>
@@ -234,6 +363,7 @@ export default function Signup(props) {
     </section>
   )}
 </Dropzone>
+</Grid>
 
           </Grid>
           <Button
@@ -245,16 +375,11 @@ export default function Signup(props) {
           >
             Sign Up
           </Button>
-          <Grid container justify="flex-end">
-            <Grid item>
-              <Link href="/signin" variant="body2">
-                Already have an account? Sign in
-              </Link>
-            </Grid>
-          </Grid>
+          
         </form>
       </div>
       <Box mt={5}></Box>
     </Container>
   );
 }
+

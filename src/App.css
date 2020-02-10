@@ -46,6 +46,10 @@
 	background-color: tomato;
 }
 
+.SpecImage {
+	justify-content: center;
+}
+
 .HomeSpec {
 	margin: auto;
 	text-align: center;

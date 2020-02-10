@@ -6,7 +6,7 @@ import MapPopup from './MapPopup'
 import { useDispatch} from 'react-redux';
 import { selectHome } from '../actions';
 
-export default function Map() {
+export default function Map(props) {
     const dispatch = useDispatch()
     const [viewport, setViewport] = useState({
         latitude: 30.2672,
@@ -16,14 +16,15 @@ export default function Map() {
         zoom: 12
       });
 
-    const homes = useSelector((state) => state.homes)
+    const homes = props.homes
+    console.log(homes)
 
     const REACT_APP_MAPBOX_TOKEN = "pk.eyJ1IjoiY2lzbmVyb3MtYSIsImEiOiJjazV5OWhjbG4yZWdmM2VuMWw4N3A1bjV2In0.Qr08RacxUb-4_etwtaK1Sg"
     const [selectedHome, setSelectedHome] = useState(null)
 
     const handleClick = (e, home) => {
         e.preventDefault()
-        setSelectedHome(home)
+        // setSelectedHome(home)
         dispatch(selectHome(home))
 
     }
@@ -54,16 +55,16 @@ export default function Map() {
             }}
             >
                 
-                {homes.state.map((home) => (
+                {homes.map((home) => (
                 <Marker
-                 key={home.id}
-                 latitude={home.latitude}
-                 longitude={home.longitude}
+                 key={home.property.id}
+                 latitude={home.property.latitude}
+                 longitude={home.property.longitude}
                  >
                    <button
                     onClick={event => handleClick(event, home)}
                     className="marker-btn">
-                       <MapFlag rent={home.rent}/>
+                       <MapFlag rent={home.property.rent}/>
                    </button>
                 </Marker>
 
