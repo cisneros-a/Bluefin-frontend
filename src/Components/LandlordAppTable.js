@@ -11,6 +11,8 @@ import TableHead from '@material-ui/core/TableHead';
 import { IconButton, Button, Collapse } from "@chakra-ui/core";
 import TableRow from '@material-ui/core/TableRow';
 import { fetch_applications, fetch_homes } from '../actions'
+import Lnavbar from './Lnavbar'
+
 
 
 
@@ -24,7 +26,7 @@ const useStyles = makeStyles({
 });
 
 export default function LandlordAppTable() {
-  const userId = useSelector(state => state.user.user_id)
+  const userId = parseInt(localStorage.userId)
   const applications = useSelector(state => state.applications)
   const classes = useStyles();
   const [page, setPage] = useState(0);
@@ -188,6 +190,10 @@ export default function LandlordAppTable() {
   }
 
   return (
+<div>
+    <div className='header'>
+  <Lnavbar />
+  </div>
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
         <Table stickyHeader aria-label="sticky table">
@@ -214,5 +220,6 @@ export default function LandlordAppTable() {
       </TableContainer>
      
     </Paper>
+    </div>
   );
 }

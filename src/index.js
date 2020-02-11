@@ -6,6 +6,8 @@ import * as serviceWorker from './serviceWorker';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { ThemeProvider } from '@chakra-ui/core'
+import { Router } from 'react-router-dom'
+import history from './history'
 
 import allReducers from './reducers';
 // webPack will automatically look for the index.js file in
@@ -33,7 +35,9 @@ const store = createStore(allReducers, enhancer);
 ReactDOM.render(
   <ThemeProvider>
     <Provider store={store}>
+      <Router history={history}>
         <App />
+        </Router>
     </Provider>
     </ThemeProvider>,
      document.getElementById('root'));

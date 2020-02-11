@@ -3,6 +3,11 @@
 	text-align: center;
 }
 
+.header {
+	padding-top: 3rem;
+	padding-bottom: 2rem;
+}
+
 .App-logo {
 	height: 40vmin;
 	pointer-events: none;
@@ -31,6 +36,10 @@
 	justify-content: center;
 }
 
+.navbar {
+	background-color: black;
+}
+
 .scroll {
 	margin: auto;
 	display: block;
@@ -42,9 +51,6 @@
 	text-align: justify;
 }
 
-.MapFlag {
-	background-color: tomato;
-}
 
 .SpecImage {
 	justify-content: center;

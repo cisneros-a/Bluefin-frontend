@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -11,12 +11,17 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { useDispatch} from 'react-redux';
-import {userSigninFetch} from '../actions';
+import { useDispatch, useSelector } from 'react-redux';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
+import TestNavbar from './TestNavbar'
+import {getProfileFetch, userSigninFetch} from '../actions';
+import LandlordDashboard from './LandlordDashboard'
+import TenantDashboard from './TenantDashboard'
+import LandlordNavbar from './LandlordNavbar'
+import history from '../history'
 
 
 
@@ -56,9 +61,24 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignIn() {
 
+  useEffect(() => {
+    dispatch(getProfileFetch())
+
+}, [])
+
+  const decideUserPath = () => {
+    if (isLogged){
+      if (userType === 'tenant'){
+        history.push('/tenant-home')
+      } else {
+        history.push('/landlord-home')
+      }
+    } 
+  } 
+
   // const user_info = useSelector(state => state.user)
 //   const dispatch = useDispatch() 
-
+  const isLogged = useSelector(state => state.isLogged)
   const classes = useStyles();
   const dispatch = useDispatch() 
   const [email, setEmail] = useState("");
@@ -84,8 +104,9 @@ export default function SignIn() {
       email: email,
       password: password,
     };
-    // console.log(user)
+    
     set_user(user)
+   
 
   };
 
@@ -94,7 +115,10 @@ export default function SignIn() {
   }
 
   return (
+   
+
     <Container component="main" maxWidth="xs">
+       {decideUserPath()}  
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -153,7 +177,7 @@ export default function SignIn() {
           </Button>
           <Grid container>
             <Grid item>
-              <Link href="/" variant="body2">
+              <Link href="/signup" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>

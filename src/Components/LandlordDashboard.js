@@ -9,6 +9,8 @@ import CardHolder from './CardHolder';
 import { useEffect, useState } from 'react'
 import {useSelector, useDispatch} from 'react-redux';
 import HomeForm from './HomeForm'
+import Lnavbar from './Lnavbar'
+
 
 
 
@@ -18,7 +20,7 @@ import HomeForm from './HomeForm'
 export default function LandlordDashboard() {
     const allHomes = useSelector((state) => state.homes)
     // const selectedHome = useSelector(state => state.selectedHome)
-    const userId = useSelector(state => state.user.user_id)
+    const userId = parseInt(localStorage.userId)
     const dispatch = useDispatch() 
     // let leasedHomes = []
     // let unleasedHomes = []
@@ -27,6 +29,9 @@ export default function LandlordDashboard() {
 
 
     useEffect(() => {
+      console.log('useEffect')
+      console.log(localStorage.userType)
+      console.log('userId', userId)
       // dispatch(fetch_homes())
       // sortHomes(allHomes)
         fetch('http://localhost:3000/properties')
@@ -36,22 +41,20 @@ export default function LandlordDashboard() {
 
     const sortHomes = data => {
         let landlordHomes = data.filter(home => home.property.user_id === userId)
-        console.log('---------', landlordHomes)
         if (landlordHomes) {
         let availableHomes = landlordHomes.filter(home => home.property.availability)
-        let onlyAvailableHomes = []
-        for (let i = 0; i < availableHomes.length; i++) {
-          onlyAvailableHomes.push(availableHomes[i].property)
-        }
+        // let onlyAvailableHomes = []
+        // for (let i = 0; i < availableHomes.length; i++) {
+        //   onlyAvailableHomes.push(availableHomes[i].property)
+        // }
         let unavailableHomes = landlordHomes.filter(home => home.property.availability === false)
-        console.log(unavailableHomes)
-        let onlyUnavailableHomes = []
-        for (let i = 0; i < unavailableHomes.length; i++) {
-          onlyUnavailableHomes.push(unavailableHomes[i].property)
-        }
-        console.log('--', onlyUnavailableHomes)
-        setLeasedHomes(onlyUnavailableHomes)
-        setUnleasedHomes(onlyAvailableHomes)
+        // let onlyUnavailableHomes = []
+        // for (let i = 0; i < unavailableHomes.length; i++) {
+        //   onlyUnavailableHomes.push(unavailableHomes[i].property)
+        // }
+        // console.log('sorthomes unavailable', o)
+        setLeasedHomes(unavailableHomes)
+        setUnleasedHomes(availableHomes)
         }
     }
 
@@ -65,10 +68,16 @@ export default function LandlordDashboard() {
         
     }
 
+
+
+
     return (
         <div>
-          <HomeForm/>
-            {/* <div >
+        <div className='header'>
+          <Lnavbar />
+        </div>
+            <div >
+       
             <Grid container spacing={2}>
           <Grid item xs={5}>
             <Container>
@@ -94,7 +103,7 @@ export default function LandlordDashboard() {
                 </div>
                 <Grid item xs={8}>
                 <LandlordAppTable/>
-                </Grid> */}
+                </Grid>
         </div>
     )
 }

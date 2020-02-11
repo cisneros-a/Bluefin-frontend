@@ -70,7 +70,7 @@ export default function Map(props) {
 
                 ))}
 
-                {selectedHome ? (
+                {/* {selectedHome ? (
                     <div className="Popup">
                     <Popup
                     onClose={() => setSelectedHome(null)}
@@ -80,7 +80,7 @@ export default function Map(props) {
                          <MapPopup selectedHome={selectedHome}/> 
                     </Popup>
                         </div>
-                ) : null}
+                ) : null} */}
             </ReactMapGL>
         </div>
     )

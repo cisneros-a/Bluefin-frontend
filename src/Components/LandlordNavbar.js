@@ -3,8 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import { withStyles } from '@material-ui/core/styles';
@@ -18,6 +16,12 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import SendIcon from '@material-ui/icons/Send';
 import { logoutUser, loginUser } from '../actions';
 import { useDispatch, useSelector } from 'react-redux';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbSeparator,
+} from "@chakra-ui/core";
 
 
 const useStyles = makeStyles(theme => ({
@@ -34,7 +38,7 @@ const useStyles = makeStyles(theme => ({
 
 const StyledMenu = withStyles({
     paper: {
-      border: '1px solid #d3d4d5',
+      border: '5px solid #d3d4d5',
     },
   })(props => (
     <Menu
@@ -70,15 +74,7 @@ export default function MenuAppBar() {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
-//   const open = Boolean(anchorEl);
 
-//   const handleChange = event => {
-//     setAuth(event.target.checked);
-//   };
-
-//   const handleMenu = event => {
-//     setAnchorEl(event.currentTarget);
-//   };
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -113,7 +109,7 @@ export default function MenuAppBar() {
   return (
     <div className={classes.root}>
      
-      <AppBar position="static">
+      <AppBar color="#a3b4f4" className='navbar' position="sticky">
         <Toolbar>
         <Typography variant="h6" className={classes.title}>
             {/* Bluefin - Landlord */}
@@ -122,9 +118,19 @@ export default function MenuAppBar() {
           {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton> */}
-          <Typography variant="h6" className={classes.title}>
-            Bluefin - Landlord
-          </Typography>
+        <Breadcrumb fontWeight="heavy" fontSize="lg">
+  <BreadcrumbItem>
+    <BreadcrumbLink href="/google">Home</BreadcrumbLink>
+  </BreadcrumbItem>
+
+  <BreadcrumbItem>
+    <BreadcrumbLink href="/about">About</BreadcrumbLink>
+  </BreadcrumbItem>
+
+  <BreadcrumbItem isCurrentPage>
+    <BreadcrumbLink href="/current">Current</BreadcrumbLink>
+  </BreadcrumbItem>
+</Breadcrumb>
           <Typography variant="h6" className={classes.title}>
             {/* Bluefin - Landlord */}
           </Typography>
