@@ -22,9 +22,14 @@ export default function HomeCard(props) {
 
 
   let setSelectedHome= home => {
-    dispatch(selectHome(home))
+    let homeObj = {
+      property : props.home,
+      uploads: props.img
+    }
+    dispatch(selectHome(homeObj))
   }
  
+  console.log('homecard', props.img)
 
   return (
     <Box

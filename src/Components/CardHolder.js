@@ -20,10 +20,12 @@ export default function CardHolder(props) {
 // </Grid>   
 
     let populateCards = () => {
+      // console.log(userType)
+      // props.homes.state.map(home => console.log('populate homes', home))
         if (userType === 'tenant'){
             return props.homes.state.map(home=> <Grid className = "CardGrid"item xs={6}><HomeCard key={home.id} img={home.uploads} home={home.property}/> </Grid> )
-          } else {
-            return props.homes.map(home=> <Grid className = "CardGrid" item xs={4}><HomeCard key={home.id} home={home}/></Grid> )
+          } else { console.log('cardholder', props)
+            return props.homes.map(home=> <Grid className = "CardGrid" item xs={4}><HomeCard key={home.id} img={home.uploads} home={home.property}/></Grid> )
           }
     }
     

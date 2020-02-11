@@ -21,6 +21,8 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from '@material-ui/core/InputAdornment';
+import Lnavbar from './Lnavbar'
+
 
 
 
@@ -187,6 +189,10 @@ export default function Signup(props) {
 //   getRequest()
 
   return (
+    <div>
+    <div className='header'>
+  <Lnavbar />
+  </div>
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
@@ -380,6 +386,7 @@ export default function Signup(props) {
       </div>
       <Box mt={5}></Box>
     </Container>
+    </div>
   );
 }
 

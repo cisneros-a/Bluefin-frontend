@@ -4,9 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Stat, StatLabel, StatNumber, StatGroup, Box, Button } from "@chakra-ui/core";
 import { fetchTenantLease } from '../actions';
 import {Accordion, AccordionItem, AccordionHeader, AccordionPanel, AccordionIcon } from "@chakra-ui/core";
+import Tnavbar from './Tnavbar'
+import Grid from "@material-ui/core/Grid";
+
+
 
 export default function TenantLease() {
-    const userId = useSelector(state => state.user.user_id)
+  const userId = parseInt(localStorage.userId)
     const tenantLease = useSelector(state => state.tenantLease.state)
     const dispatch = useDispatch()
 
@@ -27,6 +31,7 @@ export default function TenantLease() {
       const endDate = `${month}/${newDate}/${newYear}`
 
         return (
+       
             <StatGroup>
             <Stat>
               <StatLabel>Lease Start Date: </StatLabel>
@@ -50,17 +55,20 @@ export default function TenantLease() {
     }
 
     return (
-        <div>
+      <div>
+        <div className='header'>
+      <Tnavbar/>
+      </div>
+      <div>
         {displayStats(tenantLease)}
-        <br></br>
-        <br></br>
-        <br></br>
-
+        </div>
+<Grid container spacing={2}>
+  <Grid sm={8}>
         <Accordion defaultIndex={[0]} allowMultiple>
-  <AccordionItem>
+    <AccordionItem>
     <AccordionHeader>
-      <Box flex="1" textAlign="left">
-        Make A Payment
+      <Box flex="1" textAlign="center">
+       <h2> Make A Payment </h2>
       </Box>
       <AccordionIcon />
     </AccordionHeader>
@@ -73,8 +81,8 @@ export default function TenantLease() {
 
   <AccordionItem>
     <AccordionHeader>
-      <Box flex="1" textAlign="left">
-        Request a Fix
+      <Box flex="1" textAlign="center">
+       <h2> Request a Fix</h2>
       </Box>
       <AccordionIcon />
     </AccordionHeader>
@@ -87,8 +95,8 @@ export default function TenantLease() {
 
   <AccordionItem>
     <AccordionHeader>
-      <Box flex="1" textAlign="left">
-        View Your Lease
+      <Box flex="1" textAlign="center">
+        <h2>View Your Lease</h2>
       </Box>
       <AccordionIcon />
     </AccordionHeader>
@@ -99,6 +107,8 @@ export default function TenantLease() {
     </AccordionPanel>
   </AccordionItem>
 </Accordion>
+</Grid>
+</Grid>
 
 
         </div>

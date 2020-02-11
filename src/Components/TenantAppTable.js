@@ -8,9 +8,11 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
-import { IconButton } from "@chakra-ui/core";
+import { IconButton, Grid } from "@chakra-ui/core";
 import TableRow from '@material-ui/core/TableRow';
 import { fetch_applications } from '../actions'
+import Tnavbar from './Tnavbar'
+
 
 
 
@@ -24,15 +26,18 @@ const useStyles = makeStyles({
 });
 
 export default function LandlordAppTable() {
-  const userId = useSelector(state => state.user.user_id)
+  const name = useSelector(state => state.user.name)
+
+  const userId = parseInt(localStorage.userId)
   const classes = useStyles();
   const applications = useSelector(state => state.applications)
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [rows, setRows] = useState([])
+  // const [rows, setRows] = useState([])
   const dispatch = useDispatch()
 
   useEffect(() => {
+    console.log("apps",userId)
     dispatch(fetch_applications(userId))
     }, [])
 
@@ -62,6 +67,8 @@ export default function LandlordAppTable() {
       
     },
   ];
+
+
 
 
   
@@ -114,7 +121,14 @@ export default function LandlordAppTable() {
   }
 
   return (
+<div>
+  <div className='header'>
+  <Tnavbar />
+  </div>
+  
     <Paper className={classes.root}>
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
       <TableContainer className={classes.container}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -125,9 +139,12 @@ export default function LandlordAppTable() {
                   align={column.align}
                   style={{ minWidth: column.minWidth }}
                 >
-                  {column.label}
+                 <h2> {column.label} </h2>
                 </TableCell>
               ))}
+              <br></br>
+              <br></br>
+
             </TableRow>
           </TableHead>
           <TableBody>
@@ -135,7 +152,9 @@ export default function LandlordAppTable() {
           </TableBody>
         </Table>
       </TableContainer>
-     
+      </Grid>
+      </Grid>
     </Paper>
+    </div>
   );
 }

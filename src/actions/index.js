@@ -16,6 +16,7 @@ export const userSigninFetch = (user, userType) => {
             // 'message' if there is an error with creating the user, i.e. invalid username
         }
         else {
+          localStorage.setItem("userId", data.user.id)
             localStorage.setItem("token", data.jwt)
             localStorage.setItem("userType", userType)
             dispatch(loginUser(data.user, userType))
@@ -66,6 +67,7 @@ export const userSigninFetch = (user, userType) => {
               // An error will occur if the token is invalid.
               // If this happens, you may want to remove the invalid token.
               localStorage.removeItem("token")
+              
               
           }
           else {

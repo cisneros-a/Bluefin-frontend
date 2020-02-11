@@ -5,7 +5,7 @@ import {fetch_homes, toggleView} from '../actions';
 import Grid from "@material-ui/core/Grid";
 import Map from './Map'
 import HomeSpec from './HomeSpecs'
-import TenantAppTable from './TenantAppTable'
+import Tnavbar from './Tnavbar'
 import { Switch } from "@chakra-ui/core";
 import CardHolder from './CardHolder';
 import TenantLease from './TenantLease';
@@ -50,9 +50,12 @@ export default function TenantDashboard() {
 
 
     return (
-                <div>
-                    {/* <TenantLease/> */}
+       
+                <div className='header'>
+                     <Tnavbar/>
+                <div/>
                     <h3>Map</h3><Switch onChange={()=> dispatch(toggleView())} color="teal" size="lg"/><h3>Cards</h3>
+                    
                 <div >
                     <Grid  container spacing={2} >
                         <Grid  item s={6}>    
