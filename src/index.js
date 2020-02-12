@@ -8,7 +8,8 @@ import thunk from 'redux-thunk';
 import { ThemeProvider } from '@chakra-ui/core'
 import { Router } from 'react-router-dom'
 import history from './history'
-
+import {render} from 'react-dom';
+import {StripeProvider} from 'react-stripe-elements';
 import allReducers from './reducers';
 // webPack will automatically look for the index.js file in
 // the reducers folder
@@ -33,14 +34,19 @@ const store = createStore(allReducers, enhancer);
 
 
 ReactDOM.render(
-  <ThemeProvider>
-    <Provider store={store}>
-      <Router history={history}>
-        <App />
-        </Router>
-    </Provider>
-    </ThemeProvider>,
-     document.getElementById('root'));
+
+    <ThemeProvider>
+      <Provider store={store}>
+          <Router history={history}>
+        <StripeProvider apiKey="pk_test_TYooMQauvdEDq54NiTphI7jx" >
+            <App />
+          </StripeProvider>
+          </Router>
+      </Provider>
+    </ThemeProvider>
+   
+   
+    , document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -18,7 +18,7 @@ export default function HomeSpecs() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   const home = useSelector(state => state.selectedHome.state)
-  const userId = useSelector(state => state.user.user_id)
+  const userId = parseInt(localStorage.userId)
   const [button, setButton] = useState(true)
 
  

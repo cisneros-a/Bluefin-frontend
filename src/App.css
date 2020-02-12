@@ -1,5 +1,5 @@
 .App {
-	background-color: opaque;
+	background-color: rgba(121, 131, 151, 0.24);
 	text-align: center;
 }
 
@@ -101,6 +101,43 @@
 .App-link {
 	color: #61dafb;
 }
+
+.MyCardElement {
+	height: 40px;
+	padding: 10px 12px;
+	width: 100%;
+	color: #32325d;
+	background-color: white;
+	border: 3px solid transparent;
+	border-color: grey;
+	border-radius: 7px;
+  
+	box-shadow: 0 1px 3px 0 #e6ebf1;
+	-webkit-transition: box-shadow 150ms ease;
+	transition: box-shadow 150ms ease;
+  }
+  
+  .MyCardElement--focus {
+	box-shadow: 0 1px 3px 0 #cfd7df;
+  }
+  
+  /* .MyCardElement--invalid {
+	border-color: #fa755a;
+  } */
+  
+  .MyCardElement--webkit-autofill {
+	background-color: #fefde5 !important;
+  }
+
+  .checkoutForm {
+	  width: 75%;
+	  
+  }
+
+  .leaseStat {
+	border-bottom: 3px solid black;
+	padding-bottom: 1rem;
+  }
 
 @keyframes App-logo-spin {
 	from {

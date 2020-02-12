@@ -6,6 +6,9 @@ import { logoutUser, loginUser } from '../actions';
 import { useDispatch, useSelector } from 'react-redux';
 import history from '../history'
 import { Link } from 'react-router-dom'
+import { Tooltip } from "@chakra-ui/core";
+
+
 
 
 
@@ -58,15 +61,33 @@ const Navbar = (props) => {
 
 }
 
+const returnTag = (str) => {
+  return (
+    <h4>{str}</h4>
+  )
+}
+
   return (
     <>
       <NavBar >
         <FlexContainer>
           <Link to="/landlord-home">Bluefin - Landlord</Link>
           <NavLinks style={linkAnimation}>
-          <Link to="/landlord-applications">View Applications</Link>
+
+          <Tooltip label={returnTag('View applications for all your rentals!')} placement="auto-end">
+          <Link to="/landlord-applications">Applications</Link>
+          </Tooltip>
+
+          <Tooltip label={returnTag('Post another property to rent here!')} placement="auto-end">
           <Link to="/add-a-home">Add a Home</Link>
-          <Link to="/tenant-home"onClick={() => handleSwitchClick()} >Switch</Link>
+          </Tooltip>
+
+          <Tooltip label={returnTag('Look at all rentals.')} placement="auto-end">
+          <Link to="/tenant-home"onClick={() => handleSwitchClick()} >Map</Link>
+          </Tooltip>
+          
+          
+         
 
           <Link onClick={() => handleLogoutClick()} to="/">Log Out</Link>
 

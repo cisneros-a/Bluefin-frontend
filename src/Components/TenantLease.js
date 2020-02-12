@@ -5,6 +5,9 @@ import { Stat, StatLabel, StatNumber, StatGroup, Box, Button } from "@chakra-ui/
 import { fetchTenantLease } from '../actions';
 import {Accordion, AccordionItem, AccordionHeader, AccordionPanel, AccordionIcon } from "@chakra-ui/core";
 import Tnavbar from './Tnavbar'
+import MyStoreCheckout from './MyStoreCheckout';
+
+import CheckoutForm from './CheckoutForm'
 import Grid from "@material-ui/core/Grid";
 
 
@@ -54,16 +57,21 @@ export default function TenantLease() {
         }
     }
 
+
+
     return (
       <div>
         <div className='header'>
       <Tnavbar/>
       </div>
-      <div>
+      <div class='leaseStat'>
         {displayStats(tenantLease)}
         </div>
+        <br></br>
+        <br></br>
+
 <Grid container spacing={2}>
-  <Grid sm={8}>
+  <Grid sm={6}>
         <Accordion defaultIndex={[0]} allowMultiple>
     <AccordionItem>
     <AccordionHeader>
@@ -73,9 +81,15 @@ export default function TenantLease() {
       <AccordionIcon />
     </AccordionHeader>
     <AccordionPanel pb={4}>
-    <Button leftIcon="arrow-right" variantColor="teal" variant="solid">
-    Submit your payment
-  </Button> Make payments here! Stripe will securely send your payments!
+    <Box flex="5" contentAlign="center">
+
+    <div className='checkoutForm'>
+    <MyStoreCheckout/>
+
+        {/* <CheckoutForm/> */}
+        </div>
+      </Box>
+   
     </AccordionPanel>
   </AccordionItem>
 
