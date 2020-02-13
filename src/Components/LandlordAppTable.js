@@ -157,12 +157,15 @@ export default function LandlordAppTable() {
     let rows = []
     if (applications.state ) {
       data.forEach(application => {
+        console.log(application);
+        
       rows.push({
-          buttons: <div><IconButton onClick={() => handleAccept(application.id, application.tenant_id, application.property_id)} variantColor="green" aria-label="Call Segun" size="lg" icon="check"/> <IconButton onClick={() => handleDeny(application.id)} variantColor="red" aria-label="Call Segun" size="lg" icon="close"/></div>,
+          description: `${application.description}`,
+          buttons: <div className={`${application.id}`}><IconButton onClick={() => handleAccept(application.id, application.tenant_id, application.property_id)} variantColor="green" aria-label="Call Segun" size="lg" icon="check"/> <IconButton onClick={() => handleDeny(application.id)} variantColor="red" aria-label="Call Segun" size="lg" icon="close"/></div>,
           address: `${application.property.address}`,
           name: `${application.tenant.name}`,
           date: `${application.property.available_date}`,
-          more: <div><Button variantColor="blue" onClick={handleToggle}>Toggle</Button>
+          more: <div className={`${application.name}`}><Button variantColor="blue" onClick={handleToggle}>Open</Button>
    </div>
       })
       })
@@ -171,8 +174,11 @@ export default function LandlordAppTable() {
     return (rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => {
       return (
         <>
-        <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+        <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+          {console.log('-----------', row.id)}
+          
           {columns.map(column => {
+            console.log('column', column)
             const value = row[column.id];
             return (
               <TableCell key={column.id} align={column.align}>
@@ -182,18 +188,22 @@ export default function LandlordAppTable() {
           })}
         </TableRow>
         <Collapse mt={4} isOpen={show}>
-        <h1>Hi</h1>
+    <h3>{row.description}</h3>
        </Collapse>
        </>
       );
     }))
   }
 
+
+
   return (
-<div>
+<div className='center'>
     <div className='header'>
   <Lnavbar />
   </div>
+  <div className='appTable'>
+  <h1>Rental Applications:</h1>
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
         <Table stickyHeader aria-label="sticky table">
@@ -220,6 +230,7 @@ export default function LandlordAppTable() {
       </TableContainer>
      
     </Paper>
+    </div>
     </div>
   );
 }

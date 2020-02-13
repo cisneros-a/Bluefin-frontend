@@ -22,6 +22,7 @@ export default function HomeCard(props) {
 
 
   let setSelectedHome= home => {
+    console.log('clicked')
     let homeObj = {
       property : props.home,
       uploads: props.img
@@ -32,7 +33,10 @@ export default function HomeCard(props) {
   console.log('homecard', props.img)
 
   return (
+
+
     <Box
+    className="homeCard"
      boxShadow="lg"
       border="2px" 
       borderRadius="md" 
@@ -42,7 +46,7 @@ export default function HomeCard(props) {
       rounded="lg" 
       overflow="hidden">
         
-      <Image width="100%" height="100%" src={property.imageUrl} alt={property.imageAlt} />
+      <Image width="100%" height="60%" src={property.imageUrl} alt={property.imageAlt} />
 
       <Box  p="6">
         <Box  d="flex" alignItems="baseline">

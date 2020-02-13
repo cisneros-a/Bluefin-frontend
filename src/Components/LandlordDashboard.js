@@ -76,34 +76,33 @@ export default function LandlordDashboard() {
         <div className='header'>
           <Lnavbar />
         </div>
-            <div >
+           
        
             <Grid container spacing={2}>
-          <Grid item xs={5}>
-            <Container>
+          <Grid className='leftContainer' item xs={6}>
+          
               <Typography variant="h4" component="h3">
                 <div className={'CardHolderName'}>Leased :</div>
               </Typography>
+              <div className='leasedHomes'>
               {showCards(leasedHomes)}
-              
-            </Container>
+              </div>
+      
           </Grid>
 
-          <Grid item xs={5}>
-            <Container>
+          <Grid item xs={6}>
+          
               <Typography variant="h4" component="h3">
                 <div className={'CardHolderName'}> Not Leased :</div>
               </Typography>
               {showCards(unleasedHomes)}
-            </Container>
+           
           </Grid>
 
          
         </Grid>
-                </div>
-                <Grid item xs={8}>
-                <LandlordAppTable/>
-                </Grid>
+                
+                
         </div>
     )
 }

@@ -356,7 +356,6 @@ export default function Signup(props) {
               />
             </Grid>
 
-            {/* <input type="file" name="imgCollection" onChange={(event) => handleFileChange(event)} multiple /> */}
 
             <Grid item xs={12}>
 <Dropzone onDrop={(acceptedFiles) => handleDrop(acceptedFiles)} accept="image/png, image/gif,image/jpg,image/jpeg">

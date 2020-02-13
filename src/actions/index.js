@@ -159,7 +159,7 @@ export const fetch_applications = (userId) => {
       
       if (localStorage.userType === 'landlord'){
       let landlordApplications = data.filter(application => application.landlord_id === userId)
-      let pendingApplications = landlordApplications.filter(application => application.status === 'pending')
+      let pendingApplications = landlordApplications.filter(application => application.status === 'Pending')
           dispatch(populate_applications(pendingApplications))
       } else{
       let tenantApplications = data.filter(application => application.tenant_id === userId)

@@ -1,86 +1,3 @@
-// import { useForm } from "react-hook-form";
-// import React, { useState } from "react";
-// import {
-//   FormErrorMessage,
-//   FormLabel,
-//   FormControl,
-//   Input,
-//   Button,
-// } from "@chakra-ui/core";
-
-// export default function HookForm() {
-//   const { handleSubmit, errors, register } = useForm();
-//   const [isSubmitting, setIsSubmitting] = useState(false);
-
-//   function validateFirstName(value) {
-//     let error;
-//     if (!value) {
-//       error = "Name is required";
-//     }
-//     return error || true;
-//   }
-
-//   function validateLastName(value) {
-//     let error;
-//     if (!value) {
-//       error = "Name is required";
-//     }
-//     return error || true;
-//   }
-
-//   function onSubmit(values) {
-//     console.log(values)
-//     setIsSubmitting(true);
-
-//     setTimeout(() => {
-//       alert(JSON.stringify(values, null, 2));
-//       setIsSubmitting(false);
-//     }, 1000);
-//   }
-
-//   return (
-//     <form onSubmit={handleSubmit(onSubmit)}>
-//       <FormControl isInvalid={errors.name}>
-//         <FormLabel htmlFor="name">First name</FormLabel>
-//         <Input
-//           name="firstname"
-//           placeholder=" First name"
-//           ref={register({ validate: validateFirstName })}/>
-//         <FormErrorMessage>
-//           {errors.name && errors.name.message}
-//         </FormErrorMessage>
-
-
-
-//         <FormLabel htmlFor="Last name">Last name</FormLabel>
-//         <Input
-//           name="lastname"
-//           placeholder="Last name"
-//           ref={register({ validate: validateLastName })}
-//         />
-//         <FormErrorMessage>
-//           {errors.name && errors.name.message}
-//         </FormErrorMessage>
-
-
-//       </FormControl>
-//       <Button mt={4} variantColor="teal" isLoading={isSubmitting} type="submit">
-//         Submit
-//       </Button>
-//     </form>
-//   );
-// }
-
-
-
-
-
-
-
-
-
-
-
 
 import React from "react";
 import { useState } from "react";
@@ -97,6 +14,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import {userSignupFetch} from '../actions';
 import { useDispatch } from 'react-redux';
+import StaticNavbar from './StaticNavbar'
+import history from '../history'
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -129,13 +49,14 @@ export default function Signup(props) {
 
   let handleSubmit = event => {
     event.preventDefault();
-    let user = { name: name, email: email, password: password, avatar: 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Guy_Fieri_at_Guantanamo_2.jpg' };
+    let user = { name: name, email: email, password: password };
 
    set_user(user)
   };
 
   const set_user = (user) => {
   dispatch(userSignupFetch(user))
+  history.push('/tenant-home')
 }
 
   let handleNameChange = event => {
@@ -149,6 +70,16 @@ export default function Signup(props) {
   };
 
   return (
+    <>
+
+<div className='staticHeader'>
+    <StaticNavbar/>
+    </div>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
@@ -221,7 +152,7 @@ export default function Signup(props) {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="/signin" variant="body2">
+              <Link href="/" variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>
@@ -230,5 +161,6 @@ export default function Signup(props) {
       </div>
       <Box mt={5}></Box>
     </Container>
+    </>
   );
 }

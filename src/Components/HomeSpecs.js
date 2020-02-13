@@ -20,6 +20,7 @@ export default function HomeSpecs() {
   const home = useSelector(state => state.selectedHome.state)
   const userId = parseInt(localStorage.userId)
   const [button, setButton] = useState(true)
+  const [description, setDescription] = useState('')
 
  
 
@@ -35,7 +36,9 @@ export default function HomeSpecs() {
     const application = {
       tenant_id: userId,
       landlord_id: home.property.user.id,
-      property_id: home.property.id
+      property_id: home.property.id,
+      description: description,
+      status: 'Pending'
     }
 
     const res = await fetch("http://localhost:3000/applications", {
@@ -56,16 +59,21 @@ export default function HomeSpecs() {
     }     
   };
 
+  const handleDescChange = event => {
+    setDescription(event.target.value)
+    console.log(event.target.value)
+  }
+
 
 
     return (
         <div className="HomeSpec">
           <div className="SpecImage">
    <Box size="sm">
-  <Image size="400px" src={`http://localhost:3000/${home.uploads}`} alt="Home" />
+  <Image size="500px" src={`http://localhost:3000/${home.uploads}`} alt="Home" />
 </Box>
 </div>
-            
+  <div>
             <h1>{home.property.address}</h1>
             <h2>Rent: ${home.property.rent} </h2>
     <h2>Bedrooms: {home.property.bedrooms} Bathrooms: {home.property.bathrooms}</h2>
@@ -73,7 +81,7 @@ export default function HomeSpecs() {
 
     <h2>Description: {home.property.description}</h2>
     <h3>Being leased by: {home.property.user.name}</h3>
-
+</div>
     <ButtonGroup spacing={4}>
       <Button onClick={onOpen} leftIcon="edit" variantColor="teal" variant="solid">
         Apply now!
@@ -92,7 +100,7 @@ export default function HomeSpecs() {
     
       <FormControl className="modal">
               <FormLabel>Content: </FormLabel>
-              <Textarea placeholder="Feel free to suggest a rent amout, why you might be a good fit, if you have pets, etc.." />
+              <Textarea onChange={(e) => handleDescChange(e)} placeholder="Feel free to suggest a rent amout, why you might be a good fit, if you have pets, etc.." />
             </FormControl>
 
             

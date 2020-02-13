@@ -6,7 +6,7 @@ import { logoutUser, loginUser } from '../actions';
 import { useDispatch, useSelector } from 'react-redux';
 import history from '../history'
 import { Link } from 'react-router-dom'
-import { Tooltip } from "@chakra-ui/core";
+import { Tooltip, Image } from "@chakra-ui/core";
 
 
 
@@ -71,8 +71,25 @@ const returnTag = (str) => {
     <>
       <NavBar >
         <FlexContainer>
-          <Link to="/landlord-home">Bluefin - Landlord</Link>
+          <Image   width="6%" height="93%" src="/bluefin.png" alt={"logo"} />
+
           <NavLinks style={linkAnimation}>
+
+          <Link className ="homeLink" to="/landlord-home">Bluefin - Portal</Link>
+
+          <Tooltip label={returnTag('View all of your pending home applications!')} placement="auto-end">
+            <Link to="/tenant-applications"></Link>
+          </Tooltip>
+          <Tooltip label={returnTag('View all of your pending home applications!')} placement="auto-end">
+            <Link to="/tenant-applications"></Link>
+          </Tooltip>
+          <Tooltip label={returnTag('View all of your pending home applications!')} placement="auto-end">
+            <Link to="/tenant-applications"></Link>
+          </Tooltip><Tooltip label={returnTag('View all of your pending home applications!')} placement="auto-end">
+            <Link to="/tenant-applications"></Link>
+          </Tooltip><Tooltip label={returnTag('View all of your pending home applications!')} placement="auto-end">
+            <Link to="/tenant-applications"></Link>
+          </Tooltip>
 
           <Tooltip label={returnTag('View applications for all your rentals!')} placement="auto-end">
           <Link to="/landlord-applications">Applications</Link>

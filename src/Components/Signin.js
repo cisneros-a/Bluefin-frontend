@@ -18,6 +18,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import TestNavbar from './TestNavbar'
 import {getProfileFetch, userSigninFetch} from '../actions';
+import StaticNavbar from './StaticNavbar'
+
 import LandlordDashboard from './LandlordDashboard'
 import TenantDashboard from './TenantDashboard'
 import LandlordNavbar from './LandlordNavbar'
@@ -31,7 +33,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
       <Link color="inherit" href="https://material-ui.com/">
-        Job Huntr
+        Bluefin
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -115,7 +117,14 @@ export default function SignIn() {
   }
 
   return (
-   
+    <>
+    <div className='staticHeader'>
+    <StaticNavbar/>
+    </div>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
 
     <Container component="main" maxWidth="xs">
        {decideUserPath()}  
@@ -188,6 +197,7 @@ export default function SignIn() {
         <Copyright />
       </Box>
     </Container>
+    </>
   );
 }
 
