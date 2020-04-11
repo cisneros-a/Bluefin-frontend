@@ -70,7 +70,7 @@ export default function HomeSpecs() {
         <div className="HomeSpec">
           <div className="SpecImage">
    <Box size="sm">
-  <Image size="500px" src={`http://localhost:3000/${home.uploads}`} alt="Home" />
+  <Image size="400px" src={`http://localhost:3000/${home.uploads}`} alt="Home" />
 </Box>
 </div>
   <div>
