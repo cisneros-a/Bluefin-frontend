@@ -145,13 +145,6 @@ export const populate_homes = (payload) => {
   };
 };
 
-export const populate_applications = (payload) => {
-  return {
-    type: "POPULATE_APPLICATIONS",
-    payload: payload,
-  };
-};
-
 export const selectHome = (payload) => {
   return {
     type: "SELECT_HOME",
@@ -159,37 +152,50 @@ export const selectHome = (payload) => {
   };
 };
 
-export const fetch_applications = (userId) => {
+export const fetchLandlordApplications = (userId) => {
   const token = localStorage.token;
   console.log("hitting sction");
   return async (dispatch) => {
     const resp = await fetch(
-      `http://localhost:3000/landlord_properties/${userId}`,
+      `http://localhost:3000/landlord_applications/${userId}`,
       {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: `Bearer ${token}`,
         },
       }
     );
     const data = await resp.json();
     console.log(data);
-    // if (localStorage.userType === "landlord") {
-    //   let landlordApplications = data.filter(
-    //     (application) => application.landlord_id === userId
-    //   );
-    //   let pendingApplications = landlordApplications.filter(
-    //     (application) => application.status === "Pending"
-    //   );
-    //   dispatch(populate_applications(pendingApplications));
-    // } else {
-    //   let tenantApplications = data.filter(
-    //     (application) => application.tenant_id === userId
-    //   );
-    //   dispatch(populate_applications(tenantApplications));
-    // }
+    dispatch(populateLandlordApplications(data));
+  };
+};
+
+export const populateLandlordApplications = (payload) => {
+  return {
+    type: "POPULATE_LANDLORD_APPLICATIONS",
+    payload: payload,
+  };
+};
+
+export const fetchTenantApplications = (userId) => {
+  const token = localStorage.token;
+  console.log("hitting sction");
+  return async (dispatch) => {
+    const resp = await fetch(
+      `http://localhost:3000/landlord_applications/${userId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    );
+    const data = await resp.json();
+    console.log(data.applications);
+    // dispatch(populateLandlordApplications(data.applications));
   };
 };
 
