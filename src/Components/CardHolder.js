@@ -1,42 +1,42 @@
-import React from 'react';
+import React from "react";
 import HomeCard from "./HomeCard";
-import { useSelector } from 'react-redux';
+import LandlordHomeCard from "./LandlordHomeCard";
+import { useSelector } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 
+export default function CardHolder({ properties }) {
+  const userType = useSelector((state) => state.user.userType);
 
+  let populateCards = () => {
+    if (userType === "tenant") {
+      return properties.state.map((home) => (
+        <Grid className="CardGrid" item xs={4}>
+          <HomeCard key={home.id} img={home.uploads} home={home.property} />{" "}
+        </Grid>
+      ));
+    } else {
+      console.log("being hit");
 
-export default function CardHolder(props) {
+      return properties.map((property) => (
+        <Grid className="CardGrid" item xs={5}>
+          <LandlordHomeCard
+            key={property.uploads}
+            img={property.uploads}
+            propertyInfo={property.property}
+          />
+        </Grid>
+      ));
 
-  const userType = useSelector(state => state.user.userType)
-
-//      <Grid  container spacing={2} >
-// <Grid  item s={7}>    
-//     {showMap(allHomes)}      
-// </Grid>
-
-// <Grid item s={5}>
-//     {showHomeSpecs()}
-// </Grid>  
-// </Grid>   
-
-    let populateCards = () => {
-      // console.log(userType)
-      // props.homes.state.map(home => console.log('populate homes', home))
-        if (userType === 'tenant'){
-            return props.homes.state.map(home=> <Grid className = "CardGrid"item xs={6}><HomeCard key={home.id} img={home.uploads} home={home.property}/> </Grid> )
-          } else { console.log('cardholder', props)
-            return props.homes.map(home=> <Grid className = "CardGrid" item xs={4}><HomeCard key={home.id} img={home.uploads} home={home.property}/></Grid> )
-          }
+      // return props.homes.map((home) => (
+      // ));
     }
-    
+  };
 
-    return (
-        <div className="scroll">
-          <Grid container spacing={1}>
-            {populateCards()}
-            </Grid>
-        </div>
-    )
+  return (
+    <div className="scroll">
+      <Grid className="cardDiv" container spacing={1}>
+        {populateCards()}
+      </Grid>
+    </div>
+  );
 }
-
-

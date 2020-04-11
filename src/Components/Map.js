@@ -45,7 +45,7 @@ export default function Map(props) {
 
     return (
         
-        <div>
+        <div className='homeSpec'>
             <ReactMapGL
             {...viewport}
             mapboxApiAccessToken={REACT_APP_MAPBOX_TOKEN}

@@ -56,7 +56,7 @@ import { Switch, Route, withRouter} from 'react-router-dom'
  
 
   return (
-    
+    <div className="Main">
        <div className="App">
 
 
@@ -73,6 +73,7 @@ import { Switch, Route, withRouter} from 'react-router-dom'
 
             </Switch>
            
+     </div>
      </div>
    
   )

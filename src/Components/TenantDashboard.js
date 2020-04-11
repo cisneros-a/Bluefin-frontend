@@ -5,6 +5,7 @@ import {fetch_homes, toggleView} from '../actions';
 import Grid from "@material-ui/core/Grid";
 import Map from './Map'
 import HomeSpec from './HomeSpecs'
+import WelcomeSpec from './WelcomeSpec'
 import Tnavbar from './Tnavbar'
 import { Switch } from "@chakra-ui/core";
 import CardHolder from './CardHolder';
@@ -36,7 +37,6 @@ export default function TenantDashboard() {
             if ( toggleState ){
               return   <CardHolder homes={homes} />
             } 
-            console.log('dashboard', homes.state)
               return <Map homes={homes.state}/>
         }
      }
@@ -44,8 +44,11 @@ export default function TenantDashboard() {
 
     const showHomeSpecs = () => {
         if (selectedHome) {
-            return <Grid item s={12}><HomeSpec/></Grid>
-        }
+            return <HomeSpec/>
+        } 
+        // else{
+        //     return <WelcomeSpec/>
+        // }
     }
 
 
@@ -54,21 +57,19 @@ export default function TenantDashboard() {
                 <div className='header'>
                      <Tnavbar/>
                 <div/>
+                <div className='toggle'>
                     <h3>Map</h3><Switch onChange={()=> dispatch(toggleView())} color="teal" size="lg"/><h3>Cards</h3>
-                    
+                    </div>
                 <div >
-                    <Grid  container spacing={2} >
-                        <Grid  item s={6}>    
+                    <Grid  container spacing={6} >
+                        <Grid  item s={7}>    
                             {showMap(allHomes)}      
                         </Grid>
 
-                        <Grid item s={6}>
-                            <Grid container>
-                            {showHomeSpecs()}
-                            </Grid>
+                        <Grid item s={5}>
+                            {showHomeSpecs()}   
                         </Grid>  
                     </Grid> 
-                    {/* <TenantAppTable/>   */}
                  </div>
          </div>
           

@@ -23,7 +23,7 @@ const style = {
 const CardSection = () => {
   return (
     <label>
-      Stripe - Make secure payments
+      Stripe API - Make secure no-hassle payments.
       <CardElement className="MyCardElement" style={style} />
     </label>
   );

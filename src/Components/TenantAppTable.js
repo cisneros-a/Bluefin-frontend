@@ -96,7 +96,7 @@ export default function LandlordAppTable() {
     if (applications.state ) {
       data.forEach(application => {
       rows.push({
-        status: `${application.status}`,
+        status: <h4>{application.status}</h4>,
         address: `${application.property.address}`,
         name: `${application.landlord.name}`,
         date: <div><IconButton onClick={() => handleDelete(application.id)} variantColor="red" aria-label="Call Segun" size="lg" icon="close"/></div>,
@@ -121,11 +121,12 @@ export default function LandlordAppTable() {
   }
 
   return (
-<div>
+<div className='center'>
   <div className='header'>
   <Tnavbar />
   </div>
-  
+  <div className='appTable'>
+    <h1>Your sent Applications</h1>
     <Paper className={classes.root}>
       <Grid container spacing={2}>
         <Grid item xs={6}>
@@ -142,8 +143,7 @@ export default function LandlordAppTable() {
                  <h2> {column.label} </h2>
                 </TableCell>
               ))}
-              <br></br>
-              <br></br>
+             
 
             </TableRow>
           </TableHead>
@@ -155,6 +155,7 @@ export default function LandlordAppTable() {
       </Grid>
       </Grid>
     </Paper>
+    </div>
     </div>
   );
 }
