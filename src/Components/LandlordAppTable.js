@@ -10,7 +10,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import { IconButton, Button, Collapse } from "@chakra-ui/core";
 import TableRow from "@material-ui/core/TableRow";
-import { fetch_applications, fetch_homes } from "../actions";
+import { fetchLandlordApplications, fetch_homes } from "../actions";
 import Lnavbar from "./Lnavbar";
 
 const useStyles = makeStyles({
@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 
 export default function LandlordAppTable() {
   const userId = parseInt(localStorage.userId);
-  const applications = useSelector((state) => state.applications);
+  const applications = useSelector((state) => state.landlordApplications);
   const classes = useStyles();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -37,7 +37,7 @@ export default function LandlordAppTable() {
   // const apps = useSelector(state => state.applications)
 
   useEffect(() => {
-    dispatch(fetch_applications(userId));
+    dispatch(fetchLandlordApplications(userId));
   }, []);
 
   // let reloadTable =  () => {
@@ -119,7 +119,10 @@ export default function LandlordAppTable() {
         Accept: "application/json",
       },
       body: JSON.stringify({ availability: 0 }),
-    }).then(dispatch(fetch_applications(userId)), dispatch(fetch_homes()));
+    }).then(
+      dispatch(fetchLandlordApplications(userId)),
+      dispatch(fetch_homes())
+    );
   };
 
   let handleDeny = async (applicationId) => {
@@ -131,14 +134,14 @@ export default function LandlordAppTable() {
       },
       body: JSON.stringify({ status: "Denied" }),
     });
-    dispatch(fetch_applications(userId));
+    dispatch(fetchLandlordApplications(userId));
   };
 
-  let testFunction = (data) => {
-    // console.log(applications.state)
+  let testFunction = (applications) => {
     let rows = [];
-    if (applications.state) {
-      data.forEach((application) => {
+    console.log(applications.state.length);
+    if (applications.state.length > 0) {
+      applications.state.forEach((application) => {
         console.log(application);
 
         rows.push({
@@ -180,17 +183,13 @@ export default function LandlordAppTable() {
         });
       });
     }
-    console.log(rows);
     return rows
       .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
       .map((row) => {
         return (
           <>
             <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
-              {console.log("-----------", row.id)}
-
               {columns.map((column) => {
-                console.log("column", column);
                 const value = row[column.id];
                 return (
                   <TableCell key={column.id} align={column.align}>
@@ -215,35 +214,29 @@ export default function LandlordAppTable() {
         <Lnavbar />
       </div>
       <p>Under construction</p>
-      {/* <div className='appTable'>
-  <h1>Rental Applications:</h1>
-    <Paper className={classes.root}>
-      <TableContainer className={classes.container}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              {columns.map(column => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
-                >
-                  {column.label}
-                  
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-          
-          {testFunction(applications.state)}
-         
-          </TableBody>
-        </Table>
-      </TableContainer>
-     
-    </Paper>
-    </div> */}
+      <div className="appTable">
+        <h1>Rental Applications:</h1>
+        <Paper className={classes.root}>
+          <TableContainer className={classes.container}>
+            <Table stickyHeader aria-label="sticky table">
+              <TableHead>
+                <TableRow>
+                  {columns.map((column) => (
+                    <TableCell
+                      key={column.id}
+                      align={column.align}
+                      style={{ minWidth: column.minWidth }}
+                    >
+                      {column.label}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>{testFunction(applications)}</TableBody>
+            </Table>
+          </TableContainer>
+        </Paper>
+      </div>
     </div>
   );
 }

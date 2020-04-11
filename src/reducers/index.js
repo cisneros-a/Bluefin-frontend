@@ -4,7 +4,8 @@ import userReducer from "./userinfo";
 import homeReducer from "./homes";
 import toggleRedcuer from "./toggle";
 import selectedHomeReducer from "./selectedHome";
-import applicationReducer from "./applications";
+import tenantApplicationReducer from "./tenantApplications";
+import landlordApplicationReducer from "./landlordApplications";
 import tenantLeaseReducer from "./tenantLease";
 import landlordPropertiesReducer from "./landlordProperties";
 
@@ -14,7 +15,8 @@ const allReducers = combineReducers({
   homes: homeReducer,
   selectedHome: selectedHomeReducer,
   toggle: toggleRedcuer,
-  applications: applicationReducer,
+  tenantApplications: tenantApplicationReducer,
+  landlordApplications: landlordApplicationReducer,
   tenantLease: tenantLeaseReducer,
   landlordProperties: landlordPropertiesReducer,
 });

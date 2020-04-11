@@ -7,6 +7,8 @@ import { useSelector, useDispatch } from "react-redux";
 import Lnavbar from "./Lnavbar";
 
 export default function LandlordDashboard() {
+  const userId = parseInt(localStorage.userId);
+  const dispatch = useDispatch();
   const leasedProperties = useSelector(
     (state) => state.landlordProperties.state.leased_properties
   );
@@ -14,12 +16,9 @@ export default function LandlordDashboard() {
     (state) => state.landlordProperties.state.unleased_properties
   );
 
-  const userId = parseInt(localStorage.userId);
-  const dispatch = useDispatch();
-
-  if (!leasedProperties && !unleasedProperties) {
-    dispatch(fetchLandlordProperties(userId));
-  }
+  // if (!leasedProperties && !unleasedProperties) {
+  //   dispatch(fetchLandlordProperties(userId));
+  // }
 
   const showCards = (properties) => {
     if (properties) {
