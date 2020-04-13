@@ -15,7 +15,7 @@ import {
 
 import { Button } from "@chakra-ui/core";
 import { useDispatch } from "react-redux";
-import { selectHome } from "../actions";
+import { selectHome } from "../../actions";
 
 export default function LandlordHomeCard({ key, img, propertyInfo }) {
   const { isOpen, onOpen, onClose } = useDisclosure();

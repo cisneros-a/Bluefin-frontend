@@ -1,172 +1,178 @@
 .App {
-	text-align: center;
+  text-align: center;
 }
 
 .Main {
-	/* background-image: url('./shiplap-4.jpg'); */
-	background-color: rgba(121, 131, 151, 0.20);
-	background-size: cover;
-	position: relative;
-	overflow: scroll;
-	height: 100vh;
+  /* background-image: url('./shiplap-4.jpg'); */
+  background-color: rgba(121, 131, 151, 0.2);
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
 }
 
 .staticHeader {
-	display: flex;
-	justify-content: center;
-	padding-bottom: 1em;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 1em;
 }
 
 .header {
-	justify-content: center;
-	text-align: center;
-	padding-top: 3rem;
-	padding-bottom: 2rem;
+  justify-content: center;
+  text-align: center;
+  padding-top: 3rem;
+  padding-bottom: 2rem;
 }
 
 .App-logo {
-	height: 40vmin;
-	pointer-events: none;
+  height: 40vmin;
+  pointer-events: none;
 }
 
 .marker-btn {
-	background: none;
-	border: none;
-	cursor: pointer;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 .modal {
-	width: 400px;
-	height: 100px;
+  width: 400px;
+  height: 100px;
 }
 
 .toggle {
-	padding-left: 37%;
-	padding-bottom: 2em;
-	padding-top: 3em;
-	height: 30px;
-	display: flex;
-	flex-direction: row;
+  padding-left: 37%;
+  padding-bottom: 2em;
+  padding-top: 3em;
+  height: 30px;
+  display: flex;
+  flex-direction: row;
 }
 
 h3 {
-	display: flex;
-	flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 h3:before,
 h3:after {
-	content: "";
-	flex: 1 1;
-	margin: auto;
+  content: "";
+  flex: 1 1;
+  margin: auto;
 }
 
 .CardHolderName {
-	text-align: left;
+  text-align: left;
 }
 
 .cardDiv {
-	text-align: left;
+  text-align: left;
 }
 
 .CardGrid {
-	display: flex;
-	justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .homeCard {
-	background-color: white;
+  background-color: white;
 }
 
 .navbar {
-	background-color: black;
+  background-color: black;
 }
 
 .lease {
+  display: block;
+  text-align: center;
+}
+
+.lease-dropdown {
+  display: flex;
+  justify-content: center;
 }
 .center {
-	text-align: center;
-	padding: 3em;
-	width: 100vw;
-	height: 100vh;
-	justify-content: center;
+  padding: 3em;
+  width: 50vw;
+  height: 50vh;
+  justify-content: center;
 }
 
 .centerLease {
-	justify-items: center;
+  justify-items: center;
 }
 
 .scroll {
-	margin: auto;
-	display: block;
-	padding: 0px;
-	width: 55vw;
-	height: 80vh;
-	overflow-x: hidden;
-	overflow-x: auto;
-	text-align: justify;
-	justify-content: center;
+  margin: auto;
+  display: block;
+  padding: 0px;
+  width: 55vw;
+  height: 80vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  text-align: justify;
+  justify-content: center;
 }
 
 .navbarImg {
-	padding-top: 0em;
+  padding-top: 0em;
 }
 
 .SpecImage {
-	justify-content: center;
-	padding-left: 6em;
-	padding-top: 3em;
-	padding-bottom: 3em;
+  justify-content: center;
+  padding-left: 6em;
+  padding-top: 3em;
+  padding-bottom: 3em;
 }
 
 .HomeSpec {
-	background-color: rgba(121, 131, 151, 0.01);
-	display: inline-block;
-	margin: auto;
-	justify-content: center;
-	text-align: center;
-	/* Add shadows to create the "card" effect */
-	box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.5);
-	transition: 0.3s;
-	width: 40vw;
-	height: 80vh;
+  background-color: rgba(121, 131, 151, 0.01);
+  display: inline-block;
+  margin: auto;
+  justify-content: center;
+  text-align: center;
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.5);
+  transition: 0.3s;
+  width: 40vw;
+  height: 80vh;
 }
 
 .SpecImage {
-	align-items: center;
+  align-items: center;
 }
 
 /* On mouse-over, add a deeper shadow */
 .HomeSpec:hover {
-	box-shadow: 0 16px 16px 0 rgba(58, 130, 179, 0.2);
+  box-shadow: 0 16px 16px 0 rgba(58, 130, 179, 0.2);
 }
 
 .homeLink {
-	color: red;
+  color: red;
 }
 
 .appTable {
-	padding-left: 16em;
-	width: 70vw;
-	height: 100vh;
+  padding-left: 16em;
+  width: 70vw;
+  height: 100vh;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-	.App-logo {
-		animation: App-logo-spin infinite 20s linear;
-	}
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
 }
 
 .leftContainer {
-	padding-left: 20em;
-	justify-content: center;
+  padding-left: 20em;
+  justify-content: center;
 }
 
 .leasedHomes {
-	/* background-color: black; */
+  /* background-color: black; */
 
-	display: flex;
-	justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 /* .wrapper {
@@ -178,41 +184,41 @@ h3:after {
   } */
 
 .flex {
-	flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 .App-header {
-	background-color: #282c34;
-	min-height: 100vh;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	font-size: calc(10px + 2vmin);
-	color: white;
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
 }
 
 .App-link {
-	color: #61dafb;
+  color: #61dafb;
 }
 
 .MyCardElement {
-	height: 40px;
-	padding: 10px 12px;
-	width: 100%;
-	color: #32325d;
-	background-color: white;
-	border: 3px solid transparent;
-	border-color: grey;
-	border-radius: 7px;
+  height: 40px;
+  padding: 10px 12px;
+  width: 100%;
+  color: #32325d;
+  background-color: white;
+  border: 3px solid transparent;
+  border-color: grey;
+  border-radius: 7px;
 
-	box-shadow: 0 1px 3px 0 #e6ebf1;
-	-webkit-transition: box-shadow 150ms ease;
-	transition: box-shadow 150ms ease;
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
 }
 
 .MyCardElement--focus {
-	box-shadow: 0 1px 3px 0 #cfd7df;
+  box-shadow: 0 1px 3px 0 #cfd7df;
 }
 
 /* .MyCardElement--invalid {
@@ -220,23 +226,23 @@ h3:after {
   } */
 
 .MyCardElement--webkit-autofill {
-	background-color: #fefde5 !important;
+  background-color: #fefde5 !important;
 }
 
 .checkoutForm {
-	width: 75%;
+  width: 75%;
 }
 
 .leaseStat {
-	border-bottom: 3px solid black;
-	padding-bottom: 1rem;
+  border-bottom: 3px solid black;
+  padding-bottom: 1rem;
 }
 
 @keyframes App-logo-spin {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
-	}
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

@@ -10,8 +10,8 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import { IconButton, Grid } from "@chakra-ui/core";
 import TableRow from "@material-ui/core/TableRow";
-import { fetchTenantApplications } from "../actions";
-import Tnavbar from "./Tnavbar";
+import { fetchTenantApplications } from "../../actions";
+import Tnavbar from "./Navbar";
 
 const useStyles = makeStyles({
   root: {
@@ -27,7 +27,7 @@ export default function LandlordAppTable() {
 
   const userId = parseInt(localStorage.userId);
   const classes = useStyles();
-  const applications = useSelector((state) => state.applications);
+  const applications = useSelector((state) => state.tenantApplications);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   // const [rows, setRows] = useState([])
@@ -73,11 +73,11 @@ export default function LandlordAppTable() {
     dispatch(fetchTenantApplications(userId));
   };
 
-  let testFunction = (data) => {
-    console.log(data);
+  let generateTableBody = (applications) => {
+    console.log("tablebody", applications);
     let rows = [];
-    if (applications.state) {
-      data.forEach((application) => {
+    if (applications.state.length > 0) {
+      applications.state.forEach((application) => {
         rows.push({
           status: <h4>{application.status}</h4>,
           address: `${application.property.address}`,
@@ -142,7 +142,7 @@ export default function LandlordAppTable() {
                       ))}
                     </TableRow>
                   </TableHead>
-                  <TableBody>{testFunction(applications.state)}</TableBody>
+                  <TableBody>{generateTableBody(applications)}</TableBody>
                 </Table>
               </TableContainer>
             </Grid>
