@@ -1,10 +1,10 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import { fetchLandlordProperties } from "../actions";
-import CardHolder from "./CardHolder";
+import { fetchLandlordProperties } from "../../actions";
+import CardHolder from "../CardHolder";
 import { useSelector, useDispatch } from "react-redux";
-import Lnavbar from "./Lnavbar";
+import Lnavbar from "./Navbar";
 
 export default function LandlordDashboard() {
   const userId = parseInt(localStorage.userId);
@@ -16,9 +16,9 @@ export default function LandlordDashboard() {
     (state) => state.landlordProperties.state.unleased_properties
   );
 
-  // if (!leasedProperties && !unleasedProperties) {
-  //   dispatch(fetchLandlordProperties(userId));
-  // }
+  if (!leasedProperties && !unleasedProperties) {
+    dispatch(fetchLandlordProperties(userId));
+  }
 
   const showCards = (properties) => {
     if (properties) {

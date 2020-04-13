@@ -1,44 +1,40 @@
-import React from 'react'
-import { useState } from 'react'
+import React from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { useSpring, animated, config } from "react-spring";
-import { logoutUser } from '../actions';
-import { useDispatch } from 'react-redux';
-import history from '../history'
-
-
+import { logoutUser } from "../../actions";
+import { useDispatch } from "react-redux";
+import history from "../../history";
 
 // import Brand from "./Brand";
-import BurgerMenu from "./BurgerMenu";
-import CollapseMenu from "./CollapseMenu";
+import BurgerMenu from "../BurgerMenu";
+import CollapseMenu from "../CollapseMenu";
 
 const Navbar = (props) => {
-  
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const barAnimation = useSpring({
-    from: { transform: 'translate3d(0, -10rem, 0)' },
-    transform: 'translate3d(0, 0, 0)',
+    from: { transform: "translate3d(0, -10rem, 0)" },
+    transform: "translate3d(0, 0, 0)",
   });
 
   const linkAnimation = useSpring({
-    from: { transform: 'translate3d(0, 30px, 0)', opacity: 0 },
-    to: { transform: 'translate3d(0, 0, 0)', opacity: 1 },
+    from: { transform: "translate3d(0, 30px, 0)", opacity: 0 },
+    to: { transform: "translate3d(0, 0, 0)", opacity: 1 },
     delay: 800,
     config: config.wobbly,
   });
 
   const handleClick = () => {
-    console.log('clicked')
-  }
+    console.log("clicked");
+  };
 
   const handleLogoutClick = (event) => {
-    history.push('/')
-    localStorage.removeItem("token")
-    localStorage.removeItem("userType")
+    history.push("/");
+    localStorage.removeItem("token");
+    localStorage.removeItem("userType");
 
-    dispatch(logoutUser())
-
-}
+    dispatch(logoutUser());
+  };
 
   return (
     <>
@@ -49,25 +45,25 @@ const Navbar = (props) => {
             <a href="/">My Applications</a>
             <a href="/myLease">My Lease</a>
             <a onClick={() => handleLogoutClick()}>Sign Out</a>
-            <a  onClick={() => handleClick()} >link n4</a>
+            <a onClick={() => handleClick()}>link n4</a>
           </NavLinks>
           <BurgerWrapper>
             <BurgerMenu
-              navbarState={props.navbarState} 
+              navbarState={props.navbarState}
               handleNavbar={props.handleNavbar}
             />
           </BurgerWrapper>
         </FlexContainer>
       </NavBar>
-      <CollapseMenu 
-        navbarState={props.navbarState} 
+      <CollapseMenu
+        navbarState={props.navbarState}
         handleNavbar={props.handleNavbar}
       />
-   </>
-  )
-}
+    </>
+  );
+};
 
-export default Navbar
+export default Navbar;
 
 const NavBar = styled(animated.nav)`
   position: fixed;
@@ -83,7 +79,7 @@ const FlexContainer = styled.div`
   max-width: 120rem;
   display: flex;
   margin: auto;
-  padding: 0 2rem;;
+  padding: 0 2rem;
   justify-content: space-between;
   height: 5rem;
 `;
@@ -94,7 +90,7 @@ const NavLinks = styled(animated.ul)`
   margin: auto 0;
 
   & a {
-    color:#000;
+    color: #000;
     text-transform: uppercase;
     font-weight: 600;
     border-bottom: 1px solid transparent;

@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Fragment } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
 import Paper from "@material-ui/core/Paper";
@@ -8,10 +8,21 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
-import { IconButton, Button, Collapse } from "@chakra-ui/core";
+import { IconButton, Button } from "@chakra-ui/core";
+import { useDisclosure } from "@chakra-ui/core";
 import TableRow from "@material-ui/core/TableRow";
-import { fetchLandlordApplications, fetch_homes } from "../actions";
-import Lnavbar from "./Lnavbar";
+import { fetchLandlordApplications, fetch_homes } from "../../actions";
+import Lnavbar from "./Navbar";
+// import TableRow from './TableRow'
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+} from "@chakra-ui/core";
 
 const useStyles = makeStyles({
   root: {
@@ -28,29 +39,14 @@ export default function LandlordAppTable() {
   const classes = useStyles();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  // const [applications, setApplications] = useState([])
-  // const [rows, setRows] = useState([])
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const handleToggle = () => setShow(!show);
 
-  // const apps = useSelector(state => state.applications)
-
   useEffect(() => {
     dispatch(fetchLandlordApplications(userId));
   }, []);
-
-  // let reloadTable =  () => {
-  //     console.log('reloading table function')
-  //     fetch('http://localhost:3000/applications')
-  //     .then(res => res.json())
-  //     .then(data => {
-  //         let landlordApplications = data.filter(application => application.landlord_id === userId)
-  //         let pendingApplications = landlordApplications.filter(application => application.status === 'pending')
-  //         dispatch(populate_applications(pendingApplications))
-  //     })
-
-  // }
 
   const columns = [
     { id: "buttons", label: "Approve or Deny", maxWidth: 25 },
@@ -137,13 +133,10 @@ export default function LandlordAppTable() {
     dispatch(fetchLandlordApplications(userId));
   };
 
-  let testFunction = (applications) => {
+  let generateTableBody = (applications) => {
     let rows = [];
-    console.log(applications.state.length);
     if (applications.state.length > 0) {
       applications.state.forEach((application) => {
-        console.log(application);
-
         rows.push({
           description: `${application.description}`,
           buttons: (
@@ -157,15 +150,11 @@ export default function LandlordAppTable() {
                   )
                 }
                 variantColor="green"
-                aria-label="Call Segun"
-                size="lg"
                 icon="check"
               />{" "}
               <IconButton
                 onClick={() => handleDeny(application.id)}
                 variantColor="red"
-                aria-label="Call Segun"
-                size="lg"
                 icon="close"
               />
             </div>
@@ -174,10 +163,27 @@ export default function LandlordAppTable() {
           name: `${application.tenant.name}`,
           date: `${application.property.available_date}`,
           more: (
-            <div className={`${application.name}`}>
-              <Button variantColor="blue" onClick={handleToggle}>
-                Open
-              </Button>
+            <div>
+              {(function IIFE(desc) {
+                return (
+                  <>
+                    <Button variantColor="blue" onClick={onOpen}>
+                      Open
+                    </Button>
+                    <Modal isOpen={isOpen} onClose={onClose}>
+                      <ModalContent>
+                        <ModalHeader>Message from applicant: </ModalHeader>
+                        <ModalBody>{desc}</ModalBody>
+                        <ModalFooter>
+                          <Button variantColor="blue" mr={3} onClick={onClose}>
+                            Close
+                          </Button>
+                        </ModalFooter>
+                      </ModalContent>
+                    </Modal>
+                  </>
+                );
+              })(application.description)}
             </div>
           ),
         });
@@ -187,12 +193,12 @@ export default function LandlordAppTable() {
       .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
       .map((row) => {
         return (
-          <>
-            <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+          <Fragment key={Math.random()}>
+            <TableRow hover role="checkbox" tabIndex={-1}>
               {columns.map((column) => {
                 const value = row[column.id];
                 return (
-                  <TableCell key={column.id} align={column.align}>
+                  <TableCell key={Math.random(1, 100)} align={column.align}>
                     {column.format && typeof value === "number"
                       ? column.format(value)
                       : value}
@@ -200,10 +206,10 @@ export default function LandlordAppTable() {
                 );
               })}
             </TableRow>
-            <Collapse mt={4} isOpen={show}>
+            {/* <Collapse mt={4} isOpen={show}>
               <h3>{row.description}</h3>
-            </Collapse>
-          </>
+            </Collapse> */}
+          </Fragment>
         );
       });
   };
@@ -213,7 +219,6 @@ export default function LandlordAppTable() {
       <div className="header">
         <Lnavbar />
       </div>
-      <p>Under construction</p>
       <div className="appTable">
         <h1>Rental Applications:</h1>
         <Paper className={classes.root}>
@@ -232,7 +237,7 @@ export default function LandlordAppTable() {
                   ))}
                 </TableRow>
               </TableHead>
-              <TableBody>{testFunction(applications)}</TableBody>
+              <TableBody>{generateTableBody(applications)}</TableBody>
             </Table>
           </TableContainer>
         </Paper>

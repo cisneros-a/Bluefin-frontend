@@ -1,6 +1,6 @@
 import React from "react";
 import HomeCard from "./HomeCard";
-import LandlordHomeCard from "./LandlordHomeCard";
+import LandlordHomeCard from "./Landlord/HomeCard";
 import { useSelector } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 
@@ -9,14 +9,12 @@ export default function CardHolder({ properties }) {
 
   let populateCards = () => {
     if (userType === "tenant") {
-      return properties.state.map((home) => (
+      return properties.map((home) => (
         <Grid className="CardGrid" item xs={4}>
           <HomeCard key={home.id} img={home.uploads} home={home.property} />{" "}
         </Grid>
       ));
     } else {
-      console.log("being hit");
-
       return properties.map((property) => (
         <Grid className="CardGrid" item xs={5}>
           <LandlordHomeCard

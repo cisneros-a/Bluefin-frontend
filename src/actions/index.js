@@ -184,7 +184,7 @@ export const fetchTenantApplications = (userId) => {
   console.log("hitting sction");
   return async (dispatch) => {
     const resp = await fetch(
-      `http://localhost:3000/landlord_applications/${userId}`,
+      `http://localhost:3000/tenant_applications/${userId}`,
       {
         method: "GET",
         headers: {
@@ -194,8 +194,15 @@ export const fetchTenantApplications = (userId) => {
       }
     );
     const data = await resp.json();
-    console.log(data.applications);
-    // dispatch(populateLandlordApplications(data.applications));
+    console.log("action", data);
+    dispatch(populateTenantApplications(data));
+  };
+};
+
+export const populateTenantApplications = (payload) => {
+  return {
+    type: "POPULATE_TENANT_APPLICATIONS",
+    payload: payload,
   };
 };
 
