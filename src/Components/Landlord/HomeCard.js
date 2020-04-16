@@ -17,10 +17,9 @@ import { Button } from "@chakra-ui/core";
 import { useDispatch } from "react-redux";
 import { selectHome } from "../../actions";
 
-export default function LandlordHomeCard({ key, img, propertyInfo }) {
+export default function LandlordHomeCard({ img, propertyInfo }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { currentHome, setCurrentHome } = useState([]);
-  console.log("HomeCard", propertyInfo);
 
   const dispatch = useDispatch();
 
@@ -42,6 +41,34 @@ export default function LandlordHomeCard({ key, img, propertyInfo }) {
     formattedPrice: propertyInfo.rent,
   };
 
+  const displayButton = () => {
+    if (propertyInfo.availability) {
+      return (
+        <Button
+          onClick={() => {
+            handleClick(false);
+          }}
+          variantColor="pink"
+          variant="outline"
+        >
+          See more info!
+        </Button>
+      );
+    }
+    return (
+      <Button
+        onClick={() => {
+          handleClick(true);
+        }}
+        variantColor="purple"
+        variant="outline"
+      >
+        See lease info!
+      </Button>
+    );
+  };
+
+  const handleClick = (leased) => {};
   // let setSelectedHome = (home) => {
   //   console.log("clicked");
   //   let homeObj = {
@@ -100,6 +127,7 @@ export default function LandlordHomeCard({ key, img, propertyInfo }) {
             / month
           </Box>
         </Box>
+        {displayButton()}
       </Box>
     </Box>
   );

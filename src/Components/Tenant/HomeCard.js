@@ -1,15 +1,11 @@
-import React from 'react';
+import React from "react";
 import { Box, Image, Badge } from "@chakra-ui/core";
 import { Button } from "@chakra-ui/core";
-import { useDispatch} from 'react-redux';
-import { selectHome } from '../actions';
+import { useDispatch } from "react-redux";
+import { selectHome } from "../../actions";
 
-
-
-
-export default function HomeCard(props) {
-
-  const dispatch = useDispatch()
+export default function TenantHomeCard(props) {
+  const dispatch = useDispatch();
 
   const property = {
     imageUrl: `http://localhost:3000/${props.img}`,
@@ -17,39 +13,41 @@ export default function HomeCard(props) {
     beds: props.home.bedrooms,
     baths: props.home.bathrooms,
     title: props.home.address,
-    formattedPrice: props.home.rent
+    formattedPrice: props.home.rent,
   };
 
-
-  let setSelectedHome= home => {
-    console.log('clicked')
+  let setSelectedHome = (home) => {
+    console.log("clicked");
     let homeObj = {
-      property : props.home,
-      uploads: props.img
-    }
-    dispatch(selectHome(homeObj))
-  }
- 
-  console.log('homecard', props.img)
+      property: props.home,
+      uploads: props.img,
+    };
+    dispatch(selectHome(homeObj));
+  };
+
+  console.log("homecard", props.img);
 
   return (
-
-
     <Box
-    className="homeCard"
-     boxShadow="lg"
-      border="2px" 
-      borderRadius="md" 
-      borderColor="gray.200" 
-      maxW="sm" 
-      borderWidth="1px" 
-      rounded="lg" 
-      overflow="hidden">
-        
-      <Image width="100%" height="60%" src={property.imageUrl} alt={property.imageAlt} />
+      className="homeCard"
+      boxShadow="lg"
+      border="2px"
+      borderRadius="md"
+      borderColor="gray.200"
+      maxW="sm"
+      borderWidth="1px"
+      rounded="lg"
+      overflow="hidden"
+    >
+      <Image
+        width="100%"
+        height="60%"
+        src={property.imageUrl}
+        alt={property.imageAlt}
+      />
 
-      <Box  p="6">
-        <Box  d="flex" alignItems="baseline">
+      <Box p="6">
+        <Box d="flex" alignItems="baseline">
           <Badge rounded="full" px="2" variantColor="red">
             Hot!
           </Badge>
@@ -81,11 +79,13 @@ export default function HomeCard(props) {
             / month
           </Box>
         </Box>
-          <Button
-            onClick={() => setSelectedHome(props.home)}
-           variantColor="purple" variant="outline">
-            See more info!
-          </Button>
+        <Button
+          onClick={() => setSelectedHome(props.home)}
+          variantColor="purple"
+          variant="outline"
+        >
+          See more info!
+        </Button>
       </Box>
     </Box>
   );
@@ -133,8 +133,6 @@ export default function HomeCard(props) {
 //   const classes = useStyles();
 //   const theme = useTheme();
 
-  
-
 //   return (
 //     <Card className={classes.card}>
 //       <CardMedia
@@ -155,7 +153,7 @@ export default function HomeCard(props) {
 //           <IconButton aria-label="previous">
 //             <InfoIcon/>
 //           </IconButton>
-       
+
 //         </div>
 //       </div>
 //     </Card>
