@@ -145,9 +145,16 @@ export const populate_homes = (payload) => {
   };
 };
 
-export const selectHome = (payload) => {
+export const selectTenantProperty = (payload) => {
   return {
-    type: "SELECT_HOME",
+    type: "SELECT_TENANT_PROPERTY",
+    payload: payload,
+  };
+};
+export const selectLandlordProperty = (payload) => {
+  console.log("action", payload);
+  return {
+    type: "SELECT_LANDLORD_PROPERTY",
     payload: payload,
   };
 };
@@ -221,15 +228,36 @@ export const fetchTenantLease = (userId) => {
     } else {
       let tenantLease = data.find((lease) => lease.tenant_id === userId);
       console.log(tenantLease);
-      dispatch(populateLease(tenantLease));
+      dispatch(populateTenantLease(tenantLease));
     }
   };
 };
-
-const populateLease = (payload) => {
+const populateTenantLease = (payload) => {
   return {
     type: "POPULATE_TENANT_LEASE",
     payload: payload,
+  };
+};
+
+export const fetchLandlordLease = (propertyId) => {
+  console.log("hit landlord lease fetch", propertyId);
+  return async (dispatch) => {
+    const resp = await fetch(
+      `http://localhost:3000/landlord_lease/${propertyId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    );
+    const data = await resp.json();
+    console.log(data);
+    if (data.message) {
+    } else {
+      dispatch(selectLandlordProperty(data));
+    }
   };
 };
 

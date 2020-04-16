@@ -1,7 +1,12 @@
 import React from "react";
 import { Stat, StatLabel, StatNumber, StatGroup } from "@chakra-ui/core";
 
-export default function LeaseInformation({ address, createdDate, landlord }) {
+export default function LeaseInformation({
+  address,
+  createdDate,
+  userType,
+  name,
+}) {
   let year = createdDate[0];
   let newYear = parseInt(year) + 1;
   let month = createdDate[1];
@@ -29,8 +34,10 @@ export default function LeaseInformation({ address, createdDate, landlord }) {
         </Stat>
 
         <Stat>
-          <StatLabel>Landlord : </StatLabel>
-          <StatNumber>{landlord}</StatNumber>
+          <StatLabel>
+            {userType === "tenant" ? "Landlord:" : "Tenant:"}
+          </StatLabel>
+          <StatNumber>{name}</StatNumber>
         </Stat>
       </StatGroup>
     </>

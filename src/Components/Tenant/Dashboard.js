@@ -13,7 +13,7 @@ import TenantLease from "./Lease";
 
 export default function TenantDashboard() {
   const allHomes = useSelector((state) => state.homes);
-  const selectedHome = useSelector((state) => state.selectedHome);
+  const selectedHome = useSelector((state) => state.selectedTenantHome);
   const dispatch = useDispatch();
   const toggleState = useSelector((state) => state.toggle);
 
