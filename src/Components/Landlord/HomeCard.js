@@ -1,21 +1,10 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import { Box, Image, Badge } from "@chakra-ui/core";
-import {
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverHeader,
-  PopoverBody,
-  PopoverArrow,
-  PopoverCloseButton,
-  useToast,
-  useDisclosure,
-} from "@chakra-ui/core";
+import { useState } from "react";
+import { Box, Image, useDisclosure, Button } from "@chakra-ui/core";
+import history from "../../history";
 
-import { Button } from "@chakra-ui/core";
 import { useDispatch } from "react-redux";
-import { selectHome } from "../../actions";
+import { selectLandlordProperty } from "../../actions";
 
 export default function LandlordHomeCard({ img, propertyInfo }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -46,7 +35,7 @@ export default function LandlordHomeCard({ img, propertyInfo }) {
       return (
         <Button
           onClick={() => {
-            handleClick(false);
+            handleClick(propertyInfo);
           }}
           variantColor="pink"
           variant="outline"
@@ -58,7 +47,7 @@ export default function LandlordHomeCard({ img, propertyInfo }) {
     return (
       <Button
         onClick={() => {
-          handleClick(true);
+          handleClick(propertyInfo);
         }}
         variantColor="purple"
         variant="outline"
@@ -68,7 +57,10 @@ export default function LandlordHomeCard({ img, propertyInfo }) {
     );
   };
 
-  const handleClick = (leased) => {};
+  const handleClick = (property) => {
+    dispatch(selectLandlordProperty(propertyInfo));
+    history.push(`/my-properties/${property.id}`);
+  };
   // let setSelectedHome = (home) => {
   //   console.log("clicked");
   //   let homeObj = {

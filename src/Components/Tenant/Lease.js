@@ -6,7 +6,7 @@ import { fetchTenantLease } from "../../actions";
 import Tnavbar from "./Navbar";
 import MyStoreCheckout from "../MyStoreCheckout";
 import RequestForm from "../RequestForm";
-import LeaseInformationBar from "./LeaseInformationBar";
+import LeaseInformationBar from "../LeaseInformationBar";
 
 import { useToast, Box, Button } from "@chakra-ui/core";
 import {
@@ -38,7 +38,8 @@ export default function TenantLease() {
         <LeaseInformationBar
           address={lease.property.address}
           createdDate={date}
-          landlord={lease.landlord.name}
+          userType="tenant"
+          name={lease.landlord.name}
         />
       );
     }

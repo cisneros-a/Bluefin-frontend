@@ -16,13 +16,8 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormLabel from "@material-ui/core/FormLabel";
-import TestNavbar from "./Tenant/TestNavbar";
 import { getProfileFetch, userSigninFetch } from "../actions";
 import StaticNavbar from "./StaticNavbar";
-
-import LandlordDashboard from "./Landlord/Dashboard";
-import TenantDashboard from "./Tenant/Dashboard";
-import LandlordNavbar from "./Landlord/Lnavbar";
 import history from "../history";
 
 function Copyright() {

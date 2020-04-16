@@ -10,7 +10,7 @@ import LandlordAppTable from "./Components/Landlord/AppTable";
 import TenantDashboard from "./Components/Tenant/Dashboard";
 import TenantAppTable from "./Components/Tenant/AppTable";
 import TenantLease from "./Components/Tenant/Lease";
-// import homeSpec from "./Components/Landlord/Home";
+import HomeSpec from "./Components/Landlord/HomeSpec";
 
 import HomeForm from "./Components/HomeForm";
 import { Switch, Route, withRouter } from "react-router-dom";
@@ -35,7 +35,7 @@ function App() {
           <Route path="/my-lease" component={TenantLease} />
           <Route path="/add-a-home" component={HomeForm} />
           <Route path="/add-a-home" component={HomeForm} />
-          {/* <Route path="/myproperties/:id" component={HomeSpec} /> */}
+          <Route path="/my-properties/:id" component={HomeSpec} />
         </Switch>
       </div>
     </div>

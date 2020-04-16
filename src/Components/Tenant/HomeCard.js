@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Image, Badge } from "@chakra-ui/core";
 import { Button } from "@chakra-ui/core";
 import { useDispatch } from "react-redux";
-import { selectHome } from "../../actions";
+import { selectTenantProperty } from "../../actions";
 
 export default function TenantHomeCard(props) {
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ export default function TenantHomeCard(props) {
       property: props.home,
       uploads: props.img,
     };
-    dispatch(selectHome(homeObj));
+    dispatch(selectTenantProperty(homeObj));
   };
 
   console.log("homecard", props.img);
