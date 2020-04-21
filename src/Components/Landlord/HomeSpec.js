@@ -4,6 +4,7 @@ import Lnavbar from "./Navbar";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchLandlordLease } from "../../actions";
 import LeaseInformationBar from "../LeaseInformationBar";
+import SpecsContainer from "./SpecsContainer";
 
 export default function LandlordHomeSpec() {
   const dispatch = useDispatch();
@@ -35,8 +36,7 @@ export default function LandlordHomeSpec() {
       </div>
       <div className="leaseStat">{displayStats()}</div>
 
-      {/* {console.log(property)} */}
-      <p>HomeSpec</p>
+      <SpecsContainer />
     </div>
   );
 }

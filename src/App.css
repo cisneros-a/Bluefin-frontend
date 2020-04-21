@@ -16,7 +16,24 @@
   justify-content: center;
   padding-bottom: 1em;
 }
+.specs-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 30px;
+  margin: 1em;
+}
 
+.spec {
+  border: 2px solid black;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.fix-card {
+  width: 80%;
+  border: 5px dotted teal;
+  margin: 1em;
+}
 .header {
   justify-content: center;
   text-align: center;
