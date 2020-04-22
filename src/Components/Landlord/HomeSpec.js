@@ -9,7 +9,6 @@ import SpecsContainer from "./SpecsContainer";
 export default function LandlordHomeSpec() {
   const dispatch = useDispatch();
   const leaseObj = useSelector((state) => state.selectedLandlordProperty);
-  console.log("HomeSpec", leaseObj);
   useEffect(() => {
     dispatch(fetchLandlordLease(leaseObj.state.id));
   }, []);
@@ -17,7 +16,6 @@ export default function LandlordHomeSpec() {
   const displayStats = () => {
     if (leaseObj.state.tenant) {
       let lease = leaseObj.state;
-      console.log(lease);
       return (
         <LeaseInformationBar
           address={lease.property.address}
