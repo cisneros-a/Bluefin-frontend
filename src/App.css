@@ -17,6 +17,7 @@
   padding-bottom: 1em;
 }
 .specs-container {
+  height: 30%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 30px;
@@ -24,15 +25,20 @@
 }
 
 .spec {
+  height: 80%;
   border: 2px solid black;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  overflow-y: overflow;
+  overflow-x: auto;
 }
 
 .fix-card {
+  border-radius: 15px;
   width: 80%;
-  border: 5px dotted teal;
+  border: 3px solid teal;
   margin: 1em;
+  box-shadow: 7px 7px 7px grey;
 }
 .header {
   justify-content: center;

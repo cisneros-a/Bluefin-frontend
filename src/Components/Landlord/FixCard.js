@@ -1,5 +1,5 @@
 import React from "react";
-import { Image } from "@chakra-ui/core";
+import { Image, Button } from "@chakra-ui/core";
 
 export default function FixCard({ fix }) {
   return (
@@ -13,6 +13,13 @@ export default function FixCard({ fix }) {
         src={`http://localhost:3000/${fix.uploads}`}
         alt={"fix photo"}
       />
+      <Button
+        leftIcon="check-circle"
+        variantColor="purple"
+        variant={fix.fix.status === "Unresolved" ? "outline" : "disabled"}
+      >
+        {fix.fix.status === "Unresolved" ? "Mark as resolved" : "Resolved!"}
+      </Button>
     </div>
   );
 }

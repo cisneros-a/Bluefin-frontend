@@ -6,16 +6,18 @@ export default function FixesContainer() {
   const fixes = useSelector(
     (state) => state.selectedLandlordProperty.state.fixes
   );
-  console.log(fixes);
+
+  const returnCards = () => {
+    if (fixes.length > 0) {
+      return fixes.map((fix) => {
+        return <FixCard fix={fix} />;
+      });
+    }
+    return <h3> No fix requests for this propertry!</h3>;
+  };
   return (
     <>
-      <div className="spec">
-        {fixes
-          ? fixes.map((fix) => {
-              return <FixCard fix={fix} />;
-            })
-          : null}
-      </div>
+      <div className="spec">{fixes ? returnCards() : null}</div>
     </>
   );
 }
