@@ -9,6 +9,7 @@ import tenantApplicationReducer from "./tenantApplications";
 import landlordApplicationReducer from "./landlordApplications";
 import tenantLeaseReducer from "./tenantLease";
 import landlordPropertiesReducer from "./landlordProperties";
+import fixesReducer from "./fixes";
 
 const allReducers = combineReducers({
   isLogged: loggedReducer,
@@ -21,6 +22,7 @@ const allReducers = combineReducers({
   landlordApplications: landlordApplicationReducer,
   tenantLease: tenantLeaseReducer,
   landlordProperties: landlordPropertiesReducer,
+  fixes: fixesReducer,
 });
 
 export default allReducers;

@@ -80,8 +80,13 @@ export const loginUser = (userObj, userType) => {
   };
 };
 
+export const signIn = () => {
+  return {
+    type: "SIGN_IN",
+  };
+};
+
 export const toggleView = () => {
-  console.log("Toggle is dispatched");
   return {
     type: "TOGGLE",
   };
@@ -90,12 +95,6 @@ export const toggleView = () => {
 export const logoutUser = () => ({
   type: "LOGOUT_USER",
 });
-
-export const signIn = () => {
-  return {
-    type: "SIGN_IN",
-  };
-};
 
 export const fetch_homes = () => {
   return async (dispatch) => {
@@ -112,7 +111,6 @@ export const fetch_homes = () => {
 
 export const fetchLandlordProperties = (userId) => {
   const token = localStorage.token;
-  console.log("hitting sction");
   return async (dispatch) => {
     const resp = await fetch(
       `http://localhost:3000/landlord_properties/${userId}`,
@@ -126,7 +124,6 @@ export const fetchLandlordProperties = (userId) => {
       }
     );
     const data = await resp.json();
-    console.log(data);
     dispatch(populateLandlordProperties(data));
   };
 };
@@ -151,17 +148,9 @@ export const selectTenantProperty = (payload) => {
     payload: payload,
   };
 };
-export const selectLandlordProperty = (payload) => {
-  console.log("action", payload);
-  return {
-    type: "SELECT_LANDLORD_PROPERTY",
-    payload: payload,
-  };
-};
 
 export const fetchLandlordApplications = (userId) => {
   const token = localStorage.token;
-  console.log("hitting sction");
   return async (dispatch) => {
     const resp = await fetch(
       `http://localhost:3000/landlord_applications/${userId}`,
@@ -188,7 +177,6 @@ export const populateLandlordApplications = (payload) => {
 
 export const fetchTenantApplications = (userId) => {
   const token = localStorage.token;
-  console.log("hitting sction");
   return async (dispatch) => {
     const resp = await fetch(
       `http://localhost:3000/tenant_applications/${userId}`,
@@ -214,7 +202,6 @@ export const populateTenantApplications = (payload) => {
 };
 
 export const fetchTenantLease = (userId) => {
-  console.log("hit lease fetch");
   return async (dispatch) => {
     const resp = await fetch("http://localhost:3000/leases", {
       method: "GET",
@@ -227,11 +214,11 @@ export const fetchTenantLease = (userId) => {
     if (data.message) {
     } else {
       let tenantLease = data.find((lease) => lease.tenant_id === userId);
-      console.log(tenantLease);
       dispatch(populateTenantLease(tenantLease));
     }
   };
 };
+
 const populateTenantLease = (payload) => {
   return {
     type: "POPULATE_TENANT_LEASE",
@@ -240,7 +227,6 @@ const populateTenantLease = (payload) => {
 };
 
 export const fetchLandlordLease = (propertyId) => {
-  console.log("hit landlord lease fetch", propertyId);
   return async (dispatch) => {
     const resp = await fetch(
       `http://localhost:3000/landlord_lease/${propertyId}`,
@@ -253,34 +239,74 @@ export const fetchLandlordLease = (propertyId) => {
       }
     );
     const data = await resp.json();
-    console.log(data);
     if (data.message) {
     } else {
-      dispatch(selectLandlordProperty(data));
+      dispatch(
+        selectLandlordProperty({
+          lease: data.lease,
+          property: data.property,
+          tenant: data.tenant,
+        })
+      );
+      dispatch(populateFixes(data.fixes));
     }
   };
 };
 
-export const Example = (user, userType) => {
-  return async (dispatch) => {
-    const resp = await fetch("http://localhost:3000/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({ user }),
-    });
-    const data = await resp.json();
-    if (data.message) {
-      // Here you should have logic to handle invalid creation of a user.
-      // This assumes your Rails API will return a JSON object with a key of
-      // 'message' if there is an error with creating the user, i.e. invalid username
-    } else {
-      localStorage.setItem("token", data.jwt);
-      localStorage.setItem("userType", userType);
-      dispatch(loginUser(data.user, userType));
-      dispatch(signIn());
-    }
+export const selectLandlordProperty = (payload) => {
+  return {
+    type: "SELECT_LANDLORD_PROPERTY",
+    payload: payload,
   };
 };
+
+const populateFixes = (payload) => {
+  return {
+    type: "POPULATE_FIXES",
+    payload: payload,
+  };
+};
+
+export const updateFixes = (fixes, fixId) => {
+  let updatedFixes = [];
+  let fixToBeUpdated;
+  for (let i = 0; i < fixes.length; i++) {
+    // console.log(fixes[i]);
+    if (fixes[i].fix.id === fixId) {
+      fixToBeUpdated = fixes[i];
+      fixToBeUpdated.fix.status = "Resolved";
+    } else {
+      updatedFixes.push(fixes[i]);
+    }
+  }
+  updatedFixes.push(fixToBeUpdated);
+
+  return {
+    type: "POPULATE_FIXES",
+    payload: updatedFixes,
+  };
+};
+
+// export const Example = (user, userType) => {
+//   return async (dispatch) => {
+//     const resp = await fetch("http://localhost:3000/login", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//         Accept: "application/json",
+//       },
+//       body: JSON.stringify({ user }),
+//     });
+//     const data = await resp.json();
+//     if (data.message) {
+//       // Here you should have logic to handle invalid creation of a user.
+//       // This assumes your Rails API will return a JSON object with a key of
+//       // 'message' if there is an error with creating the user, i.e. invalid username
+//     } else {
+//       localStorage.setItem("token", data.jwt);
+//       localStorage.setItem("userType", userType);
+//       dispatch(loginUser(data.user, userType));
+//       dispatch(signIn());
+//     }
+//   };
+// };

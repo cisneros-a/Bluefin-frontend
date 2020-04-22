@@ -10,6 +10,7 @@ export default function LandlordHomeSpec() {
   const dispatch = useDispatch();
   const leaseObj = useSelector((state) => state.selectedLandlordProperty);
   useEffect(() => {
+    console.log("useEffect");
     dispatch(fetchLandlordLease(leaseObj.state.id));
   }, []);
 

@@ -8,20 +8,16 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
-import { IconButton, Button } from "@chakra-ui/core";
-import { useDisclosure } from "@chakra-ui/core";
+import { IconButton, Button, useDisclosure } from "@chakra-ui/core";
 import TableRow from "@material-ui/core/TableRow";
 import { fetchLandlordApplications, fetch_homes } from "../../actions";
 import Lnavbar from "./Navbar";
-// import TableRow from './TableRow'
 import {
   Modal,
-  ModalOverlay,
   ModalContent,
   ModalHeader,
   ModalFooter,
   ModalBody,
-  ModalCloseButton,
 } from "@chakra-ui/core";
 
 const useStyles = makeStyles({
@@ -42,7 +38,7 @@ export default function LandlordAppTable() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
-  const handleToggle = () => setShow(!show);
+  // const handleToggle = () => setShow(!show);
 
   useEffect(() => {
     dispatch(fetchLandlordApplications(userId));

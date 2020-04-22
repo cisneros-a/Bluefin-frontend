@@ -82,12 +82,12 @@ export default function LandlordHomeCard({ img, propertyInfo }) {
       rounded="lg"
       overflow="hidden"
     >
-      <Image
+      {/* <Image
         width="100%"
         height="60%"
         src={property.imageUrl}
         alt={property.imageAlt}
-      />
+      /> */}
 
       <Box p="6">
         <Box d="flex" alignItems="baseline">
