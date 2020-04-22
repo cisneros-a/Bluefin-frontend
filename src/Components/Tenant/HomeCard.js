@@ -25,8 +25,6 @@ export default function TenantHomeCard(props) {
     dispatch(selectTenantProperty(homeObj));
   };
 
-  console.log("homecard", props.img);
-
   return (
     <Box
       className="homeCard"

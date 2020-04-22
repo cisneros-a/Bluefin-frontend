@@ -25,12 +25,9 @@
 }
 
 .spec {
-  height: 80%;
   border: 2px solid black;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  overflow-y: overflow;
-  overflow-x: auto;
 }
 
 .fix-card {
