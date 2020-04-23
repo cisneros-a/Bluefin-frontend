@@ -3,7 +3,7 @@ import { Image, Button } from "@chakra-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { updateFixes } from "../../actions";
 
-export default function FixCard({ fix }) {
+export default function LandlordFixCard({ fix }) {
   const fixes = useSelector((state) => state.fixes.state);
   const dispatch = useDispatch();
   let handleClick = async () => {
@@ -13,7 +13,7 @@ export default function FixCard({ fix }) {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      body: JSON.stringify({ status: "Resolved" }),
+      body: JSON.stringify({ status: "Unresolved" }),
     });
 
     dispatch(updateFixes(fixes, fix.fix.id));
@@ -21,24 +21,22 @@ export default function FixCard({ fix }) {
 
   return (
     <div className="fix-card">
-      <h2>Fix Description:</h2>
       <h3>{fix.fix.description}</h3>
-      <h5>Id: {fix.fix.id}</h5>
 
-      {/* <Image
+      <Image
         width="400px"
         height="300px"
         src={`http://localhost:3000/${fix.uploads}`}
         alt={"fix photo"}
-      /> */}
+      />
       <Button
         onClick={() => handleClick()}
         leftIcon="check-circle"
         variantColor="purple"
-        isDisabled={fix.fix.status === "Unresolved" ? false : true}
-        variant={fix.fix.status === "Unresolved" ? "outline" : "outlined"}
+        variant="outline"
+        isDisabled={fix.fix.status === "Out for review" ? false : true}
       >
-        {fix.fix.status === "Unresolved" ? "Mark as resolved" : "Resolved!"}
+        {fix.fix.status === "Out for review" ? "Mark as resolved" : "Resolved!"}
       </Button>
     </div>
   );

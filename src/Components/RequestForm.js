@@ -120,20 +120,6 @@ export default function RequestForm({ lease }) {
                 placeholder="Describe the problem you are having. The more specific the better! And please include any pictures if you have them!"
               />
               <FormLabel>Photo: </FormLabel>
-
-              {/* <Dropzone
-                onDrop={(e) => handleDrop(e)}
-                accept="image/png, image/gif,image/jpg,image/jpeg"
-              >
-                {({ getRootProps, getInputProps }) => (
-                  <section>
-                    <div {...getRootProps()}>
-                      <input {...getInputProps()} />
-                      <p>Click to select files</p>
-                    </div>
-                  </section>
-                )}
-              </Dropzone> */}
             </FormControl>
           </ModalBody>
 

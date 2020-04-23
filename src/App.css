@@ -24,19 +24,34 @@
   margin: 1em;
 }
 
-.spec {
-  border: 2px solid black;
+.lease-container {
   display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 1fr;
+  grid-gap: 30px;
+  margin: 0.5em;
+}
+
+.spec {
+  max-height: 55rem;
+  display: grid;
+  overflow-y: auto;
   grid-template-columns: 1fr 1fr;
 }
 
 .fix-card {
+  background-color: white;
   border-radius: 15px;
   width: 80%;
   border: 3px solid teal;
   margin: 1em;
-  box-shadow: 7px 7px 7px grey;
+  box-shadow: 0 3px 3px 0 rgba(63, 62, 61, 0.995);
 }
+
+.fix-card:hover {
+  box-shadow: 0 6px 6px 0 rgba(63, 62, 61, 0.995);
+}
+
 .header {
   justify-content: center;
   text-align: center;
@@ -98,6 +113,10 @@ h3:after {
   background-color: white;
 }
 
+.homeCard:hover {
+  box-shadow: 0 5px 5px 0 rgba(63, 62, 61, 0.995);
+}
+
 .navbar {
   background-color: black;
 }
@@ -110,6 +129,7 @@ h3:after {
 .lease-dropdown {
   display: flex;
   justify-content: center;
+  height: 25rem;
 }
 .center {
   padding: 3em;
@@ -164,7 +184,7 @@ h3:after {
 
 /* On mouse-over, add a deeper shadow */
 .HomeSpec:hover {
-  box-shadow: 0 16px 16px 0 rgba(58, 130, 179, 0.2);
+  box-shadow: 0 9px 9px 0 rgba(63, 62, 61, 0.995);
 }
 
 .homeLink {
@@ -254,8 +274,9 @@ h3:after {
 }
 
 .leaseStat {
-  border-bottom: 3px solid black;
+  border-bottom: 5px solid white;
   padding-bottom: 1rem;
+  box-shadow: 7px 7px 7px grey;
 }
 
 @keyframes App-logo-spin {
