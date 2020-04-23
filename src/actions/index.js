@@ -201,20 +201,47 @@ export const populateTenantApplications = (payload) => {
   };
 };
 
-export const fetchTenantLease = (userId) => {
+// export const fetchTenantLease = (userId) => {
+//   return async (dispatch) => {
+//     const resp = await fetch("http://localhost:3000/leases", {
+//       method: "GET",
+//       headers: {
+//         "Content-Type": "application/json",
+//         Accept: "application/json",
+//       },
+//     });
+//     const data = await resp.json();
+//     if (data.message) {
+//     } else {
+//       let tenantLease = data.find((lease) => lease.tenant_id === userId);
+//       dispatch(populateTenantLease(tenantLease));
+//     }
+//   };
+// };
+
+export const fetchTenantLease = (propertyId) => {
   return async (dispatch) => {
-    const resp = await fetch("http://localhost:3000/leases", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    });
+    const resp = await fetch(
+      `http://localhost:3000/tenant_lease/${propertyId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    );
     const data = await resp.json();
     if (data.message) {
     } else {
-      let tenantLease = data.find((lease) => lease.tenant_id === userId);
-      dispatch(populateTenantLease(tenantLease));
+      dispatch(
+        populateTenantLease({
+          lease: data.lease,
+          property: data.property,
+          landlord: data.landlord,
+        })
+      );
+      dispatch(populateFixes(data.fixes));
     }
   };
 };

@@ -28,14 +28,14 @@ function CheckoutForm() {
     });
     // See our confirmCardPayment documentation for more:
     // https://stripe.com/docs/stripe-js/reference#stripe-confirm-card-payment
-    this.props.stripe.confirmCardPayment("{PAYMENT_INTENT_CLIENT_SECRET}", {
-      payment_method: {
-        card: this.props.elements.getElement("card"),
-        billing_details: {
-          name: "Jenny Rosen",
-        },
-      },
-    });
+    // this.props.stripe.confirmCardPayment("{PAYMENT_INTENT_CLIENT_SECRET}", {
+    //   payment_method: {
+    //     card: this.props.elements.getElement("card"),
+    //     billing_details: {
+    //       name: "Jenny Rosen",
+    //     },
+    //   },
+    // });
   };
 
   return (

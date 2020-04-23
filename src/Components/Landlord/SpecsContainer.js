@@ -7,7 +7,7 @@ export default function SpecsContainer() {
     <div className="specs-container">
       <h1>Fix Requests: </h1>
       <h1>Payments: </h1>
-      <FixesContainer />
+      <FixesContainer userType={"Landlord"} />
       <PaymentsContainer />
     </div>
   );
