@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import Dropzone from "react-dropzone";
+import { useDispatch, useSelector } from "react-redux";
+import { addFix } from "../actions";
 import { DirectUpload } from "activestorage";
 import {
   Modal,
@@ -19,7 +20,9 @@ import {
   Input,
 } from "@chakra-ui/core";
 
-export default function RequestForm({ lease }) {
+export default function RequestForm({ leaseObj }) {
+  const dispatch = useDispatch();
+  const fixes = useSelector((state) => state.fixes.state);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [description, setDescription] = useState("");
   const [images, setImages] = useState("");
@@ -38,11 +41,13 @@ export default function RequestForm({ lease }) {
   const handleSubmit = async () => {
     // console.log(fileInput(current.files[0].name));
     let fix = {
-      landlord_id: lease.landlord_id,
-      tenant_id: lease.tenant_id,
-      property_id: lease.property_id,
+      landlord_id: leaseObj.lease.landlord_id,
+      tenant_id: leaseObj.lease.tenant_id,
+      property_id: leaseObj.lease.property_id,
       description: description,
+      status: "Out for review",
     };
+    console.log(fix);
     const res = await fetch(`http://localhost:3000/fixes`, {
       method: "POST",
       headers: {
@@ -53,17 +58,13 @@ export default function RequestForm({ lease }) {
     });
 
     const fixId = await res.json();
-    console.log(fixId);
-    if (!fixId.message) {
+    if (fixId) {
       uploadFile(images, fixId);
     }
   };
 
   const uploadFile = (files, fixId) => {
-    console.log("hit the upload function", files);
-
     files.forEach((file) => {
-      console.log("hit the loop");
       //   let property = {
       //       uploads: file
       //   }
@@ -71,13 +72,9 @@ export default function RequestForm({ lease }) {
         file,
         "http://localhost:3000/rails/active_storage/direct_uploads"
       );
-      console.log(file);
       upload.create((error, blob) => {
-        console.log("blob", blob);
         if (error) {
-          console.log(error);
         } else {
-          console.log("no error");
           fetch(`http://localhost:3000/fixes/${fixId}`, {
             method: "PUT",
             headers: {
@@ -87,9 +84,8 @@ export default function RequestForm({ lease }) {
             body: JSON.stringify({ uploads: blob.signed_id }),
           })
             .then((res) => res.json())
-            .then((result) => console.log(result));
+            .then((result) => dispatch(addFix(fixes, result)));
         }
-        console.log("pls workk");
       });
     });
   };

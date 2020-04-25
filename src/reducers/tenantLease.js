@@ -1,4 +1,4 @@
-const tenantLeaseReducer = (state = [], action) => {
+const tenantLeaseReducer = (state = { state: { lease: "none" } }, action) => {
   // eslint-disable-next-line default-case
   switch (action.type) {
     case "POPULATE_TENANT_LEASE":

@@ -60,7 +60,15 @@ export default function TenantFixCard({ fix }) {
       body: JSON.stringify({ status: "Resolved" }),
     });
 
-    dispatch(updateFixes(fixes, fix.fix.id));
+    const fixObj = {
+      fixes: fixes,
+      fixId: fix.fix.id,
+      status: "Resolved",
+      description: fix.fix.description,
+      userType: "tenant",
+    };
+
+    dispatch(updateFixes(fixObj));
   };
 
   return (
@@ -71,7 +79,7 @@ export default function TenantFixCard({ fix }) {
       <Image
         width="400px"
         height="300px"
-        src={`http://localhost:3000/${fix.uploads}`}
+        src={`http://localhost:3000/${fix.uploads_url}`}
         alt={"fix photo"}
       />
       {returnButton()}

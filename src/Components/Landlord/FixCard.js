@@ -16,7 +16,15 @@ export default function LandlordFixCard({ fix }) {
       body: JSON.stringify({ status: "Unresolved" }),
     });
 
-    dispatch(updateFixes(fixes, fix.fix.id));
+    const fixObj = {
+      fixes: fixes,
+      fixId: fix.fix.id,
+      status: "Unresolved",
+      description: fix.fix.description,
+      userType: "landlord",
+    };
+
+    dispatch(updateFixes(fixObj));
   };
 
   return (
@@ -26,7 +34,7 @@ export default function LandlordFixCard({ fix }) {
       <Image
         width="400px"
         height="300px"
-        src={`http://localhost:3000/${fix.uploads}`}
+        src={`http://localhost:3000/${fix.uploads_url}`}
         alt={"fix photo"}
       />
       <Button

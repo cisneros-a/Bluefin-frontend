@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Signup from "./Components/Signup";
 import Signin from "./Components/Signin";
+import TestLogin from "./Components/TestLogin";
 import { getProfileFetch } from "./actions";
 import LandlordDashboard from "./Components/Landlord/Dashboard";
 import LandlordAppTable from "./Components/Landlord/AppTable";

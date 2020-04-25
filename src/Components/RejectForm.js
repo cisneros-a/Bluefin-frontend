@@ -44,8 +44,16 @@ export default function RequestForm({ fixes, fix }) {
         status: "Out for review",
       }),
     });
+    //fixes, fixId, status, description, userType
+    const fixObj = {
+      fixes: fixes,
+      fixId: fix.fix.id,
+      status: "Out for review",
+      description: description,
+      userType: "tenant",
+    };
 
-    dispatch(updateFixes(fixes, fix.fix.id));
+    dispatch(updateFixes(fixObj));
   };
 
   return (
@@ -56,7 +64,7 @@ export default function RequestForm({ fixes, fix }) {
         variantColor="pink"
         variant="solid"
       >
-        Request
+        Reject
       </Button>
       <Modal onClose={onClose} isOpen={isOpen} size="lg" onClose={onClose}>
         <ModalOverlay />

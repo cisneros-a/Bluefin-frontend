@@ -44,7 +44,7 @@ export default function LeaseDropdown({ tenantLease }) {
               <AccordionIcon />
             </AccordionHeader>
             <AccordionPanel pb={4}>
-              <RequestForm lease={tenantLease} />
+              <RequestForm leaseObj={tenantLease} />
             </AccordionPanel>
           </AccordionItem>
 
