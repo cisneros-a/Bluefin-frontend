@@ -201,37 +201,17 @@ export const populateTenantApplications = (payload) => {
   };
 };
 
-// export const fetchTenantLease = (userId) => {
-//   return async (dispatch) => {
-//     const resp = await fetch("http://localhost:3000/leases", {
-//       method: "GET",
-//       headers: {
-//         "Content-Type": "application/json",
-//         Accept: "application/json",
-//       },
-//     });
-//     const data = await resp.json();
-//     if (data.message) {
-//     } else {
-//       let tenantLease = data.find((lease) => lease.tenant_id === userId);
-//       dispatch(populateTenantLease(tenantLease));
-//     }
-//   };
-// };
-
-export const fetchTenantLease = (propertyId) => {
+export const fetchTenantLease = (id) => {
   return async (dispatch) => {
-    const resp = await fetch(
-      `http://localhost:3000/tenant_lease/${propertyId}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const resp = await fetch(`http://localhost:3000/tenant_lease/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
     const data = await resp.json();
+    console.log("action", data);
     if (data.message) {
     } else {
       dispatch(
@@ -241,9 +221,35 @@ export const fetchTenantLease = (propertyId) => {
           landlord: data.landlord,
         })
       );
-      dispatch(populateFixes(data.fixes));
+
+      dispatch(populateFixes(sortFixes(data.fixes, "tenant")));
     }
   };
+};
+
+const sortFixes = (fixes, userType) => {
+  if (fixes.length > 0) {
+    let unresolved = [];
+    let resolved = [];
+    let review = [];
+    for (let i = 0; i < fixes.length; i++) {
+      if (fixes[i].fix.status === "Unresolved") {
+        unresolved.push(fixes[i]);
+      }
+      if (fixes[i].fix.status === "Resolved") {
+        resolved.push(fixes[i]);
+      }
+      if (fixes[i].fix.status === "Out for review") {
+        review.push(fixes[i]);
+      }
+    }
+    const sortedFixes =
+      userType === "tenant"
+        ? [...unresolved, ...review, ...resolved]
+        : [...review, ...unresolved, ...resolved];
+    return sortedFixes;
+  }
+  return fixes;
 };
 
 const populateTenantLease = (payload) => {
@@ -275,7 +281,7 @@ export const fetchLandlordLease = (propertyId) => {
           tenant: data.tenant,
         })
       );
-      dispatch(populateFixes(data.fixes));
+      dispatch(populateFixes(sortFixes(data.fixes, "landlord")));
     }
   };
 };
@@ -294,23 +300,31 @@ const populateFixes = (payload) => {
   };
 };
 
-export const updateFixes = (fixes, fixId) => {
+export const updateFixes = (fixObj) => {
   let updatedFixes = [];
-  let fixToBeUpdated;
-  for (let i = 0; i < fixes.length; i++) {
+  let updatedFix;
+  for (let i = 0; i < fixObj.fixes.length; i++) {
     // console.log(fixes[i]);
-    if (fixes[i].fix.id === fixId) {
-      fixToBeUpdated = fixes[i];
-      fixToBeUpdated.fix.status = "Resolved";
+    if (fixObj.fixes[i].fix.id === fixObj.fixId) {
+      updatedFix = fixObj.fixes[i];
+      updatedFix.fix.status = fixObj.status;
+      updatedFix.fix.description = fixObj.description;
     } else {
-      updatedFixes.push(fixes[i]);
+      updatedFixes.push(fixObj.fixes[i]);
     }
   }
-  updatedFixes.push(fixToBeUpdated);
+  updatedFixes.push(updatedFix);
 
   return {
     type: "POPULATE_FIXES",
-    payload: updatedFixes,
+    payload: sortFixes(updatedFixes, fixObj.userType),
+  };
+};
+
+export const addFix = (fixes, fix) => {
+  return {
+    type: "POPULATE_FIXES",
+    payload: sortFixes([...fixes, fix], "tenant"),
   };
 };
 

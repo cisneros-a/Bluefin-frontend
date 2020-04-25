@@ -160,26 +160,22 @@ export default function LandlordAppTable() {
           date: `${application.property.available_date}`,
           more: (
             <div>
-              {(function IIFE(desc) {
-                return (
-                  <>
-                    <Button variantColor="blue" onClick={onOpen}>
-                      Open
-                    </Button>
-                    <Modal isOpen={isOpen} onClose={onClose}>
-                      <ModalContent>
-                        <ModalHeader>Message from applicant: </ModalHeader>
-                        <ModalBody>{desc}</ModalBody>
-                        <ModalFooter>
-                          <Button variantColor="blue" mr={3} onClick={onClose}>
-                            Close
-                          </Button>
-                        </ModalFooter>
-                      </ModalContent>
-                    </Modal>
-                  </>
-                );
-              })(application.description)}
+              <Fragment key={application.id}>
+                <Button variantColor="blue" onClick={onOpen}>
+                  Open
+                </Button>
+                <Modal isOpen={isOpen} onClose={onClose}>
+                  <ModalContent>
+                    <ModalHeader>Message from applicant: </ModalHeader>
+                    <ModalBody>{application.description}</ModalBody>
+                    <ModalFooter>
+                      <Button variantColor="blue" mr={3} onClick={onClose}>
+                        Close
+                      </Button>
+                    </ModalFooter>
+                  </ModalContent>
+                </Modal>
+              </Fragment>
             </div>
           ),
         });

@@ -15,6 +15,7 @@
   display: flex;
   justify-content: center;
   padding-bottom: 1em;
+  margin-bottom: 12rem;
 }
 .specs-container {
   height: 30%;
@@ -114,6 +115,8 @@ h3:after {
 }
 
 .homeCard:hover {
+  transition-timing-function: ease-in;
+  transition: 0.4s;
   box-shadow: 0 5px 5px 0 rgba(63, 62, 61, 0.995);
 }
 
@@ -286,4 +289,37 @@ h3:after {
   to {
     transform: rotate(360deg);
   }
+}
+
+/* ======================================== */
+
+.signin-container {
+  display: grid;
+  justify-items: center;
+  grid-auto-columns: 1fr;
+  background-color: white;
+}
+
+.signin-form {
+  text-align: left;
+  padding: 4rem;
+  padding-right: 4rem;
+  padding-bottom: 20rem;
+  /* border-spacing: 1rem; */
+  /* display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 2em; */
+  border-radius: 17px;
+  width: 23%;
+  background-color: whitesmoke;
+  font-size: xx-large;
+  font-weight: bolder;
+  font-family: Tahoma;
+}
+
+.input-field {
+  background-color: teal;
+  border-radius: 20px;
+  height: 3rem;
+  width: 75%;
 }

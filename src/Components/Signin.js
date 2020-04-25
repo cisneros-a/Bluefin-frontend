@@ -18,6 +18,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormLabel from "@material-ui/core/FormLabel";
 import { getProfileFetch, userSigninFetch } from "../actions";
 import StaticNavbar from "./StaticNavbar";
+import TestLogin from "./TestLogin";
 import history from "../history";
 
 function Copyright() {
@@ -197,6 +198,7 @@ export default function SignIn() {
           <Copyright />
         </Box>
       </Container>
+      {/* <TestLogin /> */}
     </>
   );
 }

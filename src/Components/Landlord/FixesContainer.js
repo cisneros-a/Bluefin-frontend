@@ -5,6 +5,7 @@ import TenantFixCard from "../Tenant/FixCard";
 
 export default function FixesContainer({ userType }) {
   const fixes = useSelector((state) => state.fixes.state);
+  console.log("fixes", fixes);
 
   const returnCards = () => {
     if (fixes.length > 0) {

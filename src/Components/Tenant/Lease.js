@@ -35,19 +35,32 @@ export default function TenantLease() {
     }
   };
 
+  if (tenantLease.lease !== "none") {
+    // console.log('not equal to none')
+    return (
+      <div className="lease">
+        <div className="header">
+          <Tnavbar />
+        </div>
+
+        <div className="leaseStat">{displayStats(tenantLease)}</div>
+        <div className="lease-container">
+          <h3>Lease tools: </h3>
+          <h3>Your fix Requests: </h3>
+          <LeaseDropdown tenantLease={tenantLease} />
+          <FixesContainer userType={"Tenant"} />
+        </div>
+      </div>
+    );
+  }
+
+  // console.log('not equal to none')
   return (
     <div className="lease">
-      {console.log(tenantLease)}
       <div className="header">
         <Tnavbar />
       </div>
-      <div className="leaseStat">{displayStats(tenantLease)}</div>
-      <div className="lease-container">
-        <h3>Lease tools: </h3>
-        <h3>Your fix Requests: </h3>
-        <LeaseDropdown tenantLease={tenantLease} />
-        <FixesContainer userType={"Tenant"} />
-      </div>
+      <h2> You do not have a lease yet!</h2>
     </div>
   );
 }
