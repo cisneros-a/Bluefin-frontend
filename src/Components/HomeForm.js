@@ -70,49 +70,49 @@ export default function Signup(props) {
   let handleSubmit = async (event) => {
     event.preventDefault();
     console.log(images);
-    // let input = `${values.streetaddress}, ${values.city}, ${values.state}, ${values.zipcode}`;
-    // console.log(values, images);
-    // let resp = await fetch(
-    //   `https://geocoder.ls.hereapi.com/6.2/geocode.json?apiKey=OHYIZygaUlcGO559jEmBfMg_2UaFX5n3qMoYn7h2TKo&searchtext=${input}`
-    // );
-    // const data = await resp.json();
-    // console.log(
-    //   data.Response.View[0].Result[0].Location.DisplayPosition.Latitude,
-    //   data.Response.View[0].Result[0].Location.DisplayPosition.Longitude
-    // );
+    let input = `${values.streetaddress}, ${values.city}, ${values.state}, ${values.zipcode}`;
+    console.log(values, images);
+    let resp = await fetch(
+      `https://geocoder.ls.hereapi.com/6.2/geocode.json?apiKey=OHYIZygaUlcGO559jEmBfMg_2UaFX5n3qMoYn7h2TKo&searchtext=${input}`
+    );
+    const data = await resp.json();
+    console.log(
+      data.Response.View[0].Result[0].Location.DisplayPosition.Latitude,
+      data.Response.View[0].Result[0].Location.DisplayPosition.Longitude
+    );
 
-    //   let property = {
-    //     user_id: userId,
-    //     address: input,
-    //     rent: values.rent,
-    //     bedrooms: values.bedrooms,
-    //     bathrooms: values.bathrooms,
-    //     sqft: values.sqft,
-    //     availability: 1,
-    //     available_date: values.date,
-    //     description: values.description,
-    //     latitude:
-    //       data.Response.View[0].Result[0].Location.DisplayPosition.Latitude,
-    //     longitude:
-    //       data.Response.View[0].Result[0].Location.DisplayPosition.Longitude,
-    //     uploads: images[0],
-    //   };
-    //   const res = await fetch("http://localhost:3000/properties", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       Accept: "application/json",
-    //     },
-    //     body: JSON.stringify({ property }),
-    //   });
+    let property = {
+      user_id: userId,
+      address: input,
+      rent: values.rent,
+      bedrooms: values.bedrooms,
+      bathrooms: values.bathrooms,
+      sqft: values.sqft,
+      availability: 1,
+      available_date: values.date,
+      description: values.description,
+      latitude:
+        data.Response.View[0].Result[0].Location.DisplayPosition.Latitude,
+      longitude:
+        data.Response.View[0].Result[0].Location.DisplayPosition.Longitude,
+      uploads: images[0],
+    };
+    const res = await fetch("http://localhost:3000/properties", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({ property }),
+    });
 
-    //   const propertiesData = await res.json();
-    //   if (data.message) {
-    //     console.log("Maybe this failed");
-    //   } else {
-    //     uploadFile(images, propertiesData);
-    //     // console.log(data)
-    //   }
+    const propertiesData = await res.json();
+    if (data.message) {
+      console.log("Maybe this failed");
+    } else {
+      uploadFile(images, propertiesData);
+      // console.log(data)
+    }
   };
 
   const uploadFile = (files, propertyId) => {

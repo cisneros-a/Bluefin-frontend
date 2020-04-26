@@ -6,6 +6,8 @@ const landlordPropertiesReducer = (
   switch (action.type) {
     case "POPULATE_LANDLORD_PROPERTIES":
       return { state: action.payload };
+    case "LOGOUT_USER":
+      return { state: { unleasedProperties: [], leasedProperties: [] } };
     default:
       return state;
   }

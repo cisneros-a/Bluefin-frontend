@@ -27,6 +27,7 @@ export default function LandlordFixCard({ fix }) {
     dispatch(updateFixes(fixObj));
   };
 
+  console.log("fix card", fix);
   return (
     <div className="fix-card">
       <h3>{fix.fix.description}</h3>
@@ -34,7 +35,7 @@ export default function LandlordFixCard({ fix }) {
       <Image
         width="400px"
         height="300px"
-        src={`http://localhost:3000/${fix.uploads_url}`}
+        src={`http://localhost:3000/${fix.uploads}`}
         alt={"fix photo"}
       />
       <Button
