@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetch_homes, toggleView } from "../../actions";
+import { fetchAvailablehomes, toggleView } from "../../actions";
 import Grid from "@material-ui/core/Grid";
 import Map from "../Map";
 import HomeSpec from "../HomeSpecs";
@@ -18,7 +18,7 @@ export default function TenantDashboard() {
   const toggleState = useSelector((state) => state.toggle);
 
   if (allHomes.state.length === 0) {
-    dispatch(fetch_homes());
+    dispatch(fetchAvailablehomes());
   }
 
   const showMap = (homes) => {

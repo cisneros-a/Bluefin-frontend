@@ -10,7 +10,12 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import { IconButton, Button, useDisclosure } from "@chakra-ui/core";
 import TableRow from "@material-ui/core/TableRow";
-import { fetchLandlordApplications, fetch_homes } from "../../actions";
+import {
+  fetchLandlordApplications,
+  updateLandlordApplications,
+  updateLandlordProperties,
+  updateAllAvailableProperties,
+} from "../../actions";
 import Lnavbar from "./Navbar";
 import {
   Modal,
@@ -31,7 +36,11 @@ const useStyles = makeStyles({
 
 export default function LandlordAppTable() {
   const userId = parseInt(localStorage.userId);
+  const allProperties = useSelector((state) => state.homes);
+
   const applications = useSelector((state) => state.landlordApplications);
+  const properties = useSelector((state) => state.landlordProperties.state);
+
   const classes = useStyles();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -83,10 +92,10 @@ export default function LandlordAppTable() {
         Accept: "application/json",
       },
       body: JSON.stringify({ status: "Accepted" }),
-    }).then(postLease(tenantId, propertyId));
+    }).then(postLease(tenantId, propertyId, applicationId));
   };
 
-  let postLease = async (tenantId, propertyId) => {
+  let postLease = async (tenantId, propertyId, applicationId) => {
     let lease = {
       landlord_id: userId,
       tenant_id: tenantId,
@@ -100,10 +109,10 @@ export default function LandlordAppTable() {
       },
       body: JSON.stringify({ lease }),
     });
-    updateProperty(propertyId);
+    updateProperty(propertyId, applicationId);
   };
 
-  let updateProperty = async (propertyId) => {
+  let updateProperty = async (propertyId, applicationId) => {
     await fetch(`http://localhost:3000/update_availability/${propertyId}`, {
       method: "PATCH",
       headers: {
@@ -112,8 +121,9 @@ export default function LandlordAppTable() {
       },
       body: JSON.stringify({ availability: 0 }),
     }).then(
-      dispatch(fetchLandlordApplications(userId)),
-      dispatch(fetch_homes())
+      dispatch(updateLandlordApplications(applications.state, applicationId)),
+      dispatch(updateLandlordProperties(properties, propertyId)),
+      dispatch(updateAllAvailableProperties(allProperties, propertyId))
     );
   };
 
@@ -126,7 +136,7 @@ export default function LandlordAppTable() {
       },
       body: JSON.stringify({ status: "Denied" }),
     });
-    dispatch(fetchLandlordApplications(userId));
+    dispatch(updateLandlordApplications(applications.state, applicationId));
   };
 
   let generateTableBody = (applications) => {

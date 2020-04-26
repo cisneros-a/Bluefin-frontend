@@ -109,6 +109,20 @@ export const fetch_homes = () => {
   };
 };
 
+export const fetchAvailablehomes = () => {
+  return async (dispatch) => {
+    let resp = await fetch("http://localhost:3000/properties");
+    const data = await resp.json();
+    let availableHomes = data.filter((home) => home.property.availability);
+    let onlyHomes = [];
+    for (let i = 0; i < availableHomes.length; i++) {
+      onlyHomes.push(availableHomes[i]);
+    }
+    // console.log(onlyHomes);
+    dispatch(populate_homes(onlyHomes));
+  };
+};
+
 export const fetchLandlordProperties = (userId) => {
   const token = localStorage.token;
   return async (dispatch) => {
@@ -132,6 +146,35 @@ export const populateLandlordProperties = (payload) => {
   return {
     type: "POPULATE_LANDLORD_PROPERTIES",
     payload: payload,
+  };
+};
+
+export const updateAllAvailableProperties = (properties, id) => {
+  let updatedProperties = [];
+  for (let i = 0; i < properties.length; i++) {
+    if (!properties[i].property.id === id) {
+      updatedProperties.push(properties[i]);
+    }
+  }
+  return {
+    type: "POPULATE_HOMES",
+    payload: updatedProperties,
+  };
+};
+
+export const updateLandlordProperties = (properties, id) => {
+  let leased = properties.leased_properties;
+  let unleased = properties.unleased_properties;
+  for (let i = 0; i < properties.unleased_properties.length; i++) {
+    if (properties.unleased_properties[i].property.id === id) {
+      properties.unleased_properties[i].property.availability = false;
+      leased.push(properties.unleased_properties[i]);
+      unleased.splice(i, 1);
+    }
+  }
+  return {
+    type: "POPULATE_LANDLORD_PROPERTIES",
+    payload: { leased_properties: leased, unleased_properties: unleased },
   };
 };
 
@@ -172,6 +215,19 @@ export const populateLandlordApplications = (payload) => {
   return {
     type: "POPULATE_LANDLORD_APPLICATIONS",
     payload: payload,
+  };
+};
+
+export const updateLandlordApplications = (applications, id) => {
+  let updatedApplications = [];
+  for (let i = 0; i < applications.length; i++) {
+    if (applications[i].id !== id) {
+      updatedApplications.push(applications[i]);
+    }
+  }
+  return {
+    type: "POPULATE_LANDLORD_APPLICATIONS",
+    payload: updatedApplications,
   };
 };
 
@@ -281,6 +337,7 @@ export const fetchLandlordLease = (propertyId) => {
           tenant: data.tenant,
         })
       );
+      console.log("action", data.fixes);
       dispatch(populateFixes(sortFixes(data.fixes, "landlord")));
     }
   };
