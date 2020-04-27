@@ -7,7 +7,6 @@ import LeaseInformationBar from "../LeaseInformationBar";
 import SpecsContainer from "./SpecsContainer";
 
 export default function LandlordHomeSpec() {
-  // const fixes = useSelector((state) => state.fixes.state);
   const dispatch = useDispatch();
   const leaseObj = useSelector((state) => state.selectedLandlordProperty);
 

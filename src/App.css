@@ -323,3 +323,17 @@ h3:after {
   height: 3rem;
   width: 75%;
 }
+
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 8px;
+  border-radius: 4px;
+  background: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.4);
+  border-width: 2px;
+  border-image: initial;
+  border-radius: 4px;
+}

@@ -12,14 +12,16 @@ import HomeIcon from "@material-ui/icons/Home";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { userSignupFetch } from "../actions";
+import { addLandlordProperty } from "../actions";
 import { useDispatch, useSelector } from "react-redux";
 import { DirectUpload } from "activestorage";
 import Dropzone from "react-dropzone";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
-import InputAdornment from "@material-ui/core/InputAdornment";
+import history from "../history";
+
+// import InputAdornment from "@material-ui/core/InputAdornment";
 import Lnavbar from "./Landlord/Navbar";
 
 const useStyles = makeStyles((theme) => ({
@@ -43,6 +45,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Signup(props) {
+  const landlordProperties = useSelector(
+    (state) => state.landlordProperties.state
+  );
   const userId = useSelector((state) => state.user.user_id);
   const dispatch = useDispatch();
 
@@ -69,7 +74,6 @@ export default function Signup(props) {
 
   let handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(images);
     let input = `${values.streetaddress}, ${values.city}, ${values.state}, ${values.zipcode}`;
     console.log(values, images);
     let resp = await fetch(
@@ -144,7 +148,10 @@ export default function Signup(props) {
             body: JSON.stringify({ uploads: blob.signed_id }),
           })
             .then((res) => res.json())
-            .then((result) => console.log(result));
+            .then((result) =>
+              dispatch(addLandlordProperty(landlordProperties, result))
+            )
+            .then(history.push("/landlord-home"));
         }
         console.log("pls workk");
       });
@@ -411,7 +418,7 @@ export default function Signup(props) {
               color="primary"
               className={classes.submit}
             >
-              Sign Up
+              Add Home!
             </Button>
           </form>
         </div>

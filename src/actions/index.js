@@ -178,6 +178,16 @@ export const updateLandlordProperties = (properties, id) => {
   };
 };
 
+export const addLandlordProperty = (properties, property) => {
+  let leased = properties.leased_properties;
+  let unleased = [property, ...properties.unleased_properties];
+
+  return {
+    type: "POPULATE_LANDLORD_PROPERTIES",
+    payload: { leased_properties: leased, unleased_properties: unleased },
+  };
+};
+
 export const populate_homes = (payload) => {
   return {
     type: "POPULATE_HOMES",
