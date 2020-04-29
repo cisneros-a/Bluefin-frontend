@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import MapFlag from "./MapFlag";
-import MapPopup from "./MapPopup";
 import { useDispatch } from "react-redux";
 import { selectTenantProperty } from "../actions";
 
@@ -17,7 +16,7 @@ export default function Map(props) {
   });
 
   const homes = props.homes;
-  console.log(homes);
+  // console.log(homes);
 
   const REACT_APP_MAPBOX_TOKEN =
     "pk.eyJ1IjoiY2lzbmVyb3MtYSIsImEiOiJjazV5OWhjbG4yZWdmM2VuMWw4N3A1bjV2In0.Qr08RacxUb-4_etwtaK1Sg";
@@ -52,6 +51,7 @@ export default function Map(props) {
           setViewport(viewport);
         }}
       >
+        {console.log(this)}
         {homes.map((home) => (
           <Marker
             key={home.property.id}

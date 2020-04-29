@@ -21,6 +21,7 @@ import {
 } from "@chakra-ui/core";
 
 export default function RequestForm({ leaseObj }) {
+  const [button, setButton] = useState(true);
   const dispatch = useDispatch();
   const fixes = useSelector((state) => state.fixes.state);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -39,6 +40,7 @@ export default function RequestForm({ leaseObj }) {
   const fileInput = React.createRef();
 
   const handleSubmit = async () => {
+    setButton(!button);
     // console.log(fileInput(current.files[0].name));
     let fix = {
       landlord_id: leaseObj.lease.landlord_id,
@@ -93,7 +95,7 @@ export default function RequestForm({ leaseObj }) {
   return (
     <div>
       <p>
-        Fill out this form. Attach photos and relevant information. An official
+        Fill out this form. Attach a photo and relevant information. An official
         record.
       </p>
       <Button
@@ -113,7 +115,7 @@ export default function RequestForm({ leaseObj }) {
               <FormLabel>Content: </FormLabel>
               <Textarea
                 onChange={(e) => handleDescChange(e)}
-                placeholder="Describe the problem you are having. The more specific the better! And please include any pictures if you have them!"
+                placeholder="Describe the problem you are having. The more specific the better! Please include a picture."
               />
               <FormLabel>Photo: </FormLabel>
             </FormControl>
@@ -127,13 +129,20 @@ export default function RequestForm({ leaseObj }) {
                 handleDrop(e);
               }}
             />
-            <Button
-              onClick={() => handleSubmit()}
-              leftIcon="edit"
-              variantColor="pink"
-            >
-              Submit!
-            </Button>
+            {button ? (
+              <Button
+                onClick={() => handleSubmit()}
+                leftIcon="edit"
+                variantColor="pink"
+                variant="solid"
+              >
+                Apply now!
+              </Button>
+            ) : (
+              <Button onClick={onClose} variant="ghost">
+                Close
+              </Button>
+            )}
           </ModalFooter>
         </ModalContent>
       </Modal>

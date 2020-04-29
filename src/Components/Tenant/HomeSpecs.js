@@ -127,7 +127,7 @@ export default function HomeSpecs() {
               </Button>
             ) : (
               <Button onClick={onClose} variant="ghost">
-                Cancel
+                Close
               </Button>
             )}
           </ModalFooter>

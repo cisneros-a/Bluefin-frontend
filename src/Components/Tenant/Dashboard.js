@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchAvailablehomes, toggleView } from "../../actions";
 import Grid from "@material-ui/core/Grid";
 import Map from "../Map";
-import HomeSpec from "../HomeSpecs";
+import HomeSpec from "./HomeSpecs";
 import WelcomeSpec from "../WelcomeSpec";
 import Tnavbar from "./Navbar";
 import { Switch } from "@chakra-ui/core";
@@ -29,10 +29,10 @@ export default function TenantDashboard() {
         let onlyHomes = [];
         homes.state.forEach((home) => onlyHomes.push(home.property));
         if (toggleState) {
-          return <CardHolder properties={homes.state} />;
+          return <Map homes={homes.state} />;
         }
-        return <p>Map</p>;
-        // return <Map homes={homes.state} />;
+        return <CardHolder properties={homes.state} />;
+        // return <p>Map</p>;
       }
     }
   };

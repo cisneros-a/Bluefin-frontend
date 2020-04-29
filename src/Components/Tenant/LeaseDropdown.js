@@ -57,9 +57,20 @@ export default function LeaseDropdown({ tenantLease }) {
             </AccordionHeader>
             <AccordionPanel pb={4}>
               <Button leftIcon="download" variantColor="purple" variant="solid">
-                <Link color="purple" to="./Lease.pdf" target="_blank" download>
-                  Download
-                </Link>
+                {/* <Link
+                  color="purple"
+                  to="/Users/Adrian/Desktop/Adrian-Cisneros-Resume.pdf"
+                  target="_blank"
+                  download
+                > */}
+                <a
+                  href="/Users/Adrian/Desktop/Adrian-Cisneros-Resume.pdf"
+                  download
+                >
+                  Click to download
+                </a>
+                Download
+                {/* </Link> */}
               </Button>{" "}
               Just incase you need to reference anything!
             </AccordionPanel>
