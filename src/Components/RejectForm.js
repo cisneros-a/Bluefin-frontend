@@ -75,9 +75,8 @@ export default function RequestForm({ fixes, fix }) {
               <FormLabel>Content: </FormLabel>
               <Textarea
                 onChange={(e) => handleDescChange(e)}
-                placeholder="Describe the problem you are having. The more specific the better! And please include any pictures if you have them!"
+                placeholder="Give an update if problem has not been fixed!"
               />
-              <FormLabel>Photo: </FormLabel>
             </FormControl>
           </ModalBody>
 
