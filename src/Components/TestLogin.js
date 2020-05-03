@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   FormControl,
   FormLabel,
@@ -6,64 +6,70 @@ import {
   FormHelperText,
   Input,
 } from "@chakra-ui/core";
+import history from "../history";
+
+import { Link } from "react-router-dom";
 import StaticNavbar from "./StaticNavbar";
 
 export default function TestLogin() {
+  const [values, setValues] = useState({
+    password: "",
+    email: "",
+    userType: "tenant",
+  });
+
+  const changeValues = (e) => {
+    setValues({ [e.target.name]: e.target.value });
+  };
+
+  const error = false;
+
   return (
-    <>
+    <div className="signin-container">
       <div className="staticHeader">
         <StaticNavbar />
       </div>
-      <div className="signin-container">
-        <h3>Sign In: </h3>
-        <div className="signin-form">
-          <FormControl isRequired>
-            <FormLabel htmlFor="fname">First name</FormLabel>
-            <div className="input-field">
-              <Input
-                isFullWidth="false"
-                size="lg"
-                id="fname"
-                placeholder="First name"
-              />
-            </div>
-            <FormLabel htmlFor="fname">Password</FormLabel>
-            <div className="input-field">
-              <Input
-                isFullWidth="false"
-                size="lg"
-                id="fname"
-                placeholder="First name"
-                type="password"
-              />
-            </div>
-          </FormControl>
-          {/* <form>
-          <label>Username :</label>
-          <input
-            className="input-field"
-            type="text"
-            name="username"
-            value=""
-          ></input>
-          <label> Password :</label>
-          <input
-            className="input-field"
-            type="text"
-            name="username"
-            value=""
-          ></input>
-          <div>
-            <label for="male">Male</label>
-            <input type="radio" id="male" name="gender" value="male" />
+      <div className="signin-form">
+        <h3> Sign in</h3>
+        <form className="form">
+          <div className={error ? "form-field-error" : "form-field"}>
+            <label className="form-label"> Email: </label>
+            <input
+              onChange={(e) => changeValues(e)}
+              placeholder="email"
+              type="text"
+              name="email"
+              value={values.email}
+            ></input>
+            {error ? (
+              <span class="error-message">A sample error message</span>
+            ) : (
+              ""
+            )}
           </div>
-          <div>
-            <label for="female">Female</label>
-            <input type="radio" id="female" name="gender" value="female" />
+          <div className={error ? "form-field-error" : "form-field"}>
+            <label className="form-label"> Password: </label>
+            <input
+              onChange={(e) => changeValues(e)}
+              placeholder="password"
+              type="password"
+              name="password"
+              value={values.password}
+            ></input>
+            {error ? (
+              <span class="error-message">Incorrect password.</span>
+            ) : (
+              ""
+            )}
           </div>
-          </form> */}
-        </div>
+
+          <button className="form-btn" type="submit">
+            {" "}
+            Sign in
+          </button>
+        </form>
+        <Link to="/signup">{"Don't have an account? Sign Up"}</Link>
       </div>
-    </>
+    </div>
   );
 }

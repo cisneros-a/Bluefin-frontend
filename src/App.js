@@ -28,7 +28,7 @@ function App() {
       <div className="App">
         <Switch>
           <Route path="/signup" component={Signup} />
-          <Route exact path="/" component={Signin} />
+          <Route exact path="/" component={TestLogin} />
           <Route path="/tenant-home" component={TenantDashboard} />
           <Route path="/landlord-home" component={LandlordDashboard} />
           <Route path="/landlord-applications" component={LandlordAppTable} />
