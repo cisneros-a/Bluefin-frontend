@@ -15,7 +15,7 @@
   display: flex;
   justify-content: center;
   padding-bottom: 1em;
-  margin-bottom: 12rem;
+  /* margin-bottom: 5rem; */
 }
 .specs-container {
   height: 30%;
@@ -294,34 +294,113 @@ h3:after {
 /* ======================================== */
 
 .signin-container {
+  height: 100vh;
   display: grid;
   justify-items: center;
+  align-content: center;
   grid-auto-columns: 1fr;
-  background-color: white;
+  font-family: "Source Sans Pro", sans-serif;
+  /* background-color: whitesmoke; */
+  /* border: 2px solid black; */
+}
+
+.form-label {
+  font-size: large;
+  font-weight: 600;
+  padding: 10px 0;
 }
 
 .signin-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   text-align: left;
   padding: 4rem;
-  padding-right: 4rem;
-  padding-bottom: 20rem;
-  /* border-spacing: 1rem; */
-  /* display: grid;
-  grid-template-columns: 1fr;
-  row-gap: 2em; */
-  border-radius: 17px;
-  width: 23%;
-  background-color: whitesmoke;
-  font-size: xx-large;
-  font-weight: bolder;
-  font-family: Tahoma;
+  padding-left: 2.2rem;
+  padding-bottom: 4rem;
+  border-radius: 10px;
+  width: 28%;
+  background-color: white;
+  border: 1px solid black;
+  box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.09);
+  background-image: linear-gradient(to right, white, whitesmoke);
 }
 
-.input-field {
-  background-color: teal;
-  border-radius: 20px;
-  height: 3rem;
+.signin-form > h3 {
+  align-self: center;
+}
+
+.form {
+  width: 18rem;
+  height: 18rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: stretch;
+  border-radius: 5px;
+  height: 6rem;
+  width: 100%;
+}
+
+.form-field > input {
+  background-color: #f4f4f4;
+  border: none;
+  border-bottom: 1.2px solid black;
+  height: 2.2rem;
+  width: 80%;
+  font-size: medium;
+}
+
+.form-field > input:focus {
+  background-color: #ffffff;
+  box-shadow: 0 9px 20px 0 rgba(0, 0, 0, 0.09);
+  border-bottom: 1.5px solid slateblue;
+}
+
+.form-field-error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  border-radius: 5px;
+  height: 6rem;
+  width: 100%;
+}
+
+.form-field-error > input {
+  font-size: medium;
+  height: 2.2rem;
   width: 75%;
+  background: #fff8f8;
+  border: none;
+  border-bottom: 1.2px solid #d50000;
+}
+
+.form-field-error > input:focus {
+  background-color: #ffffff;
+}
+
+.error-message {
+  padding-top: 1em;
+  font-size: small;
+  color: red;
+}
+
+.form-btn {
+  margin-right: 3rem;
+  height: 2.3rem;
+  width: 8rem;
+  background-color: #008080;
+  border: 1px solid white;
+  font-size: medium;
+  font-weight: 500;
 }
 
 ::-webkit-scrollbar {
