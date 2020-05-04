@@ -1,45 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import {
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+  FormHelperText,
+  Input,
+} from "@chakra-ui/core";
 import history from "../history";
+
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getProfileFetch, userSigninFetch } from "../actions";
 import StaticNavbar from "./StaticNavbar";
 
 export default function TestLogin() {
-  const isLogged = useSelector((state) => state.isLogged);
-  const dispatch = useDispatch();
   const [values, setValues] = useState({
     password: "",
     email: "",
+    name: "",
     userType: "tenant",
   });
 
   const changeValues = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
-
-  useEffect(() => {
-    dispatch(getProfileFetch());
-  }, []);
-
-  const decideUserPath = () => {
-    if (isLogged) {
-      history.push("/tenant-home");
-    }
-  };
-
-  let handleSubmit = (event) => {
-    event.preventDefault();
-    let user = {
-      email: values.email,
-      password: values.password,
-    };
-
-    set_user(user);
-  };
-
-  const set_user = (user) => {
-    dispatch(userSigninFetch(user, "tenant"));
+    setValues({ [e.target.name]: e.target.value });
   };
 
   const error = false;
@@ -47,18 +28,27 @@ export default function TestLogin() {
   return (
     <div className="signin-container">
       <div className="staticHeader">
-        {decideUserPath()}
         <StaticNavbar />
       </div>
       <div className="signin-form">
-        <h3> Sign in</h3>
-        <form className="form" onSubmit={(event) => handleSubmit(event)}>
+        <h3> Sign up</h3>
+        <form className="signup-form">
+          <div className="form-field">
+            <label className="form-label"> Name: </label>
+            <input
+              onChange={(e) => changeValues(e)}
+              placeholder="name"
+              type="text"
+              name="name"
+              value={values.name}
+            ></input>
+          </div>
           <div className={error ? "form-field-error" : "form-field"}>
             <label className="form-label"> Email: </label>
             <input
               onChange={(e) => changeValues(e)}
               placeholder="email"
-              type="email"
+              type="text"
               name="email"
               value={values.email}
             ></input>
@@ -86,10 +76,10 @@ export default function TestLogin() {
 
           <button className="form-btn" type="submit">
             {" "}
-            Sign in
+            Sign up
           </button>
         </form>
-        <Link to="/signup">{"Don't have an account? Sign Up"}</Link>
+        <Link to="/">{"Already have an account? Log in!"}</Link>
       </div>
     </div>
   );
