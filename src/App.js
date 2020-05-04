@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import Signup from "./Components/Signup";
 import Signin from "./Components/Signin";
 import TestLogin from "./Components/TestLogin";
+import TestSignup from "./Components/TestSignup";
 import { getProfileFetch } from "./actions";
 import LandlordDashboard from "./Components/Landlord/Dashboard";
 import LandlordAppTable from "./Components/Landlord/AppTable";
@@ -27,7 +28,7 @@ function App() {
     <div className="Main">
       <div className="App">
         <Switch>
-          <Route path="/signup" component={Signup} />
+          <Route path="/signup" component={TestSignup} />
           <Route exact path="/" component={TestLogin} />
           <Route path="/tenant-home" component={TenantDashboard} />
           <Route path="/landlord-home" component={LandlordDashboard} />

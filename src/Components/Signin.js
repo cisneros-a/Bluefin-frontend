@@ -61,11 +61,7 @@ export default function SignIn() {
 
   const decideUserPath = () => {
     if (isLogged) {
-      if (userType === "tenant") {
-        history.push("/tenant-home");
-      } else {
-        history.push("/landlord-home");
-      }
+      history.push("/tenant-home");
     }
   };
 

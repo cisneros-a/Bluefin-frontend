@@ -319,19 +319,31 @@ h3:after {
   padding-left: 2.2rem;
   padding-bottom: 4rem;
   border-radius: 10px;
-  width: 28%;
-  background-color: white;
+  width: 16%;
+  /* background-color: white; */
   border: 1px solid black;
   box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.09);
-  background-image: linear-gradient(to right, white, whitesmoke);
+}
+
+.signup-form {
+  width: 18rem;
+  height: 23rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .signin-form > h3 {
   align-self: center;
 }
 
+.signin-form > a {
+  align-self: center;
+}
+
 .form {
-  width: 18rem;
+  width: 20rem;
   height: 18rem;
   display: flex;
   flex-direction: column;
@@ -350,7 +362,7 @@ h3:after {
 }
 
 .form-field > input {
-  background-color: #f4f4f4;
+  background-color: #e4e6ea;
   border: none;
   border-bottom: 1.2px solid black;
   height: 2.2rem;
@@ -359,6 +371,8 @@ h3:after {
 }
 
 .form-field > input:focus {
+  transition-timing-function: ease-in;
+  transition: 0.2s;
   background-color: #ffffff;
   box-shadow: 0 9px 20px 0 rgba(0, 0, 0, 0.09);
   border-bottom: 1.5px solid slateblue;
@@ -395,12 +409,21 @@ h3:after {
 
 .form-btn {
   margin-right: 3rem;
+  margin-bottom: 1rem;
   height: 2.3rem;
   width: 8rem;
   background-color: #008080;
   border: 1px solid white;
   font-size: medium;
   font-weight: 500;
+  align-self: center;
+}
+
+.form-btn:hover {
+  transition-timing-function: ease-in;
+  transition: 0.2s;
+  border: 1.2px solid black;
+  color: white;
 }
 
 ::-webkit-scrollbar {

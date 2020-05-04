@@ -55,7 +55,7 @@ export default function Signup(props) {
   const classes = useStyles();
   const [images, setImages] = useState("");
 
-  const [values, setValues] = React.useState({
+  const [values, setValues] = useState({
     streetaddress: "N/A",
     city: "N/A",
     state: "TX",
