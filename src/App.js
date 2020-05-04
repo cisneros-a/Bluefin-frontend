@@ -13,8 +13,9 @@ import TenantDashboard from "./Components/Tenant/Dashboard";
 import TenantAppTable from "./Components/Tenant/AppTable";
 import TenantLease from "./Components/Tenant/Lease";
 import HomeSpec from "./Components/Landlord/HomeSpec";
+import TempPage from "./Components/TempPage";
 
-import HomeForm from "./Components/HomeForm";
+import NewHomeForm from "./Components/NewHomeForm";
 import { Switch, Route, withRouter } from "react-router-dom";
 
 function App() {
@@ -35,8 +36,8 @@ function App() {
           <Route path="/landlord-applications" component={LandlordAppTable} />
           <Route path="/tenant-applications" component={TenantAppTable} />
           <Route path="/my-lease" component={TenantLease} />
-          <Route path="/add-a-home" component={HomeForm} />
-          <Route path="/add-a-home" component={HomeForm} />
+          <Route path="/add-a-home" component={NewHomeForm} />
+          {/* <Route path="/add-a-home" component={HomeForm} /> */}
           <Route path="/my-properties/:id" component={HomeSpec} />
         </Switch>
       </div>

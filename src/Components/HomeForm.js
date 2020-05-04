@@ -20,6 +20,7 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
 import history from "../history";
+import TestHomeForm from "./NewHomeForm";
 
 // import InputAdornment from "@material-ui/core/InputAdornment";
 import Lnavbar from "./Landlord/Navbar";
@@ -56,16 +57,16 @@ export default function Signup(props) {
   const [images, setImages] = useState("");
 
   const [values, setValues] = useState({
-    streetaddress: "N/A",
-    city: "N/A",
+    streetaddress: "",
+    city: "",
     state: "TX",
-    zipcode: "N/A",
-    rent: "N/A",
-    bedrooms: "N/A",
-    bathrooms: "N/A",
-    sqft: "N/A",
-    date: "N/A",
-    description: "N/A",
+    zipcode: "",
+    rent: "",
+    bedrooms: "",
+    bathrooms: "",
+    sqft: "",
+    date: "",
+    description: "",
   });
 
   const handleChange = (prop) => (event) => {
@@ -421,6 +422,7 @@ export default function Signup(props) {
               Add Home!
             </Button>
           </form>
+          {/* <TestHomeForm /> */}
         </div>
         <Box mt={5}></Box>
       </Container>

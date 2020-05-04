@@ -439,3 +439,116 @@ h3:after {
   border-image: initial;
   border-radius: 4px;
 }
+
+.temp-container {
+  width: 100vw;
+  display: flex;
+  justify-content: space-around;
+}
+
+.home-form-container {
+  height: 100vh;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  grid-auto-columns: 1fr;
+  font-family: "Source Sans Pro", sans-serif;
+  /* background-color: whitesmoke; */
+  /* border: 2px solid black; */
+}
+
+.home-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  padding: 4rem;
+  border-radius: 10px;
+  width: 28vw;
+  height: auto;
+  border: 1px solid black;
+  box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.09);
+}
+
+.home-form > h2 {
+  align-self: center;
+}
+
+.home-form-label {
+  font-size: medium;
+  font-weight: 550;
+  padding-bottom: 10px;
+  margin-right: 1rem;
+}
+
+.home-form-field {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: stretch;
+  border-radius: 5px;
+  height: 6rem;
+  width: 100%;
+}
+
+.home-form-field > input {
+  background-color: #e4e6ea;
+  border: none;
+  border-bottom: 1.2px solid black;
+  height: 2.2rem;
+  width: 80%;
+  font-size: medium;
+}
+
+.home-form-field > input:focus {
+  transition-timing-function: ease-in;
+  transition: 0.2s;
+  background-color: #ffffff;
+  box-shadow: 0 9px 20px 0 rgba(0, 0, 0, 0.09);
+  border-bottom: 1.5px solid #f50057;
+}
+
+.one-input {
+  align-self: stretch;
+}
+
+.three-inputs {
+  display: flex;
+  justify-content: space-between;
+  align-self: stretch;
+}
+
+.three-inputs > select {
+  font-weight: 500;
+}
+
+.two-inputs {
+  display: flex;
+  align-self: stretch;
+  justify-content: space-between;
+}
+
+.dropzone {
+  padding-top: 0.5rem;
+  padding-left: 1rem;
+  border: 1px solid black;
+  font-weight: 600;
+}
+
+.dropzone:hover {
+  padding-top: 0.5rem;
+  padding-left: 1rem;
+  border: 1.7px solid #f50057;
+  size: large;
+}
+
+.home-form-btn {
+  height: 3rem;
+  width: 10rem;
+  border-radius: 4px;
+  background-color: #008080;
+  border: 1px solid white;
+  font-size: medium;
+  font-weight: 500;
+  align-self: center;
+}
