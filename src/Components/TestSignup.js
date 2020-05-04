@@ -20,7 +20,7 @@ export default function TestLogin() {
   });
 
   const changeValues = (e) => {
-    setValues({ [e.target.name]: e.target.value });
+    setValues({ ...values, [e.target.name]: e.target.value });
   };
 
   const error = false;
