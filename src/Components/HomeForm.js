@@ -20,9 +20,7 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
 import history from "../history";
-import TestHomeForm from "./NewHomeForm";
 
-// import InputAdornment from "@material-ui/core/InputAdornment";
 import Lnavbar from "./Landlord/Navbar";
 
 const useStyles = makeStyles((theme) => ({
@@ -52,7 +50,6 @@ export default function Signup(props) {
   const userId = useSelector((state) => state.user.user_id);
   const dispatch = useDispatch();
 
-  const [files, setFiles] = useState("");
   const classes = useStyles();
   const [images, setImages] = useState("");
 

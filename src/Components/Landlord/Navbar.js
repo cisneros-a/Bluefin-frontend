@@ -1,14 +1,11 @@
 import React from "react";
-import { useState } from "react";
 import styled from "styled-components";
 import { useSpring, animated, config } from "react-spring";
-import { logoutUser, loginUser } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
-import history from "../../history";
 import { Link } from "react-router-dom";
 import { Tooltip, Image } from "@chakra-ui/core";
-
-// import Brand from "./Brand";
+import history from "../../history";
+import { logoutUser, loginUser } from "../../actions";
 import BurgerMenu from "../BurgerMenu";
 import CollapseMenu from "../CollapseMenu";
 
@@ -17,10 +14,10 @@ const Navbar = (props) => {
   const userId = parseInt(localStorage.userId);
 
   const dispatch = useDispatch();
-  const barAnimation = useSpring({
-    from: { transform: "translate3d(0, -10rem, 0)" },
-    transform: "translate3d(0, 0, 0)",
-  });
+  // const barAnimation = useSpring({
+  //   from: { transform: "translate3d(0, -10rem, 0)" },
+  //   transform: "translate3d(0, 0, 0)",
+  // });
 
   const linkAnimation = useSpring({
     from: { transform: "translate3d(0, 30px, 0)", opacity: 0 },
@@ -28,10 +25,6 @@ const Navbar = (props) => {
     delay: 800,
     config: config.wobbly,
   });
-
-  const handleClick = () => {
-    console.log("clicked");
-  };
 
   const handleLogoutClick = (event) => {
     history.push("/");

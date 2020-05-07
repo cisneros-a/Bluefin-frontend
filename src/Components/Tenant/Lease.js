@@ -1,7 +1,6 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { fetchTenantLease } from "../../actions";
 import Tnavbar from "./Navbar";
 import FixesContainer from "../Landlord/FixesContainer";
@@ -9,8 +8,6 @@ import LeaseInformationBar from "../LeaseInformationBar";
 import LeaseDropdown from "./LeaseDropdown";
 
 export default function TenantLease() {
-  const [button, setButton] = useState("solid");
-
   const userId = parseInt(localStorage.userId);
   const tenantLease = useSelector((state) => state.tenantLease.state);
   const dispatch = useDispatch();
@@ -36,7 +33,6 @@ export default function TenantLease() {
   };
 
   if (tenantLease.lease !== "none") {
-    // console.log('not equal to none')
     return (
       <div className="lease">
         <div className="header">
@@ -54,7 +50,6 @@ export default function TenantLease() {
     );
   }
 
-  // console.log('not equal to none')
   return (
     <div className="lease">
       <div className="header">

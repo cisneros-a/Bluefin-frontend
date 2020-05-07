@@ -17,7 +17,6 @@ import {
   Button,
   Textarea,
   useDisclosure,
-  Input,
 } from "@chakra-ui/core";
 
 export default function RequestForm({ leaseObj }) {

@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import Dropzone from "react-dropzone";
-import { DirectUpload } from "activestorage";
+
 import { useDispatch } from "react-redux";
 import { updateFixes } from "../actions";
 
@@ -19,7 +18,6 @@ import {
   Button,
   Textarea,
   useDisclosure,
-  Input,
 } from "@chakra-ui/core";
 
 export default function RequestForm({ fixes, fix }) {

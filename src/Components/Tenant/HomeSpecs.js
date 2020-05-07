@@ -15,12 +15,12 @@ import {
 } from "@chakra-ui/core";
 
 export default function HomeSpecs() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const toast = useToast();
   const home = useSelector((state) => state.selectedTenantHome.state);
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const userId = parseInt(localStorage.userId);
-  const [button, setButton] = useState(true);
   const [description, setDescription] = useState("");
+  const [button, setButton] = useState(true);
+  const toast = useToast();
 
   const handleClick = async () => {
     toast({
