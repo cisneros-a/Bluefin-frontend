@@ -1,25 +1,11 @@
 import React from "react";
-import { useState } from "react";
-import { Box, Image, useDisclosure, Button } from "@chakra-ui/core";
+import { useDispatch } from "react-redux";
+import { Box, Image, Button } from "@chakra-ui/core";
+import { selectLandlordProperty } from "../../actions";
 import history from "../../history";
 
-import { useDispatch } from "react-redux";
-import { selectLandlordProperty } from "../../actions";
-
 export default function LandlordHomeCard({ img, propertyInfo }) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const { currentHome, setCurrentHome } = useState([]);
-
   const dispatch = useDispatch();
-
-  //   useEffect(() => {
-  //       fetch('http://localhost:3000/leases')
-  //       .then( res => res.json())
-  //       .then(data => {
-  //           let currentLease = data.find(lease => lease.property_id === props.home.id)
-  //           setCurrentHome(currentLease)
-  //       })
-  //   }, [])
 
   const property = {
     imageUrl: `http://localhost:3000/${img}`,
@@ -61,14 +47,6 @@ export default function LandlordHomeCard({ img, propertyInfo }) {
     dispatch(selectLandlordProperty(propertyInfo));
     history.push(`/my-properties/${property.id}`);
   };
-  // let setSelectedHome = (home) => {
-  //   console.log("clicked");
-  //   let homeObj = {
-  //     property: props.home,
-  //     uploads: props.img,
-  //   };
-  //   dispatch(selectHome(homeObj));
-  // };
 
   return (
     <Box
@@ -82,12 +60,12 @@ export default function LandlordHomeCard({ img, propertyInfo }) {
       rounded="lg"
       overflow="hidden"
     >
-      {/* <Image
+      <Image
         width="100%"
         height="60%"
         src={property.imageUrl}
         alt={property.imageAlt}
-      /> */}
+      />
 
       <Box p="6">
         <Box d="flex" alignItems="baseline">

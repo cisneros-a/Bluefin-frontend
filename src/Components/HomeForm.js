@@ -71,6 +71,7 @@ export default function Signup(props) {
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
+    console.log();
   };
 
   let handleSubmit = async (event) => {
