@@ -1,15 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import history from "../history";
-import { Link } from "react-router-dom";
+import { DirectUpload } from "activestorage";
 import { useDispatch, useSelector } from "react-redux";
 import Dropzone from "react-dropzone";
-import { getProfileFetch, userSigninFetch } from "../actions";
+import { addLandlordProperty } from "../actions";
 import Lnavbar from "./Landlord/Navbar";
 
 export default function TestHomeForm() {
+  const landlordProperties = useSelector(
+    (state) => state.landlordProperties.state
+  );
+  const userId = useSelector((state) => state.user.user_id);
+  const dispatch = useDispatch();
   const [images, setImages] = useState("");
   const [values, setValues] = useState({
-    streetaddress: "",
+    address: "",
     city: "",
     state: "TX",
     zipcode: "",
@@ -25,17 +30,12 @@ export default function TestHomeForm() {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(e);
-  };
-
   let handleDrop = (acceptedFiles) => {
     setImages(acceptedFiles);
     console.log(acceptedFiles);
   };
 
-  const error = false;
+  //   const error = false;
 
   const createOptions = () => {
     // return <MenuItem value={'hello'}>State</MenuItem>
@@ -103,12 +103,100 @@ export default function TestHomeForm() {
     return states.map((state) => <option value={state}>{state}</option>);
   };
 
+  let handleSubmit = async (event) => {
+    event.preventDefault();
+    let input = `${values.address}, ${values.city}, ${values.state}, ${values.zipcode}`;
+    console.log(values, images);
+    let resp = await fetch(
+      `https://geocoder.ls.hereapi.com/6.2/geocode.json?apiKey=OHYIZygaUlcGO559jEmBfMg_2UaFX5n3qMoYn7h2TKo&searchtext=${input}`
+    );
+    const data = await resp.json();
+    console.log(
+      data.Response.View[0].Result[0].Location.DisplayPosition.Latitude,
+      data.Response.View[0].Result[0].Location.DisplayPosition.Longitude
+    );
+
+    let property = {
+      user_id: userId,
+      address: input,
+      rent: values.rent,
+      bedrooms: values.bedrooms,
+      bathrooms: values.bathrooms,
+      sqft: values.sqft,
+      availability: 1,
+      available_date: values.date,
+      description: values.description,
+      latitude:
+        data.Response.View[0].Result[0].Location.DisplayPosition.Latitude,
+      longitude:
+        data.Response.View[0].Result[0].Location.DisplayPosition.Longitude,
+      uploads: images[0],
+    };
+
+    // console.log(property);
+    const res = await fetch("http://localhost:3000/properties", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({ property }),
+    });
+
+    const propertiesData = await res.json();
+    if (data.message) {
+      console.log("Maybe this failed");
+    } else {
+      uploadFile(images, propertiesData);
+      // console.log(data)
+    }
+  };
+
+  const uploadFile = (files, propertyId) => {
+    console.log(propertyId);
+
+    files.forEach((file) => {
+      //   let property = {
+      //       uploads: file
+      //   }
+      const upload = new DirectUpload(
+        file,
+        "http://localhost:3000/rails/active_storage/direct_uploads"
+      );
+      console.log(file);
+      upload.create((error, blob) => {
+        //   let property = { uploads : blob.signed_id
+        //   }
+        console.log("blob", blob);
+        if (error) {
+          console.log(error);
+        } else {
+          console.log("no error");
+          fetch(`http://localhost:3000/properties/${propertyId}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify({ uploads: blob.signed_id }),
+          })
+            .then((res) => res.json())
+            .then((result) =>
+              dispatch(addLandlordProperty(landlordProperties, result))
+            )
+            .then(history.push("/landlord-home"));
+        }
+        console.log("pls workk");
+      });
+    });
+  };
+
   return (
     <div className="home-form-container">
       <div className="header">
         <Lnavbar />
       </div>
-      <form className="home-form">
+      <form onSubmit={(e) => handleSubmit(e)} className="home-form">
         <h2> Upload A Home</h2>
         <div className="one-input">
           <div className="home-form-field">
@@ -199,7 +287,7 @@ export default function TestHomeForm() {
               onChange={(e) => changeValues(e)}
               type="date"
               name="date"
-              value={values.zipcode}
+              value={values.date}
             ></input>
           </div>
         </div>
