@@ -1,6 +1,5 @@
 import React from "react";
-import { Box, Image, Badge } from "@chakra-ui/core";
-import { Button } from "@chakra-ui/core";
+import { Box, Image, Badge, Button } from "@chakra-ui/core";
 import { useDispatch } from "react-redux";
 import { selectTenantProperty } from "../../actions";
 
@@ -16,7 +15,7 @@ export default function TenantHomeCard(props) {
     formattedPrice: props.home.rent,
   };
 
-  let setSelectedHome = (home) => {
+  let setSelectedHome = () => {
     console.log("clicked");
     let homeObj = {
       property: props.home,
@@ -78,7 +77,7 @@ export default function TenantHomeCard(props) {
           </Box>
         </Box>
         <Button
-          onClick={() => setSelectedHome(props.home)}
+          onClick={() => setSelectedHome()}
           variantColor="purple"
           variant="outline"
         >

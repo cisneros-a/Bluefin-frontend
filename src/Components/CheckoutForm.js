@@ -3,12 +3,6 @@ import { useToast } from "@chakra-ui/core";
 
 import { injectStripe } from "react-stripe-elements";
 import { Button } from "@chakra-ui/core";
-import {
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
-} from "@chakra-ui/core";
 
 import CardSection from "./CardSection";
 

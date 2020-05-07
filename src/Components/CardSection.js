@@ -1,8 +1,5 @@
-/**
-* Use the CSS tab above to style your Element's container.
-*/
-import React from 'react';
-import {CardElement} from 'react-stripe-elements';
+import React from "react";
+import { CardElement } from "react-stripe-elements";
 
 const style = {
   base: {
@@ -11,13 +8,13 @@ const style = {
     fontSmoothing: "antialiased",
     fontSize: "16px",
     "::placeholder": {
-      color: "#aab7c4"
-    }
+      color: "#aab7c4",
+    },
   },
   invalid: {
     color: "#000",
-    iconColor: "#000"
-  }
+    iconColor: "#000",
+  },
 };
 
 const CardSection = () => {

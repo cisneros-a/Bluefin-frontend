@@ -1,7 +1,6 @@
 import React from "react";
 import MyStoreCheckout from "../MyStoreCheckout";
 import RequestForm from "../RequestForm";
-import { Link } from "react-router-dom";
 
 import {
   Accordion,
@@ -57,12 +56,6 @@ export default function LeaseDropdown({ tenantLease }) {
             </AccordionHeader>
             <AccordionPanel pb={4}>
               <Button leftIcon="download" variantColor="purple" variant="solid">
-                {/* <Link
-                  color="purple"
-                  to="/Users/Adrian/Desktop/Adrian-Cisneros-Resume.pdf"
-                  target="_blank"
-                  download
-                > */}
                 <a
                   href="/Users/Adrian/Desktop/Adrian-Cisneros-Resume.pdf"
                   download
@@ -70,7 +63,6 @@ export default function LeaseDropdown({ tenantLease }) {
                   Click to download
                 </a>
                 Download
-                {/* </Link> */}
               </Button>{" "}
               Just incase you need to reference anything!
             </AccordionPanel>

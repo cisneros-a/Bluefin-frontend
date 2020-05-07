@@ -1,9 +1,9 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { fetchLandlordProperties } from "../../actions";
 import CardHolder from "../CardHolder";
-import { useSelector, useDispatch } from "react-redux";
 import Lnavbar from "./Navbar";
 
 export default function LandlordDashboard() {

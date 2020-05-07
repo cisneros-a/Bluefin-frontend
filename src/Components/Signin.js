@@ -1,60 +1,23 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
+import React, { useState, useEffect } from "react";
+import history from "../history";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormLabel from "@material-ui/core/FormLabel";
 import { getProfileFetch, userSigninFetch } from "../actions";
 import StaticNavbar from "./StaticNavbar";
-import TestLogin from "./TestLogin";
-import history from "../history";
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Bluefin
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+export default function TestLogin() {
+  const isLogged = useSelector((state) => state.isLogged);
+  const dispatch = useDispatch();
+  const [values, setValues] = useState({
+    password: "",
+    email: "",
+    userType: "tenant",
+  });
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
+  const changeValues = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
 
-export default function SignIn() {
   useEffect(() => {
     dispatch(getProfileFetch());
   }, []);
@@ -65,136 +28,69 @@ export default function SignIn() {
     }
   };
 
-  // const user_info = useSelector(state => state.user)
-  //   const dispatch = useDispatch()
-  const isLogged = useSelector((state) => state.isLogged);
-  const classes = useStyles();
-  const dispatch = useDispatch();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [userType, setUserType] = useState("");
-  // const API = "http://localhost:3000/login";
-
-  let handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-  let handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
-  let handleTypeChange = (event) => {
-    setUserType(event.target.value);
-  };
-
   let handleSubmit = (event) => {
     event.preventDefault();
-
     let user = {
-      email: email,
-      password: password,
+      email: values.email,
+      password: values.password,
     };
 
     set_user(user);
   };
 
   const set_user = (user) => {
-    dispatch(userSigninFetch(user, userType));
+    dispatch(userSigninFetch(user, "tenant"));
   };
 
+  const error = false;
+
   return (
-    <>
+    <div className="signin-container">
       <div className="staticHeader">
+        {decideUserPath()}
         <StaticNavbar />
       </div>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-
-      <Container component="main" maxWidth="xs">
-        {decideUserPath()}
-        <CssBaseline />
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <form
-            onSubmit={(event) => handleSubmit(event)}
-            className={classes.form}
-            noValidate
-          >
-            <TextField
-              onChange={(event) => {
-                handleEmailChange(event);
-              }}
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
+      <div className="signin-form">
+        <h3> Sign in</h3>
+        <form className="form" onSubmit={(event) => handleSubmit(event)}>
+          <div className={error ? "form-field-error" : "form-field"}>
+            <label className="form-label"> Email: </label>
+            <input
+              onChange={(e) => changeValues(e)}
+              placeholder="email"
+              type="email"
               name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              onChange={(event) => {
-                handlePasswordChange(event);
-              }}
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
+              value={values.email}
+            ></input>
+            {error ? (
+              <span class="error-message">A sample error message</span>
+            ) : (
+              ""
+            )}
+          </div>
+          <div className={error ? "form-field-error" : "form-field"}>
+            <label className="form-label"> Password: </label>
+            <input
+              onChange={(e) => changeValues(e)}
+              placeholder="password"
               type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <FormLabel component="legend">User Type:</FormLabel>
-            <RadioGroup
-              aria-label="userType"
-              name="userType"
-              value={userType}
-              onChange={(event) => handleTypeChange(event)}
-              row
-            >
-              <FormControlLabel
-                value="landlord"
-                control={<Radio />}
-                label="Landlord"
-              />
-              <FormControlLabel
-                value="tenant"
-                control={<Radio />}
-                label="Tenant"
-              />
-            </RadioGroup>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item>
-                <Link href="/signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
-          </form>
-        </div>
-        <Box mt={8}>
-          <Copyright />
-        </Box>
-      </Container>
-      {/* <TestLogin /> */}
-    </>
+              name="password"
+              value={values.password}
+            ></input>
+            {error ? (
+              <span class="error-message">Incorrect password.</span>
+            ) : (
+              ""
+            )}
+          </div>
+
+          <button className="form-btn" type="submit">
+            {" "}
+            Sign in
+          </button>
+        </form>
+        <Link to="/signup">{"Don't have an account? Sign Up"}</Link>
+      </div>
+    </div>
   );
 }

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import ReactMapGL, { Marker, Popup } from "react-map-gl";
+import ReactMapGL, { Marker } from "react-map-gl";
 import MapFlag from "./MapFlag";
 import { useDispatch } from "react-redux";
 import { selectTenantProperty } from "../actions";

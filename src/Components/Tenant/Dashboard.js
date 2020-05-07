@@ -1,15 +1,12 @@
 import React from "react";
-import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchAvailablehomes, toggleView } from "../../actions";
 import Grid from "@material-ui/core/Grid";
-import Map from "../Map";
-import HomeSpec from "./HomeSpecs";
-import WelcomeSpec from "../WelcomeSpec";
-import Tnavbar from "./Navbar";
 import { Switch } from "@chakra-ui/core";
+import Tnavbar from "./Navbar";
+import { fetchAvailablehomes, toggleView } from "../../actions";
 import CardHolder from "../CardHolder";
-import TenantLease from "./Lease";
+import HomeSpec from "./HomeSpecs";
+import Map from "../Map";
 
 export default function TenantDashboard() {
   const allHomes = useSelector((state) => state.homes);
@@ -24,15 +21,12 @@ export default function TenantDashboard() {
   const showMap = (homes) => {
     if (homes.state) {
       if (homes.state.length > 0) {
-        // console.log('homes.state.length is greater than 0')
-        // console.log(homes.state)
         let onlyHomes = [];
         homes.state.forEach((home) => onlyHomes.push(home.property));
         if (toggleState) {
-          return <Map homes={homes.state} />;
+          return <CardHolder properties={homes.state} />;
         }
-        return <CardHolder properties={homes.state} />;
-        // return <p>Map</p>;
+        return <Map homes={homes.state} />;
       }
     }
   };
@@ -41,9 +35,6 @@ export default function TenantDashboard() {
     if (selectedHome) {
       return <HomeSpec />;
     }
-    // else{
-    //     return <WelcomeSpec/>
-    // }
   };
 
   return (

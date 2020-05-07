@@ -1,10 +1,9 @@
-import React from "react";
-import { useEffect } from "react";
-import Lnavbar from "./Navbar";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchLandlordLease } from "../../actions";
 import LeaseInformationBar from "../LeaseInformationBar";
 import SpecsContainer from "./SpecsContainer";
+import Lnavbar from "./Navbar";
 
 export default function LandlordHomeSpec() {
   const dispatch = useDispatch();

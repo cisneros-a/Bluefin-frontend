@@ -1,14 +1,11 @@
 import React from "react";
-import { useState } from "react";
 import styled from "styled-components";
 import { useSpring, animated, config } from "react-spring";
-import { logoutUser, loginUser } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
-import history from "../../history";
 import { Link } from "react-router-dom";
 import { Tooltip, Image } from "@chakra-ui/core";
-
-// import Brand from "./Brand";
+import { logoutUser, loginUser } from "../../actions";
+import history from "../../history";
 import BurgerMenu from "../BurgerMenu";
 import CollapseMenu from "../CollapseMenu";
 
@@ -28,10 +25,6 @@ const Navbar = (props) => {
     delay: 800,
     config: config.wobbly,
   });
-
-  const handleClick = () => {
-    console.log("clicked");
-  };
 
   const handleLogoutClick = (event) => {
     history.push("/");
@@ -124,9 +117,6 @@ const Navbar = (props) => {
             <Link onClick={() => handleLogoutClick()} to="/">
               Log Out
             </Link>
-
-            {/* <a onClick={() => handleLogoutClick()}>Sign Out</a>
-            <a  onClick={() => handleClick()} >link n4</a> */}
           </NavLinks>
           <BurgerWrapper>
             <BurgerMenu
