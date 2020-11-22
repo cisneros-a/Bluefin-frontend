@@ -3,10 +3,12 @@ import history from "../history";
 import { DirectUpload } from "activestorage";
 import { useDispatch, useSelector } from "react-redux";
 import Dropzone from "react-dropzone";
-import { addLandlordProperty } from "../actions";
+import { addLandlordProperty, addPropertyToAllProperties } from "../actions";
 import Lnavbar from "./Landlord/Navbar";
 
 export default function TestHomeForm() {
+  const allProperties = useSelector((state) => state.homes);
+
   const landlordProperties = useSelector(
     (state) => state.landlordProperties.state
   );
@@ -181,8 +183,10 @@ export default function TestHomeForm() {
             body: JSON.stringify({ uploads: blob.signed_id }),
           })
             .then((res) => res.json())
-            .then((result) =>
-              dispatch(addLandlordProperty(landlordProperties, result))
+            .then(
+              (result) =>
+                dispatch(addLandlordProperty(landlordProperties, result)) &&
+                dispatch(addPropertyToAllProperties(allProperties, result))
             )
             .then(history.push("/landlord-home"));
         }

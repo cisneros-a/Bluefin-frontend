@@ -41,7 +41,7 @@ export default function Map(props) {
   }, []);
 
   return (
-    <div className="homeSpec">
+    <div className="Map">
       <ReactMapGL
         {...viewport}
         mapboxApiAccessToken={REACT_APP_MAPBOX_TOKEN}
@@ -50,19 +50,22 @@ export default function Map(props) {
           setViewport(viewport);
         }}
       >
-        {console.log(this)}
         {homes.map((home) => (
+          // {
+          //   console.log(home.property.id);
+          // }
+
           <Marker
             key={home.property.id}
             latitude={home.property.latitude}
             longitude={home.property.longitude}
           >
-            <button
+            <div
               onClick={(event) => handleClick(event, home)}
               className="marker-btn"
             >
               <MapFlag rent={home.property.rent} />
-            </button>
+            </div>
           </Marker>
         ))}
 

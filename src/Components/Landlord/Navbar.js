@@ -12,6 +12,7 @@ import CollapseMenu from "../CollapseMenu";
 const Navbar = (props) => {
   const name = useSelector((state) => state.user.name);
   const userId = parseInt(localStorage.userId);
+  const firstName = name.split(" ")[0];
 
   const dispatch = useDispatch();
   // const barAnimation = useSpring({
@@ -39,7 +40,6 @@ const Navbar = (props) => {
       name: name,
       id: userId,
     };
-    console.log({ user });
     localStorage.setItem("userType", "tenant");
     dispatch(loginUser(user, "tenant"));
   };
@@ -54,9 +54,9 @@ const Navbar = (props) => {
         <FlexContainer>
           <Image width="6%" height="93%" src="/bluefin.png" alt={"logo"} />
 
-          <NavLinks style={linkAnimation}>
+          <NavLinks>
             <Link className="homeLink" to="/landlord-home">
-              Bluefin - Portal
+              {firstName}'s Portal
             </Link>
 
             <Tooltip
@@ -109,7 +109,7 @@ const Navbar = (props) => {
               placement="auto-end"
             >
               <Link to="/tenant-home" onClick={() => handleSwitchClick()}>
-                Map
+                Home
               </Link>
             </Tooltip>
 

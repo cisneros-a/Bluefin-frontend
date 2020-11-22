@@ -135,7 +135,7 @@ export default function RequestForm({ leaseObj }) {
                 variantColor="pink"
                 variant="solid"
               >
-                Apply now!
+                Submit
               </Button>
             ) : (
               <Button onClick={onClose} variant="ghost">

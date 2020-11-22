@@ -62,7 +62,7 @@ export default function LandlordHomeCard({ img, propertyInfo }) {
     >
       <Image
         width="100%"
-        height="60%"
+        height="100%"
         src={property.imageUrl}
         alt={property.imageAlt}
       />

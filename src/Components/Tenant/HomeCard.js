@@ -61,21 +61,19 @@ export default function TenantHomeCard(props) {
         </Box>
 
         <Box
-          mt="1"
-          fontWeight="semibold"
-          as="h4"
-          lineHeight="tight"
+          as="h2"
+          color="gray.600"
+          fontSize="lg"
           isTruncated
+          fontWeight="tight"
         >
+          ${property.formattedPrice}/ month
+        </Box>
+
+        <Box mt="1" as="h5">
           {property.title}
         </Box>
 
-        <Box>
-          ${property.formattedPrice}
-          <Box as="span" color="gray.600" fontSize="sm">
-            / month
-          </Box>
-        </Box>
         <Button
           onClick={() => setSelectedHome()}
           variantColor="purple"

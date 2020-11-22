@@ -13,6 +13,8 @@ import {
   ModalBody,
   Image,
 } from "@chakra-ui/core";
+import HomeDescription from "./HomeDescription";
+import { Home } from "@material-ui/icons";
 
 export default function HomeSpecs() {
   const home = useSelector((state) => state.selectedTenantHome.state);
@@ -67,35 +69,21 @@ export default function HomeSpecs() {
       <div className="SpecImage">
         <Box size="sm">
           <Image
-            size="400px"
+            size="500px"
             src={`http://localhost:3000/${home.uploads}`}
             alt="Home"
           />
         </Box>
       </div>
-      <div>
-        <h1>{home.property.address}</h1>
-        <h2>Rent: ${home.property.rent} </h2>
-        <h2>
-          Bedrooms: {home.property.bedrooms} Bathrooms:{" "}
-          {home.property.bathrooms}
-        </h2>
-        <h2>Sqft: {home.property.sqft} </h2>
-
-        <h2>Description: {home.property.description}</h2>
-        <h3>Being leased by: {home.property.user.name}</h3>
-      </div>
+      <HomeDescription home={home} />
       <ButtonGroup spacing={4}>
         <Button
-          onClick={onOpen}
+          onClick={handleClick}
           leftIcon="edit"
           variantColor="teal"
           variant="solid"
         >
           Apply now!
-        </Button>
-        <Button rightIcon="email" variantColor="teal" variant="outline">
-          Email us!
         </Button>
       </ButtonGroup>
 
