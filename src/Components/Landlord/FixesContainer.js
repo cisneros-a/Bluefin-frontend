@@ -19,12 +19,12 @@ export default function FixesContainer({ userType }) {
         });
       }
     }
-    return <h3> No fix requests for this propertry!</h3>;
+    return <h3> </h3>;
   };
 
   return (
     <>
-      <div className="spec">{fixes ? returnCards() : null}</div>
+      <div className="spec">{fixes.length > 0 ? returnCards() : <h3></h3>}</div>
     </>
   );
 }

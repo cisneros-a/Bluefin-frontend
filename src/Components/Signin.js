@@ -29,6 +29,7 @@ export default function TestLogin() {
   };
 
   let handleSubmit = (event) => {
+    console.log("submitting");
     event.preventDefault();
     let user = {
       email: values.email,

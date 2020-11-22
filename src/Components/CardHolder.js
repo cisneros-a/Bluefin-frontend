@@ -10,35 +10,26 @@ export default function CardHolder({ properties }) {
   let populateCards = () => {
     if (userType === "tenant") {
       return properties.map((home) => (
-        <Grid className="CardGrid" item xs={4}>
+        <div>
           <TenantHomeCard
             key={home.id}
             img={home.uploads}
             home={home.property}
-          />{" "}
-        </Grid>
+          />
+        </div>
       ));
     } else {
       return properties.map((property) => (
-        <Grid className="CardGrid" item xs={5}>
+        <div>
           <LandlordHomeCard
             key={property.property.id}
             img={property.uploads}
             propertyInfo={property.property}
           />
-        </Grid>
+        </div>
       ));
-
-      // return props.homes.map((home) => (
-      // ));
     }
   };
 
-  return (
-    <div className="scroll">
-      <Grid className="cardDiv" container spacing={1}>
-        {populateCards()}
-      </Grid>
-    </div>
-  );
+  return <div className="scroll">{populateCards()}</div>;
 }

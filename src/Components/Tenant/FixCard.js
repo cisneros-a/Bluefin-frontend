@@ -73,7 +73,6 @@ export default function TenantFixCard({ fix }) {
 
   return (
     <div className="fix-card">
-      <h3>Tenant</h3>
       <h3>{fix.fix.description}</h3>
 
       <Image

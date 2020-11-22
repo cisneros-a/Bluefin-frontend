@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Grid from "@material-ui/core/Grid";
 import { Switch } from "@chakra-ui/core";
 import Tnavbar from "./Navbar";
 import { fetchAvailablehomes, toggleView } from "../../actions";
@@ -50,16 +49,10 @@ export default function TenantDashboard() {
         />
         <h3>Cards</h3>
       </div>
-      <div>
-        <Grid container spacing={6}>
-          <Grid item s={7}>
-            {showMap(allHomes)}
-          </Grid>
+      <div className="tenant-dashboard-container">
+        <div>{showMap(allHomes)}</div>
 
-          <Grid item s={5}>
-            {showHomeSpecs()}
-          </Grid>
-        </Grid>
+        <div>{showHomeSpecs()}</div>
       </div>
     </div>
   );

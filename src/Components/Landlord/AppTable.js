@@ -74,12 +74,6 @@ export default function LandlordAppTable() {
       minWidth: 170,
       align: "right",
     },
-    {
-      id: "more",
-      label: "See More:",
-      minWidth: 170,
-      align: "right",
-    },
   ];
 
   let handleAccept = (applicationId, tenantId, propertyId) => {

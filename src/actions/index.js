@@ -162,6 +162,15 @@ export const updateAllAvailableProperties = (properties, id) => {
   };
 };
 
+export const addPropertyToAllProperties = (properties, newProperty) => {
+  console.log("properties", properties);
+  console.log("property", newProperty);
+  return {
+    type: "POPULATE_HOMES",
+    payload: [newProperty, ...properties.state],
+  };
+};
+
 export const updateLandlordProperties = (properties, id) => {
   let leased = properties.leased_properties;
   let unleased = properties.unleased_properties;

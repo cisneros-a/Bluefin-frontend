@@ -20,6 +20,17 @@ export default function LeaseDropdown({ tenantLease }) {
           <AccordionItem>
             <AccordionHeader>
               <Box flex="1" textAlign="center">
+                <h2> Request a Fix</h2>
+              </Box>
+              <AccordionIcon />
+            </AccordionHeader>
+            <AccordionPanel pb={4}>
+              <RequestForm leaseObj={tenantLease} />
+            </AccordionPanel>
+          </AccordionItem>
+          <AccordionItem>
+            <AccordionHeader>
+              <Box flex="1" textAlign="center">
                 <h2> Make A Payment </h2>
               </Box>
               <AccordionIcon />
@@ -38,31 +49,23 @@ export default function LeaseDropdown({ tenantLease }) {
           <AccordionItem>
             <AccordionHeader>
               <Box flex="1" textAlign="center">
-                <h2> Request a Fix</h2>
-              </Box>
-              <AccordionIcon />
-            </AccordionHeader>
-            <AccordionPanel pb={4}>
-              <RequestForm leaseObj={tenantLease} />
-            </AccordionPanel>
-          </AccordionItem>
-
-          <AccordionItem>
-            <AccordionHeader>
-              <Box flex="1" textAlign="center">
                 <h2>View Your Lease</h2>
               </Box>
               <AccordionIcon />
             </AccordionHeader>
             <AccordionPanel pb={4}>
-              <Button leftIcon="download" variantColor="purple" variant="solid">
+              <Button
+                className="lease-download"
+                leftIcon="download"
+                variantColor="purple"
+                variant="solid"
+              >
                 <a
                   href="/Users/Adrian/Desktop/Adrian-Cisneros-Resume.pdf"
                   download
                 >
-                  Click to download
+                  Download
                 </a>
-                Download
               </Button>{" "}
               Just incase you need to reference anything!
             </AccordionPanel>

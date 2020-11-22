@@ -12,6 +12,7 @@ import CollapseMenu from "../CollapseMenu";
 const Navbar = (props) => {
   const name = useSelector((state) => state.user.name);
   const userId = parseInt(localStorage.userId);
+  const firstName = name.split(" ")[0];
 
   const dispatch = useDispatch();
   const barAnimation = useSpring({
@@ -55,8 +56,8 @@ const Navbar = (props) => {
           <Image width="5%" height="90%" src="/bluefin.png" alt={"logo"} />
 
           {/* <img src="/bluefin.png" alt='logo'></img> */}
-          <NavLinks style={linkAnimation}>
-            <Link to="/tenant-home">Bluefin</Link>
+          <NavLinks>
+            <Link to="/tenant-home">{firstName}'s Home</Link>
 
             <Tooltip
               label={returnTag("View all of your pending home applications!")}
