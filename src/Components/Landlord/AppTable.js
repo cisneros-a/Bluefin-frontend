@@ -216,7 +216,7 @@ export default function LandlordAppTable() {
         <Lnavbar />
       </div>
       <div className="appTable">
-        <h1>Rental Applications:</h1>
+        <h1>Rental Applications</h1>
         <Paper className={classes.root}>
           <TableContainer className={classes.container}>
             <Table stickyHeader aria-label="sticky table">
