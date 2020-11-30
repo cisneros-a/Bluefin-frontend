@@ -65,17 +65,18 @@ export default function HomeSpecs() {
   };
 
   return (
-    <div className="HomeSpec">
-      <div className="SpecImage">
-        <Box size="sm">
+    <div className="home-spec-container">
+      <h2>{home.property.address}</h2>
+      <div className="home-info-container">
+        <Box className="home-spec-image" size="sm">
           <Image
-            size="500px"
+            size="325px"
             src={`http://localhost:3000/${home.uploads}`}
             alt="Home"
           />
         </Box>
+        <HomeDescription home={home} />
       </div>
-      <HomeDescription home={home} />
       <ButtonGroup spacing={4}>
         <Button
           onClick={handleClick}

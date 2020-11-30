@@ -123,7 +123,7 @@ export default function LandlordAppTable() {
         <Tnavbar />
       </div>
       <div className="appTable">
-        <h1>Your sent Applications</h1>
+        <h1>Your Sent Applications</h1>
         <Paper className={classes.root}>
           <Grid container spacing={2}>
             <Grid item xs={6}>
