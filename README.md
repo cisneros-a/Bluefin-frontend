@@ -4,9 +4,8 @@ Bluefin is an application I built with inspiration from a company I worked for, 
 
 This application was built with React, Redux for global state management, a Ruby on Rails API, and Mapbox API. 
 
-## Features
 
- ### Renter dashboard:
+ ## Renter dashboard:
    #### View all available homes: You can view homes and toggle between map/card views.
  ![toggle](https://user-images.githubusercontent.com/52793441/100570459-72f3de00-3296-11eb-9d6d-31f7b34d5aa3.gif)
 
@@ -28,7 +27,7 @@ This application was built with React, Redux for global state management, a Ruby
     
     
     
-  ### Rental property owner dashboard:
+  ## Rental property owner dashboard:
    
   #### View your leased and unleased properties: Get a quick view of which properties are leased.
   #### View lease: Select a home and view the lease information, including previous rent paymenets and fix requests.
